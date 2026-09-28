@@ -149,9 +149,9 @@ function home(){
    '<a class="search" href="#/search" style="text-decoration:none;color:var(--ink-soft)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search: bag, fox, baby hat...</span></a>'+
    '<div class="sec" style="padding-bottom:0;padding-top:18px"><h2 style="font-size:17px">Start here</h2></div>'+
    '<div class="chips" style="padding-top:8px"><a class="chip" href="#/browse/beginner" style="text-decoration:none">Start simple</a><a class="chip" href="#/browse/quick" style="text-decoration:none">Quick makes</a></div>'+
-   '<div class="sec"><h2>Your shelf</h2><small>'+D.recipes.length+(D.recipes.length===1?' pattern':' patterns')+'</small></div>'+
+   '<div class="sec"><h2>Your shelf</h2></div>'+
    '<div class="tiles">'+D.categories.map(function(c){
-     return '<a class="tile" href="#/c/'+c.id+'" style="background:'+c.color+';text-decoration:none"><span class="ic">'+c.emoji+'</span><span><span class="nm">'+esc(c.name)+'</span><br><span class="ct">'+count(c.id)+(count(c.id)===1?' pattern':' patterns')+'</span></span></a>'; }).join("")+'</div>';
+     return '<a class="tile" href="#/c/'+c.id+'" style="background:'+c.color+';text-decoration:none"><span class="ic">'+c.emoji+'</span><span><span class="nm">'+esc(c.name)+'</span></span></a>'; }).join("")+'</div>';
 }
 function category(id, lv){
   var c = CAT[id]; if(!c){ return home(); }
