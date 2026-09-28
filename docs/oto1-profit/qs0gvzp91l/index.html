@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Crochet Profit Formula&#8482; &mdash; CrochetLib</title>
+<style>
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/6lcebm.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/onbguu.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+--bg:#FBF7F1;--paper:#FFFFFF;--ink:#2B2420;--ink-soft:#6B5E55;
+--accent:#C2683F;--accent-dark:#9C4A28;--verde:#33A96B;--line:#EDE3D8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;padding:24px 16px 48px}
+
+/* Header */
+.brand{text-align:center;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+h1{text-align:center;font-size:1.55rem;font-weight:800;line-height:1.25;margin-bottom:10px}
+.congrats{text-align:center;color:var(--ink-soft);font-size:.95rem;margin-bottom:28px;line-height:1.5}
+.divider{width:48px;height:3px;background:var(--accent);border-radius:2px;margin:0 auto 28px}
+
+/* Sections */
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden}
+summary{font-weight:700;font-size:1.05rem;padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;user-select:none;transition:background .15s}
+summary:hover{background:var(--bg)}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:8px;height:8px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open]>summary::before{transform:rotate(45deg)}
+.sec-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:800;flex-shrink:0}
+.sec-body{padding:4px 18px 20px;font-size:.9rem;color:var(--ink)}
+.sec-body h3{font-size:.95rem;font-weight:700;margin:16px 0 6px;color:var(--accent-dark)}
+.sec-body h3:first-child{margin-top:8px}
+.sec-body p{margin-bottom:10px}
+.sec-body ul,.sec-body ol{margin:0 0 12px 18px}
+.sec-body li{margin-bottom:4px}
+.sec-body strong{font-weight:700}
+.sec-body .formula{background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0 14px;font-size:.88rem;line-height:1.5}
+
+/* Tables */
+.sec-body table{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.82rem}
+.sec-body th{background:var(--accent);color:#fff;font-weight:700;text-align:left;padding:7px 8px}
+.sec-body td{padding:7px 8px;border-bottom:1px solid var(--line)}
+.sec-body tr:last-child td{border-bottom:none}
+.sec-body tr:nth-child(even) td{background:#faf6f2}
+
+/* Tag pill */
+.tag{display:inline-block;background:var(--verde);color:#fff;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle;margin-left:6px}
+
+/* Keywords grid */
+.kw-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0 14px}
+.kw-cat{font-weight:700;font-size:.78rem;color:var(--accent-dark);margin-bottom:2px}
+.kw-list{font-size:.78rem;color:var(--ink-soft);line-height:1.45}
+
+/* Day badge */
+.day{display:inline-block;background:var(--accent);color:#fff;font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:4px;margin-bottom:4px}
+
+/* Form fields */
+.field{border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:8px;min-height:44px;color:var(--ink-soft);font-size:.85rem;background:var(--bg)}
+.field-label{font-weight:700;font-size:.8rem;margin-bottom:4px;color:var(--ink)}
+
+/* Swipe card */
+.swipe{background:var(--bg);border-radius:8px;padding:14px;margin-bottom:10px}
+.swipe-title{font-weight:700;font-size:.88rem;margin-bottom:4px}
+.swipe-meta{font-size:.78rem;color:var(--ink-soft);margin-bottom:6px}
+.swipe-why{font-size:.84rem;line-height:1.5}
+
+/* Footer */
+.footer{text-align:center;margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+.footer h2{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.footer p{color:var(--ink-soft);font-size:.9rem;line-height:1.55}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<p class="brand">CrochetLib</p>
+<h1>Crochet Profit Formula&#8482;</h1>
+<div class="divider"></div>
+<p class="congrats">You're in! Here's everything included in your Crochet Profit Formula&#8482; bundle.</p>
+
+<!-- 1. PRICING-TO-PROFIT SYSTEM -->
+<details open>
+<summary><span class="sec-num">1</span> Pricing-to-Profit System</summary>
+<div class="sec-body">
+
+<h3>The 3-Layer Pricing Formula</h3>
+<div class="formula">
+<strong>Step 1 &mdash; Base Cost:</strong> Materials + (Hours x Your Hourly Rate) + 15% Overhead<br>
+<strong>Step 2 &mdash; Wholesale Price:</strong> Base Cost (this is your floor; never sell below it)<br>
+<strong>Step 3 &mdash; Retail Price:</strong> Wholesale x 2
+</div>
+<p>Set your hourly rate between <strong>$15&ndash;$25/hr</strong> depending on your skill level and market. Beginners start at $15; experienced makers with a following charge $25+. The 15% overhead covers hooks, needles, electricity, packaging, and Etsy fees.</p>
+
+<h3>Pricing Examples</h3>
+<table>
+<tr><th>Item</th><th>Materials</th><th>Time</th><th>Wholesale</th><th>Retail</th></tr>
+<tr><td>Beanie</td><td>$4</td><td>2 hrs</td><td>$51</td><td>$102</td></tr>
+<tr><td>Scarf</td><td>$8</td><td>3 hrs</td><td>$75</td><td>$150</td></tr>
+<tr><td>Amigurumi</td><td>$3</td><td>4 hrs</td><td>$73</td><td>$146</td></tr>
+<tr><td>Blanket</td><td>$25</td><td>12 hrs</td><td>$304</td><td>$608</td></tr>
+<tr><td>Tote Bag</td><td>$6</td><td>3 hrs</td><td>$76</td><td>$152</td></tr>
+</table>
+<p><em>Calculated at $20/hr rate with 15% overhead.</em></p>
+
+<h3>Competitor Analysis (5 Steps)</h3>
+<ol>
+<li><strong>Find 10 sellers</strong> making the same item on Etsy or at local markets.</li>
+<li><strong>Record their prices</strong> for the closest match to your item.</li>
+<li><strong>Note the materials</strong> they use (acrylic vs. cotton vs. wool blend).</li>
+<li><strong>Compare quality</strong> &mdash; stitch consistency, finishing, packaging.</li>
+<li><strong>Position yours</strong> &mdash; if your quality is higher, price 10&ndash;20% above the median. If comparable, match it. Never race to the bottom.</li>
+</ol>
+
+<h3>Margin Tiers</h3>
+<table>
+<tr><th>Tier</th><th>Margin</th><th>Best For</th></tr>
+<tr><td>Budget</td><td>40%</td><td>Simple items, acrylic yarn, high volume</td></tr>
+<tr><td>Mid-Range</td><td>55%</td><td>Cotton/blend items, moderate detail</td></tr>
+<tr><td>Premium</td><td>65%</td><td>Luxury fibers, complex patterns, brand story</td></tr>
+</table>
+
+<h3>Common Pricing Mistakes</h3>
+<ul>
+<li><strong>Undercharging for time</strong> &mdash; your hours have value even if you enjoy the work.</li>
+<li><strong>Ignoring overhead</strong> &mdash; hooks break, patterns cost money, shipping supplies add up.</li>
+<li><strong>Racing to the bottom</strong> &mdash; competing on price alone attracts bargain hunters who leave bad reviews over $2.</li>
+<li><strong>Copying competitors blindly</strong> &mdash; their costs are not your costs.</li>
+<li><strong>Not raising prices</strong> &mdash; revisit pricing every 3 months as your skill and reputation grow.</li>
+</ul>
+
+</div>
+</details>
+
+<!-- 2. ETSY LAUNCH KIT -->
+<details>
+<summary><span class="sec-num">2</span> Etsy Launch Kit</summary>
+<div class="sec-body">
+
+<h3>10 Listing Title Templates</h3>
+<p>Formula: <strong>[Adjective] + [Item] + [Occasion/Use] + [Material/Style]</strong></p>
+<ol>
+<li>Cozy Chunky Knit Beanie &mdash; Winter Gift for Her &mdash; Merino Wool</li>
+<li>Handmade Baby Blanket &mdash; Newborn Shower Gift &mdash; Soft Cotton Crochet</li>
+<li>Custom Amigurumi Bear &mdash; Nursery Decor &mdash; Organic Cotton Stuffed Toy</li>
+<li>Oversized Market Tote Bag &mdash; Reusable Grocery Bag &mdash; Boho Cotton Crochet</li>
+<li>Delicate Lace Table Runner &mdash; Farmhouse Dining Decor &mdash; Handmade Cotton</li>
+<li>Personalized Baby Booties &mdash; First Birthday Gift &mdash; Soft Pastel Crochet</li>
+<li>Chunky Throw Pillow Cover &mdash; Living Room Accent &mdash; Textured Knit Cotton</li>
+<li>Vintage-Style Granny Square Cardigan &mdash; Fall Layering Piece &mdash; Wool Blend</li>
+<li>Mini Crochet Succulent Set &mdash; Desk Decor Gift &mdash; Handmade Faux Plants</li>
+<li>Matching Scarf and Mitten Set &mdash; Holiday Gift Bundle &mdash; Alpaca Wool Crochet</li>
+</ol>
+
+<h3>120 SEO Keywords by Category</h3>
+<div class="kw-grid">
+<div>
+<p class="kw-cat">Amigurumi</p>
+<p class="kw-list">crochet amigurumi, stuffed animal handmade, crochet toy, amigurumi doll, crochet plushie, kawaii crochet, amigurumi pattern, crochet animal, handmade stuffed toy, custom amigurumi, crochet bear, crochet bunny, amigurumi baby, crochet figure, knit stuffed animal, amigurumi set, crochet dinosaur, amigurumi gift, small crochet toy, crochet doll handmade</p>
+</div>
+<div>
+<p class="kw-cat">Baby Items</p>
+<p class="kw-list">crochet baby blanket, baby shower gift, newborn crochet, baby booties handmade, crochet baby hat, baby lovey, baby comforter crochet, infant blanket, baby rattle crochet, crochet bib, baby milestone blanket, organic baby crochet, gender neutral baby, crochet swaddle, nursery decor handmade, baby gift set, crochet pacifier clip, baby cardigan, heirloom baby blanket, soft crochet baby</p>
+</div>
+<div>
+<p class="kw-cat">Home Decor</p>
+<p class="kw-list">crochet pillow cover, handmade throw blanket, crochet basket, table runner crochet, macrame wall hanging, crochet coasters, farmhouse decor, boho home decor, crochet plant hanger, handmade doily, crochet lamp shade, decorative crochet, crochet mandala, crochet rug, cotton basket handmade, crochet curtain, home accent handmade, crochet pot holder, fiber art wall, crochet candle holder</p>
+</div>
+<div>
+<p class="kw-cat">Accessories</p>
+<p class="kw-list">crochet beanie, handmade scarf, crochet tote bag, market bag crochet, crochet headband, slouchy beanie, crochet mittens, crochet earrings, handmade hair clip, crochet scrunchie, bucket hat crochet, crochet clutch, crossbody bag crochet, crochet wallet, fingerless gloves, crochet collar, crochet belt, wrist warmers, crochet cowl, ear warmer crochet</p>
+</div>
+<div>
+<p class="kw-cat">Seasonal</p>
+<p class="kw-list">Christmas crochet, Halloween amigurumi, Easter crochet, Valentine crochet gift, fall crochet decor, winter accessories, spring crochet, summer tote, crochet ornament, holiday stocking, crochet wreath, pumpkin crochet, crochet snowflake, advent calendar, crochet garland, back to school, crochet flag, autumn blanket, crochet egg, heart crochet</p>
+</div>
+<div>
+<p class="kw-cat">Gift-Related</p>
+<p class="kw-list">gift for mom, gift for her handmade, anniversary gift crochet, birthday gift unique, best friend gift, teacher gift handmade, gift for grandma, couples gift crochet, housewarming gift, bridesmaid gift handmade, thank you gift, personalized gift, custom name crochet, gift set handmade, gift for crafter, mother's day crochet, father's day gift, graduation gift, pet owner gift, new home gift</p>
+</div>
+</div>
+
+<h3>5 Description Formulas</h3>
+<ol>
+<li><strong>Hook:</strong> Open with the feeling the buyer wants ("Imagine wrapping your baby in something made with love...")</li>
+<li><strong>Benefits:</strong> 3 bullet points &mdash; what makes your item special (materials, technique, uniqueness)</li>
+<li><strong>Details:</strong> Dimensions, yarn weight, care instructions, colors available</li>
+<li><strong>Sizing:</strong> If applicable &mdash; clear size chart or "fits X to Y"</li>
+<li><strong>CTA:</strong> Close with urgency or reassurance ("Order today &mdash; each piece is made to order within 5&ndash;7 business days.")</li>
+</ol>
+
+</div>
+</details>
+
+<!-- 3. PHONE PHOTO PLAYBOOK -->
+<details>
+<summary><span class="sec-num">3</span> Phone Photo Playbook</summary>
+<div class="sec-body">
+
+<h3>5 Backdrop Setups</h3>
+<table>
+<tr><th>Backdrop</th><th>Source</th><th>Best For</th></tr>
+<tr><td>Marble contact paper</td><td>Dollar store or Amazon ($5&ndash;8)</td><td>Accessories, small items</td></tr>
+<tr><td>Raw wood board</td><td>Hardware store, 24x24" plywood ($4)</td><td>Rustic/boho items</td></tr>
+<tr><td>Linen fabric</td><td>Fabric store, 1 yard neutral ($6)</td><td>Baby items, blankets</td></tr>
+<tr><td>Kraft paper roll</td><td>Craft store ($3)</td><td>Flat lays, gift bundles</td></tr>
+<tr><td>Seasonal props</td><td>Thrift stores, nature walks</td><td>Holiday and seasonal items</td></tr>
+</table>
+<p>Tape the backdrop to a table near your best window. Keep it wrinkle-free and wipe it between shots.</p>
+
+<h3>The Window Light Technique</h3>
+<ol>
+<li>Place your item <strong>2&ndash;3 feet from a window</strong> with indirect light (no direct sun beams).</li>
+<li>Position a <strong>white foam board</strong> ($1 at the dollar store) on the opposite side to bounce light back and soften shadows.</li>
+<li>Shoot during <strong>mid-morning or mid-afternoon</strong> for the most even light.</li>
+<li>If shadows are too harsh, hang a white sheet over the window to diffuse.</li>
+</ol>
+
+<h3>Phone Camera Settings</h3>
+<ul>
+<li><strong>HDR:</strong> Off (it over-processes textures and makes yarn look flat).</li>
+<li><strong>Grid:</strong> On (helps you center the item and follow the rule of thirds).</li>
+<li><strong>Focus:</strong> Tap on the item itself so the camera locks exposure there.</li>
+<li><strong>White balance:</strong> Set to "daylight" or leave on auto near a window.</li>
+<li><strong>Zoom:</strong> Never use digital zoom. Move closer instead.</li>
+</ul>
+
+<h3>5 Quick Editing Tips</h3>
+<ol>
+<li><strong>Brightness +15</strong> &mdash; lifts the image without blowing out whites.</li>
+<li><strong>Contrast +10</strong> &mdash; makes stitches pop and adds depth.</li>
+<li><strong>Saturation -5</strong> &mdash; prevents yarn colors from looking neon on screens.</li>
+<li><strong>Crop to center</strong> &mdash; remove distracting edges; keep the item as the star.</li>
+<li><strong>White balance warm</strong> &mdash; a slight warm shift feels inviting and handmade.</li>
+</ol>
+
+<h3>3 Composition Rules</h3>
+<ul>
+<li><strong>Rule of thirds:</strong> Place the item at a grid intersection, not dead center.</li>
+<li><strong>Flat lay with props:</strong> Arrange 2&ndash;3 small props (scissors, a plant, a cup of coffee) around the item at angles.</li>
+<li><strong>Lifestyle in-use shot:</strong> Show the item being worn or used &mdash; a beanie on a head, a tote on a shoulder, a blanket draped on a couch.</li>
+</ul>
+
+</div>
+</details>
+
+<!-- 4. FIRST 10 SALES ROADMAP -->
+<details>
+<summary><span class="sec-num">4</span> First 10 Sales Roadmap (14 Days)</summary>
+<div class="sec-body">
+
+<p><span class="day">Days 1&ndash;2</span></p>
+<p><strong>Set Up Your Etsy Shop</strong></p>
+<ul>
+<li>Pick a shop name (short, memorable, searchable &mdash; avoid numbers and hyphens).</li>
+<li>Write your "About" section: who you are, why you crochet, what makes your work different.</li>
+<li>Upload a banner (1200x300px) and profile photo.</li>
+<li>Set policies: processing time 5&ndash;7 days, returns accepted within 14 days for non-custom items.</li>
+</ul>
+
+<p><span class="day">Days 3&ndash;4</span></p>
+<p><strong>Price Your First 5 Items</strong></p>
+<ul>
+<li>Use the 3-layer formula from Section 1 for each item.</li>
+<li>Run competitor analysis for at least your top 2 items.</li>
+<li>Write down final prices and keep a simple spreadsheet.</li>
+</ul>
+
+<p><span class="day">Days 5&ndash;6</span></p>
+<p><strong>Photograph All 5 Items</strong></p>
+<ul>
+<li>Shoot each item with at least 5 photos: front, detail, scale (next to a hand or ruler), flat lay, lifestyle.</li>
+<li>Edit using the tips from Section 3.</li>
+<li>Save at 2000x2000px minimum for Etsy's zoom feature.</li>
+</ul>
+
+<p><span class="day">Days 7&ndash;8</span></p>
+<p><strong>Write and Publish 5 Listings</strong></p>
+<ul>
+<li>Use the title templates from Section 2.</li>
+<li>Add 13 tags per listing (Etsy's max) from the keyword list.</li>
+<li>Write descriptions using the 5-part formula.</li>
+<li>Set shipping profiles (calculate actual cost + $1 buffer for packaging).</li>
+</ul>
+
+<p><span class="day">Days 9&ndash;10</span></p>
+<p><strong>Share on 2 Platforms</strong></p>
+<ul>
+<li><strong>Instagram:</strong> Post 3 photos (flat lay, process video, finished item). Use 15&ndash;20 hashtags from your keyword list.</li>
+<li><strong>Pinterest:</strong> Create 3 pins linking directly to your Etsy listings. Use vertical images (1000x1500px).</li>
+</ul>
+
+<p><span class="day">Days 11&ndash;12</span></p>
+<p><strong>Optimize Based on Stats</strong></p>
+<ul>
+<li>Check Etsy Stats: which listings got impressions but no clicks? Swap the main photo.</li>
+<li>Clicks but no favorites? Adjust pricing or add a better description.</li>
+<li>Favorites but no sales? Add a small "limited time" note or bundle offer.</li>
+</ul>
+
+<p><span class="day">Days 13&ndash;14</span></p>
+<p><strong>Launch Your Grand Opening Sale</strong></p>
+<ul>
+<li>Run a 10% off sale on all listings using Etsy's Sales and Coupons tool.</li>
+<li>Share the sale in 3 Facebook groups related to handmade goods or crochet lovers.</li>
+<li>Post a "shop is open" reel or story on Instagram with a direct link.</li>
+<li>Send a message to 5 friends or family members who might buy or share.</li>
+</ul>
+
+</div>
+</details>
+
+<!-- 5. BONUS: PERSONAL PRICING REVIEW -->
+<details>
+<summary><span class="sec-num">5</span> Personal Pricing Review <span class="tag">Bonus</span></summary>
+<div class="sec-body">
+
+<p>Pick your <strong>3 best-selling or favorite items</strong>. For each one, fill in the details below. Submit everything in one message and you will receive personalized pricing feedback within 72 hours.</p>
+
+<h3>Item 1</h3>
+<p class="field-label">Item Name</p>
+<div class="field">e.g., Chunky Beanie</div>
+<p class="field-label">Materials Used and Total Cost</p>
+<div class="field">e.g., 1 skein Bernat Blanket yarn ($8), polyfill ($1) = $9</div>
+<p class="field-label">Time to Make (hours)</p>
+<div class="field">e.g., 2.5 hours</div>
+<p class="field-label">Your Current Price (or what you would charge)</p>
+<div class="field">e.g., $28</div>
+
+<h3>Item 2</h3>
+<p class="field-label">Item Name</p>
+<div class="field"></div>
+<p class="field-label">Materials Used and Total Cost</p>
+<div class="field"></div>
+<p class="field-label">Time to Make (hours)</p>
+<div class="field"></div>
+<p class="field-label">Your Current Price</p>
+<div class="field"></div>
+
+<h3>Item 3</h3>
+<p class="field-label">Item Name</p>
+<div class="field"></div>
+<p class="field-label">Materials Used and Total Cost</p>
+<div class="field"></div>
+<p class="field-label">Time to Make (hours)</p>
+<div class="field"></div>
+<p class="field-label">Your Current Price</p>
+<div class="field"></div>
+
+<h3>Your Ideal Buyer</h3>
+<p class="field-label">Who do you think buys your items? (age, interests, where they shop)</p>
+<div class="field" style="min-height:64px"></div>
+
+<p style="margin-top:14px;font-size:.84rem;color:var(--ink-soft)">Copy this section into a message, fill in your answers, and send it to receive your personalized review.</p>
+
+</div>
+</details>
+
+<!-- 6. SECRET BONUS: SWIPE FILE -->
+<details>
+<summary><span class="sec-num">6</span> Top Seller Swipe File <span class="tag">Secret Bonus</span></summary>
+<div class="sec-body">
+<p>Five high-performing Etsy listing breakdowns. Study what works and adapt it to your own shop.</p>
+
+<div class="swipe">
+<p class="swipe-title">1. "Cozy Oversized Chunky Beanie &mdash; Winter Hat Gift for Women &mdash; Hand Knit Merino"</p>
+<p class="swipe-meta">Price: $42 | Photos: clean white backdrop, close-up of stitches, model wearing it outdoors | 2,800+ sales</p>
+<p class="swipe-why"><strong>Why it works:</strong> The title hits 3 high-volume keywords (chunky beanie, winter hat, gift for women). The price signals quality without being intimidating. White backdrop photos let the texture speak. The listing description opens with "Made for the coldest mornings" &mdash; selling the feeling, not the yarn.</p>
+</div>
+
+<div class="swipe">
+<p class="swipe-title">2. "Crochet Amigurumi Animal Set of 3 &mdash; Safari Nursery Decor &mdash; Baby Shower Gift"</p>
+<p class="swipe-meta">Price: $65 (set) | Photos: flat lay on linen, nursery shelf, held by toddler | 1,900+ sales</p>
+<p class="swipe-why"><strong>Why it works:</strong> Bundling 3 animals into a set raises the average order value. "Safari nursery" targets a trending decor style. The lifestyle photo of a toddler holding one creates an emotional pull. The description lists safety features (embroidered eyes, no small parts) &mdash; addressing a parent's top concern before they ask.</p>
+</div>
+
+<div class="swipe">
+<p class="swipe-title">3. "Handmade Heirloom Baby Blanket &mdash; Personalized Name Crochet &mdash; Organic Cotton"</p>
+<p class="swipe-meta">Price: $89 | Photos: folded on wood, draped in crib, close-up of name embroidery | 3,400+ sales</p>
+<p class="swipe-why"><strong>Why it works:</strong> "Heirloom" and "personalized" justify premium pricing. Organic cotton appeals to safety-conscious parents. The seller offers 12 color options, which means the listing ranks for multiple search terms. The first photo is always the folded blanket with the name visible &mdash; instant personalization proof.</p>
+</div>
+
+<div class="swipe">
+<p class="swipe-title">4. "Large Crochet Market Tote &mdash; Reusable Beach Bag &mdash; Boho Summer Accessory Cotton"</p>
+<p class="swipe-meta">Price: $38 | Photos: held on shoulder, flat with produce inside, hanging on door hook | 1,200+ sales</p>
+<p class="swipe-why"><strong>Why it works:</strong> The title covers 3 use cases (market, beach, summer) so it ranks in multiple searches. Showing produce inside helps the buyer picture using it. The price is under $40 &mdash; an impulse-buy range for a handmade bag. The description mentions "fits a full grocery run" with exact dimensions.</p>
+</div>
+
+<div class="swipe">
+<p class="swipe-title">5. "Crochet Christmas Ornament Set of 6 &mdash; Farmhouse Tree Decor &mdash; Handmade Holiday Gift"</p>
+<p class="swipe-meta">Price: $34 (set) | Photos: on tree, flat lay on kraft paper, in gift box | 4,100+ sales</p>
+<p class="swipe-why"><strong>Why it works:</strong> Seasonal items spike hard in Q4. A set of 6 at $34 feels like a bargain ($5.67 each) while still being profitable. "Farmhouse" is a top home-decor keyword. The gift box photo solves the "what do I wrap it in?" problem. The seller relists in September and runs a 15% early-bird sale.</p>
+</div>
+
+</div>
+</details>
+
+<!-- FOOTER -->
+<div class="footer">
+<h2>Your Next Step</h2>
+<p>Head back to your CrochetLib app and start applying what you learned. Your first sale is closer than you think.</p>
+</div>
+
+</div>
+</body>
+</html>

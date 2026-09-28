@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Scale Without Stitching&#8482; &mdash; CrochetLib</title>
+<style>
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/6lcebm.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/onbguu.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+--bg:#FBF7F1;--paper:#FFFFFF;--ink:#2B2420;--ink-soft:#6B5E55;
+--accent:#C2683F;--accent-dark:#9C4A28;--verde:#33A96B;--line:#EDE3D8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;padding:0 16px 48px}
+header{text-align:center;padding:40px 0 32px}
+.brand{font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+header h1{font-size:1.55rem;font-weight:800;margin:8px 0 0;line-height:1.25;color:var(--ink)}
+header h1 span{color:var(--accent)}
+.welcome{margin-top:14px;font-size:.95rem;color:var(--ink-soft);line-height:1.55}
+details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden}
+summary{font-weight:700;font-size:1rem;padding:16px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;user-select:none;color:var(--ink)}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:8px;height:8px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open]>summary::before{transform:rotate(45deg)}
+summary .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;flex-shrink:0}
+summary .bonus{display:inline-block;background:var(--verde);color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:4px;margin-left:auto;flex-shrink:0}
+.body{padding:4px 18px 22px;font-size:.9rem;color:var(--ink)}
+.body h3{font-size:.95rem;font-weight:700;color:var(--accent-dark);margin:18px 0 6px;line-height:1.3}
+.body h3:first-child{margin-top:8px}
+.body p{margin:6px 0;line-height:1.6}
+.body ul,.body ol{margin:6px 0 10px 20px}
+.body li{margin-bottom:4px;line-height:1.5}
+.body li::marker{color:var(--accent)}
+.body strong{color:var(--ink);font-weight:700}
+.body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.82rem}
+.body th{background:var(--accent);color:#fff;font-weight:700;padding:8px 6px;text-align:left;white-space:nowrap}
+.body td{padding:7px 6px;border-bottom:1px solid var(--line)}
+.body tr:last-child td{border-bottom:none}
+.body tr:nth-child(even){background:var(--bg)}
+.copy-box{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:10px 0;font-size:.85rem;line-height:1.6;white-space:pre-wrap;color:var(--ink-soft)}
+.calc-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:.88rem}
+.calc-row .label{flex:1;color:var(--ink)}
+.calc-row .blank{width:100px;border-bottom:2px solid var(--line);text-align:center;color:var(--ink-soft);font-size:.85rem;padding:2px 0}
+footer{text-align:center;padding:32px 0 0;border-top:1px solid var(--line);margin-top:8px}
+footer h2{font-size:1.15rem;font-weight:800;color:var(--ink);margin-bottom:8px}
+footer p{font-size:.9rem;color:var(--ink-soft);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">CrochetLib</div>
+  <h1><span>Scale Without Stitching</span>&#8482;</h1>
+  <p class="welcome">You're in! Here's your complete Scale Without Stitching&#8482; toolkit &mdash; everything you need to sell more than your hands can make.</p>
+</header>
+
+<!-- 1. Outsource & Scale Playbook -->
+<details open>
+  <summary><span class="num">1</span> Outsource &amp; Scale Playbook</summary>
+  <div class="body">
+    <h3>Finding Crocheters You Can Trust</h3>
+    <p><strong>Where to find them:</strong></p>
+    <ul>
+      <li>Local craft groups and stitch-and-chat meetups</li>
+      <li>Facebook crochet communities (search "[your city] crochet")</li>
+      <li>Etsy sellers who already do custom work</li>
+      <li>Craft school graduates looking for freelance income</li>
+      <li>Retired crafters with time and skill</li>
+    </ul>
+    <p><strong>The 3-question filter:</strong></p>
+    <ol>
+      <li>Can they follow a written pattern accurately?</li>
+      <li>Can they match gauge consistently across pieces?</li>
+      <li>Can they meet a deadline without reminders?</li>
+    </ol>
+    <p>Start with ONE person and one simple pattern. Do not scale until that first relationship works smoothly.</p>
+
+    <h3>The Test Project</h3>
+    <ol>
+      <li>Send them your simplest best-selling pattern, the exact yarn, and the exact hook size.</li>
+      <li>Ask for 2 identical pieces within 7 days.</li>
+      <li>When they deliver, check: stitch consistency, gauge match, finishing quality, and communication throughout the process.</li>
+    </ol>
+
+    <h3>Quality Assurance Checklist (10 Points)</h3>
+    <p>Score each point pass/fail for every piece you receive:</p>
+    <ol>
+      <li>Correct stitch count per row</li>
+      <li>Even tension throughout the piece</li>
+      <li>Correct dimensions (within 1 cm of your sample)</li>
+      <li>Clean color changes (if applicable)</li>
+      <li>Ends woven in properly and invisibly</li>
+      <li>No visible knots on the right side</li>
+      <li>Correct finishing (blocking, seaming as specified)</li>
+      <li>Stuffing firmness matches your sample (for amigurumi)</li>
+      <li>Safety eyes secured properly (for toys)</li>
+      <li>Overall appearance matches your reference sample</li>
+    </ol>
+    <p>A piece must score 9/10 or above before you accept it. Eight or below means rework or re-training.</p>
+
+    <h3>Pricing Your Contractors</h3>
+    <p><strong>Formula:</strong> Pay 40&ndash;50% of your retail price per piece.</p>
+    <p><strong>Example:</strong> Beanie retails at $30. You pay the contractor $12&ndash;15. Your profit per piece: $15&ndash;18 minus materials.</p>
+    <p><strong>When to raise pay:</strong> When a contractor consistently delivers quality work and meets every deadline for 8+ weeks in a row, raise their rate by 5&ndash;10%. Reliable contractors are worth keeping.</p>
+
+    <h3>Scaling from 1x to 10x</h3>
+    <table>
+      <tr><th>Phase</th><th>Output</th><th>Setup</th></tr>
+      <tr><td><strong>Phase 1</strong></td><td>1&ndash;2x</td><td>One contractor, your best-seller only</td></tr>
+      <tr><td><strong>Phase 2</strong></td><td>3&ndash;5x</td><td>2&ndash;3 contractors, top 3 products</td></tr>
+      <tr><td><strong>Phase 3</strong></td><td>5&ndash;10x</td><td>Team of contractors + VA for coordination, full catalog</td></tr>
+    </table>
+    <p>Move to the next phase only after you have consistent quality and reliable delivery at the current one.</p>
+  </div>
+</details>
+
+<!-- 2. VA Hiring Kit -->
+<details>
+  <summary><span class="num">2</span> VA Hiring Kit</summary>
+  <div class="body">
+    <h3>Job Post Template</h3>
+    <p>Copy, customize the bracketed fields, and post:</p>
+    <div class="copy-box">Looking for a Virtual Assistant for my handmade crochet business. Part-time, [X] hours/week, remote.
+
+Responsibilities: Managing customer messages, processing orders, coordinating with production team, updating inventory, scheduling social media posts.
+
+Requirements: Organized and detail-oriented. Comfortable with [Etsy/Shopify]. Basic photo editing a plus. Crochet knowledge helpful but not required.
+
+Hours: Flexible, [X] hours/week.
+Compensation: [$/hour].
+
+To apply: Tell me about your experience with e-commerce or handmade businesses, and describe how you stay organized when managing multiple tasks.</div>
+
+    <h3>Test Project for VA Candidates</h3>
+    <p>Give each candidate these 3 tasks that mirror actual day-to-day work:</p>
+    <ol>
+      <li><strong>Draft 3 Etsy listing descriptions</strong> from your product photos and details you provide.</li>
+      <li><strong>Respond to 3 sample customer messages</strong> (provide realistic scenarios: a sizing question, a shipping delay, a custom order request).</li>
+      <li><strong>Create a weekly social media schedule</strong> for one product (7 days, platform and caption ideas).</li>
+    </ol>
+    <p><strong>Scoring:</strong></p>
+    <table>
+      <tr><th>Criteria</th><th>Score</th></tr>
+      <tr><td>Quality of work</td><td>1&ndash;5</td></tr>
+      <tr><td>Speed of delivery</td><td>1&ndash;5</td></tr>
+      <tr><td>Communication clarity</td><td>1&ndash;5</td></tr>
+    </table>
+    <p>Minimum passing score: <strong>12 out of 15</strong>. Below that, move on to the next candidate.</p>
+
+    <h3>Onboarding Checklist (First Week)</h3>
+    <ul>
+      <li><strong>Day 1:</strong> Introduction to your brand, products, and voice/tone guide.</li>
+      <li><strong>Day 2:</strong> Walk through your shop platform, demonstrate the full order flow.</li>
+      <li><strong>Day 3:</strong> Practice tasks with your detailed feedback.</li>
+      <li><strong>Days 4&ndash;5:</strong> Handle real tasks &mdash; you review everything before it goes out.</li>
+      <li><strong>Week 2 onward:</strong> Independent work with a weekly check-in call.</li>
+    </ul>
+  </div>
+</details>
+
+<!-- 3. Digital Product Pivot -->
+<details>
+  <summary><span class="num">3</span> Digital Product Pivot</summary>
+  <div class="body">
+    <h3>5 Digital Products You Can Create</h3>
+    <ol>
+      <li><strong>PDF Patterns</strong> &mdash; Write your patterns professionally and sell on Etsy or Ravelry for $3&ndash;8 each. No shipping, no materials cost, unlimited copies.</li>
+      <li><strong>Pattern Bundles</strong> &mdash; Group 5&ndash;10 related patterns into a themed bundle (e.g., "Baby Essentials Set") and price at 40% off the individual total.</li>
+      <li><strong>Video Tutorials</strong> &mdash; Record yourself making a piece start to finish. Sell access for $12&ndash;20. Film with your phone, edit with free tools like CapCut or iMovie.</li>
+      <li><strong>Printable Planners</strong> &mdash; Crochet project planners, yarn inventory trackers, pattern organizers. Design in Canva, sell for $5&ndash;10.</li>
+      <li><strong>Stitch Guides</strong> &mdash; Visual reference cards for stitch types, hook sizes, and yarn weights. Sell individually or as a complete set.</li>
+    </ol>
+
+    <h3>Converting Your First Pattern to PDF</h3>
+    <ol>
+      <li><strong>Write it clearly:</strong> Standard abbreviations + fully written instructions + stitch counts at the end of every row.</li>
+      <li><strong>Add photos:</strong> Include images at every key step where someone might get confused.</li>
+      <li><strong>Format it:</strong> Use a clean template with your brand header, consistent fonts, and generous white space.</li>
+      <li><strong>Save as PDF:</strong> Export from your word processor or design tool.</li>
+      <li><strong>List on Etsy:</strong> Write a clear title, upload 5 preview images (cover, detail shots, sample pages).</li>
+    </ol>
+    <p><strong>Materials cost:</strong> $0. <strong>Time investment:</strong> 2&ndash;4 hours. <strong>Potential income:</strong> Unlimited copies sold.</p>
+
+    <h3>Passive Income Math</h3>
+    <p>If you create 5 patterns at $5 each and each pattern gets 10 sales per month:</p>
+    <p><strong>5 patterns &times; $5 &times; 10 sales = $250/month</strong> with zero ongoing work after the initial creation.</p>
+    <p>Every new pattern you add increases the total. Ten patterns at the same rate = $500/month. This income runs while you sleep, while you crochet, and while you focus on your physical products.</p>
+  </div>
+</details>
+
+<!-- 4. Wholesale in a Weekend -->
+<details>
+  <summary><span class="num">4</span> Wholesale in a Weekend</summary>
+  <div class="body">
+    <h3>The Saturday/Sunday Plan</h3>
+    <p><strong>Saturday morning:</strong> List 10 local shops that could carry handmade goods. Think beyond the obvious:</p>
+    <ul>
+      <li>Boutiques and gift shops</li>
+      <li>Baby and children's stores</li>
+      <li>Yoga studios and wellness centers</li>
+      <li>Pet shops (crochet pet toys and accessories)</li>
+      <li>Farmers markets and artisan fairs</li>
+      <li>Coffee shops with retail shelves</li>
+      <li>Hospital and airport gift shops</li>
+    </ul>
+    <p><strong>Saturday afternoon:</strong> Visit 3&ndash;5 of them in person. Observe what they already carry, note their price range, and pay attention to their customer base.</p>
+    <p><strong>Sunday:</strong> Send a pitch email or message to all 10 shops on your list.</p>
+
+    <h3>Pitch Template</h3>
+    <p>Copy, customize, and send:</p>
+    <div class="copy-box">Hi [Shop Name],
+
+I'm a local crochet artisan and I noticed your shop carries [type of items they carry]. I think my handmade [your items] would be a great fit for your customers.
+
+I offer wholesale pricing at 50% of retail, with no minimum order. I can provide a sample set of [3-5 items] for you to display, and restock within [X] days of an order.
+
+Here are a few of my pieces: [attach 3 photos]
+
+Would you be open to a quick 10-minute chat this week?
+
+[Your name]</div>
+
+    <h3>Wholesale Pricing</h3>
+    <table>
+      <tr><th>Model</th><th>How It Works</th><th>Best For</th></tr>
+      <tr><td><strong>Standard wholesale</strong></td><td>50% of retail &mdash; shop doubles your price</td><td>Established shops ready to buy upfront</td></tr>
+      <tr><td><strong>Consignment</strong></td><td>Shop takes 30&ndash;40% commission, you keep the rest</td><td>New shops or hesitant owners &mdash; lower risk for them</td></tr>
+    </table>
+    <p>Start with no minimum order to get your foot in the door. You can set minimums later once demand is proven.</p>
+
+    <h3>Follow-Up Framework</h3>
+    <ul>
+      <li><strong>No response in 5 days:</strong> Send one friendly follow-up message.</li>
+      <li><strong>"Maybe later":</strong> Add to your calendar. Check back in 30 days with a new photo or seasonal angle.</li>
+      <li><strong>"Yes":</strong> Deliver a sample set within 3 days. Include price cards and care instruction tags for every item.</li>
+      <li><strong>"No":</strong> Thank them warmly. Ask if they know another shop that might be a good fit.</li>
+    </ul>
+  </div>
+</details>
+
+<!-- 5. BONUS: Done-For-You Pitch Deck -->
+<details>
+  <summary><span class="num">5</span> Done-For-You Pitch Deck <span class="bonus">Bonus</span></summary>
+  <div class="body">
+    <p>Build this 8-slide presentation to walk into any shop with confidence. Use Canva, Google Slides, or PowerPoint.</p>
+    <h3>Slide-by-Slide Outline</h3>
+    <ol>
+      <li><strong>Cover Slide:</strong> Your brand name + "Handmade Crochet Collection" + your single best product photo.</li>
+      <li><strong>About You:</strong> 2&ndash;3 sentences about your story and craft. Example: "I've been crocheting for [X] years and I specialize in [your niche]."</li>
+      <li><strong>The Products:</strong> A grid of 6&ndash;8 product photos with names and retail prices below each one.</li>
+      <li><strong>Why Handmade Sells:</strong> Three bullet points &mdash; growing demand for artisan goods, customers pay a premium for unique items, zero mass-market competition for your exact designs.</li>
+      <li><strong>Wholesale Terms:</strong> Pricing (50% of retail), minimum order (none to start), restock time, payment terms (net 30).</li>
+      <li><strong>Best Sellers:</strong> Your top 3 products with one sentence about why customers love each one.</li>
+      <li><strong>Display Suggestion:</strong> A photo or description of how your products look best displayed in a shop &mdash; on a shelf, in a basket, or on a countertop stand.</li>
+      <li><strong>Next Steps:</strong> "I'd love to bring a sample set to your shop this week. Here's how to reach me."</li>
+    </ol>
+    <p><strong>Tip:</strong> Keep it visual. More photos, fewer words. Shop owners decide in seconds whether your products fit their store.</p>
+  </div>
+</details>
+
+<!-- 6. SECRET BONUS: Income Replacement Calculator -->
+<details>
+  <summary><span class="num">6</span> Income Replacement Calculator <span class="bonus">Secret Bonus</span></summary>
+  <div class="body">
+    <h3>How Many Pieces Per Week to Replace Your 9-to-5?</h3>
+    <p>Fill in your own numbers:</p>
+
+    <div class="calc-row"><span class="label"><strong>Step 1:</strong> Your target monthly income</span><span class="blank">$________</span></div>
+    <div class="calc-row"><span class="label"><strong>Step 2:</strong> Average profit per piece (after materials + contractor pay)</span><span class="blank">$________</span></div>
+    <div class="calc-row"><span class="label"><strong>Step 3:</strong> Pieces needed per month (Step 1 / Step 2)</span><span class="blank">________</span></div>
+    <div class="calc-row"><span class="label"><strong>Step 4:</strong> Pieces needed per week (Step 3 / 4)</span><span class="blank">________</span></div>
+    <div class="calc-row"><span class="label"><strong>Step 5:</strong> Contractors needed (Step 4 / pieces per contractor per week)</span><span class="blank">________</span></div>
+
+    <h3>Example Scenarios</h3>
+    <table>
+      <tr><th>Target Income</th><th>Profit/Piece</th><th>Pieces/Month</th><th>Pieces/Week</th><th>Contractors</th></tr>
+      <tr><td>$2,000</td><td>$15</td><td>134</td><td>34</td><td>7</td></tr>
+      <tr><td>$3,000</td><td>$15</td><td>200</td><td>50</td><td>10</td></tr>
+      <tr><td>$2,000</td><td>$25</td><td>80</td><td>20</td><td>4</td></tr>
+      <tr><td>$3,000</td><td>$25</td><td>120</td><td>30</td><td>6</td></tr>
+      <tr><td>$4,000</td><td>$20</td><td>200</td><td>50</td><td>10</td></tr>
+    </table>
+    <p>The contractors column assumes each person produces 5 finished pieces per week. Adjust based on your product complexity.</p>
+    <p><strong>The math always works. The question is: are you willing to stop being the only pair of hands?</strong></p>
+  </div>
+</details>
+
+<footer>
+  <h2>Your Next Step</h2>
+  <p>Pick one scaling strategy from the playbook above. Just one. Then take the first action step this week &mdash; whether that is posting in a crochet group to find your first contractor, drafting your VA job post, or converting your best pattern into a PDF. One step forward is all it takes to start.</p>
+</footer>
+
+</div>
+</body>
+</html>

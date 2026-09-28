@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Repeat Buyer Engine&#8482; &mdash; CrochetLib</title>
+<style>
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/6lcebm.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/onbguu.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --bg:#FBF7F1;--paper:#FFFFFF;--ink:#2B2420;--ink-soft:#6B5E55;
+  --accent:#C2683F;--accent-dark:#9C4A28;--verde:#33A96B;--line:#EDE3D8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+.wrap{max-width:520px;margin:0 auto}
+
+/* Header */
+.brand{text-align:center;font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+h1{text-align:center;font-size:1.45rem;font-weight:800;line-height:1.25;margin-bottom:12px;color:var(--ink)}
+.welcome{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;font-size:.93rem;color:var(--ink-soft);line-height:1.55;margin-bottom:28px;text-align:center}
+
+/* Sections */
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden}
+summary{font-weight:700;font-size:1rem;padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:8px;height:8px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open]>summary::before{transform:rotate(45deg)}
+summary .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:var(--accent);color:#fff;border-radius:50%;font-size:.78rem;font-weight:800;flex-shrink:0}
+summary .bonus{display:inline-flex;align-items:center;justify-content:center;padding:2px 9px;background:var(--verde);color:#fff;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0}
+summary .secret{display:inline-flex;align-items:center;justify-content:center;padding:2px 9px;background:var(--accent-dark);color:#fff;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0}
+.body{padding:6px 18px 20px}
+
+/* Typography inside sections */
+.body h3{font-size:.95rem;font-weight:700;color:var(--accent-dark);margin:18px 0 6px;line-height:1.3}
+.body h3:first-child{margin-top:8px}
+.body p{font-size:.88rem;color:var(--ink);margin-bottom:10px}
+.body ul,.body ol{font-size:.88rem;padding-left:20px;margin-bottom:12px}
+.body li{margin-bottom:6px}
+.body strong{font-weight:700;color:var(--ink)}
+
+/* Template boxes */
+.tpl{background:var(--bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0 14px;font-size:.84rem;line-height:1.55;color:var(--ink-soft)}
+.tpl b{color:var(--ink);font-weight:700}
+.tpl .subj{font-weight:700;color:var(--accent-dark);display:block;margin-bottom:4px}
+
+/* Tables */
+.body table{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0 14px}
+.body th{background:var(--accent);color:#fff;font-weight:700;text-align:left;padding:8px 10px}
+.body td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--ink)}
+.body tr:nth-child(even) td{background:var(--bg)}
+
+/* Calendar month cards */
+.month{background:var(--bg);border-radius:8px;padding:12px 14px;margin:10px 0 14px}
+.month-title{font-weight:700;color:var(--accent-dark);font-size:.9rem;margin-bottom:4px}
+.month p,.month ul{font-size:.84rem;margin-bottom:6px}
+.month ul{padding-left:18px}
+.month li{margin-bottom:3px}
+
+/* Swipe items */
+.swipe{background:var(--bg);border-radius:8px;padding:10px 14px;margin:8px 0}
+.swipe-num{font-weight:800;color:var(--accent);font-size:.82rem}
+.swipe-subj{font-weight:700;color:var(--ink);font-size:.86rem;display:block;margin:2px 0 4px}
+.swipe p{font-size:.82rem;color:var(--ink-soft);margin:0}
+
+/* Footer */
+.footer{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center;margin-top:20px;margin-bottom:24px}
+.footer h2{font-size:1.05rem;font-weight:800;color:var(--accent-dark);margin-bottom:8px}
+.footer p{font-size:.88rem;color:var(--ink-soft);line-height:1.55}
+.copy{text-align:center;font-size:.72rem;color:var(--ink-soft);padding-bottom:20px;opacity:.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<p class="brand">CrochetLib</p>
+<h1>Repeat Buyer Engine&#8482;</h1>
+<div class="welcome">You're in! Here's your complete Repeat Buyer Engine&#8482; &mdash; everything you need to turn one-time buyers into loyal customers.</div>
+
+<!-- 1. CUSTOMER RETURN SYSTEM -->
+<details open>
+<summary><span class="num">1</span> Customer Return System</summary>
+<div class="body">
+
+<h3>Welcome Email Template</h3>
+<div class="tpl">
+<span class="subj">Subject: "Your [item] is on its way &mdash; plus a little thank you"</span>
+<b>Opening:</b> Thank them by name for their purchase. Mention the specific item they ordered.<br><br>
+<b>Middle:</b> Set a delivery expectation (e.g., "Your [item] should arrive within [X] days"). Include care instructions specific to crochet items &mdash; hand wash in cool water, lay flat to dry, store folded (not hung) to keep the shape.<br><br>
+<b>Close:</b> Offer a first-look discount code for their next purchase. "As a thank you for being one of my customers, here's 10% off your next order. Use code WELCOME10 at checkout &mdash; valid for 30 days."
+</div>
+
+<h3>7-Day Follow-Up Template</h3>
+<div class="tpl">
+<span class="subj">Subject: "How are you loving your [item]?"</span>
+<b>Opening:</b> Check in on their experience. "It's been about a week since your [item] arrived &mdash; I hope it's bringing you joy!"<br><br>
+<b>Middle:</b> Ask for a photo. "If you've taken any photos with your [item], I'd love to see them. I might even feature it in my shop (with your permission, of course)."<br><br>
+<b>Close:</b> Mention complementary items. "By the way, I just finished a [complementary item] that pairs perfectly with your [item]. I thought you might want to see it first."
+</div>
+
+<h3>30-Day Re-engagement Template</h3>
+<div class="tpl">
+<span class="subj">Subject: "I made something that goes perfectly with your [item]"</span>
+<b>Opening:</b> Reference their original purchase. "A month ago you took home [item], and I've been working on something I think you'll love."<br><br>
+<b>Middle:</b> Show a matching or complementary piece with a short description. Emphasize that it was designed to pair with what they already own. Include a photo.<br><br>
+<b>Close:</b> Add light scarcity. "I only made [X] of these &mdash; reply to this email if you'd like me to hold one for you."
+</div>
+
+<h3>Loyalty Card Framework</h3>
+<p>Reward repeat customers at these milestones:</p>
+<table>
+<tr><th>Milestone</th><th>Reward</th></tr>
+<tr><td><strong>3 purchases</strong></td><td>Free shipping on next order</td></tr>
+<tr><td><strong>5 purchases</strong></td><td>20% off any item</td></tr>
+<tr><td><strong>10 purchases</strong></td><td>Free custom piece (you choose the pattern)</td></tr>
+</table>
+<p><strong>How to track:</strong> Create a simple spreadsheet with columns for customer name, email, purchase dates, items bought, and reward status. Update it after every sale. When a customer hits a milestone, send them a personal message with their reward code.</p>
+
+<h3>Monthly Subscription Model: The "Stitch of the Month Club"</h3>
+<p>Customers pay a fixed monthly amount and receive a surprise crochet item each month. This creates predictable income and keeps customers engaged.</p>
+<p><strong>Pricing:</strong> Set your subscription price at 1.5x your average item cost. If your average item sells for $20, charge $30/month for the subscription (the surprise factor and exclusivity justify the premium).</p>
+<div class="tpl">
+<b>Sign-Up Message Template:</b><br>
+"Welcome to the Stitch of the Month Club! Every month, you'll receive a handmade surprise crochet piece delivered to your door. Each item is crafted exclusively for members &mdash; you won't find these in my regular shop. Your first item ships within [X] days of signing up."<br><br>
+<b>Cancellation Policy:</b><br>
+"You can cancel anytime before the 25th of the month to stop your next shipment. No questions asked, no hard feelings. Already-shipped items are non-refundable."
+</div>
+
+</div>
+</details>
+
+<!-- 2. UPSELL & BUNDLE TEMPLATES -->
+<details>
+<summary><span class="num">2</span> Upsell &amp; Bundle Templates</summary>
+<div class="body">
+
+<h3>The Matching Set Bundle</h3>
+<p>Turn a single item into a 3-piece set. Customers get more value, you increase your average order.</p>
+<div class="tpl">
+<b>Example:</b> Beanie ($25) &rarr; Beanie + Scarf + Mittens set ($55, saves $20)<br><br>
+<b>Template:</b> "[Item A] loves company. Get the complete [Set Name] and save [X%]. Each piece is made in the same yarn and color to match perfectly."
+</div>
+
+<h3>The Gift Bundle</h3>
+<p>Wrap 2-3 items together with a handwritten card in tissue paper. Charge a 15-20% premium over individual prices. This works especially well during holidays.</p>
+<div class="tpl">
+<b>Template:</b> "Give the gift of handmade. The [Bundle Name] comes gift-ready &mdash; beautifully wrapped with a handwritten note. Just tell me what to write."
+</div>
+
+<h3>The Upgrade Upsell</h3>
+<p>Offer premium yarn or a custom color choice for an additional 30% on top of the base price.</p>
+<div class="tpl">
+<b>Template:</b> "Want this in [premium material, e.g., merino wool or organic cotton]? Upgrade for just [amount] more. Same design, elevated feel."
+</div>
+
+<h3>The Add-On</h3>
+<p>Pair a small, quick-to-make item with any order. Keychains, scrunchies, and coasters work perfectly at $5-8 each.</p>
+<div class="tpl">
+<b>Template:</b> "Add a matching [small item] to your order for just [price]. It takes me 20 minutes to make and ships with your [main item] &mdash; no extra shipping."
+</div>
+
+<h3>Pricing Matrix</h3>
+<table>
+<tr><th>Bundle Type</th><th>Single</th><th>Bundle</th><th>You Save (cost)</th><th>They Save</th></tr>
+<tr><td><strong>Beanie Set</strong></td><td>$75</td><td>$55</td><td>~$5 in yarn</td><td>$20</td></tr>
+<tr><td><strong>Amigurumi Trio</strong></td><td>$60</td><td>$45</td><td>~$4 in yarn</td><td>$15</td></tr>
+<tr><td><strong>Home Decor Pack</strong></td><td>$90</td><td>$70</td><td>~$6 in yarn</td><td>$20</td></tr>
+<tr><td><strong>Gift Set</strong></td><td>$50</td><td>$55*</td><td>$0 (premium)</td><td>Gift-ready</td></tr>
+<tr><td><strong>Accessory Duo</strong></td><td>$40</td><td>$32</td><td>~$3 in yarn</td><td>$8</td></tr>
+</table>
+<p style="font-size:.8rem;color:var(--ink-soft)">*Gift Set charges a premium for wrapping and presentation. Your material cost stays the same, but you earn more per order.</p>
+
+</div>
+</details>
+
+<!-- 3. HOLIDAY CAMPAIGN CALENDAR -->
+<details>
+<summary><span class="num">3</span> Holiday Campaign Calendar</summary>
+<div class="body">
+<p>One email per month, copy-paste ready. Customize the [brackets] with your own products and details.</p>
+
+<div class="month">
+<p class="month-title">January &mdash; New Year Fresh Start</p>
+<div class="tpl">
+<span class="subj">Subject: "New year, new projects &mdash; start cozy"</span>
+"Happy new year! While everyone's making resolutions, I've been making [item]. There's something about wrapping up in handmade warmth that makes January feel less cold. Here's what's new in the shop this month."
+</div>
+<ul>
+<li>Feature warm accessories: scarves, chunky blankets, ear warmers</li>
+<li>Promote beginner-friendly items for "new year, new hobby" buyers</li>
+<li>Offer a "fresh start" bundle of cozy essentials</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">February &mdash; Valentine's Day</p>
+<div class="tpl">
+<span class="subj">Subject: "Handmade love: gifts they'll keep forever"</span>
+"Valentine's Day is [X] days away, and handmade gifts always mean more. I've put together a few pieces that say 'I love you' without saying a word. Every stitch is made with care &mdash; just like the real thing."
+</div>
+<ul>
+<li>Heart-shaped amigurumi, matching couple accessories</li>
+<li>Gift wrapping upsell with handwritten card</li>
+<li>"Last order date for Valentine's delivery" urgency</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">March &mdash; Spring Refresh</p>
+<div class="tpl">
+<span class="subj">Subject: "Spring colors are here &mdash; new collection drop"</span>
+"Winter is finally loosening its grip, and I've been working with the prettiest pastel yarns. Think soft lavender, mint green, and blush pink. The new spring collection is live &mdash; here are my three favorites."
+</div>
+<ul>
+<li>Pastel items, flower motif accessories, light-weight scarves</li>
+<li>Easter teaser: "Next month's Easter collection is coming &mdash; stay tuned"</li>
+<li>Spring cleaning angle: "Out with the old, in with the handmade"</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">April &mdash; Easter</p>
+<div class="tpl">
+<span class="subj">Subject: "The Easter collection: bunnies, baskets &amp; beyond"</span>
+"Easter is almost here, and this year's collection is my favorite yet. From little bunny amigurumi to crochet basket stuffers, everything is ready to ship. These are limited &mdash; once they're gone, they're gone until next year."
+</div>
+<ul>
+<li>Easter bunny amigurumi, crochet eggs, basket stuffers</li>
+<li>Spring home decor: table runners, coasters in pastels</li>
+<li>Bundle: "Easter Basket Kit" with 3-4 small items</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">May &mdash; Mother's Day</p>
+<div class="tpl">
+<span class="subj">Subject: "For the mom who deserves handmade"</span>
+"Moms don't need another candle. This year, give her something made by hand and chosen with thought. I've put together gift bundles in her favorite colors &mdash; just tell me which ones and I'll handle the rest."
+</div>
+<ul>
+<li>Gift bundles in curated color palettes</li>
+<li>Custom-color option for a personal touch</li>
+<li>Gift wrapping upsell: "arrives gift-ready"</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">June &mdash; Summer Kickoff</p>
+<div class="tpl">
+<span class="subj">Subject: "Light, bright, and beach-ready"</span>
+"Summer is officially here, and I've switched to cotton yarn for the season. Tote bags, lightweight headbands, and the cutest little coasters for your iced coffee. Everything is made for warm weather."
+</div>
+<ul>
+<li>Cotton tote bags, sun hats, lightweight headbands</li>
+<li>Beach-themed accessories and summer home decor</li>
+<li>Seasonal patterns if you sell digital downloads</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">July &mdash; Mid-Year Sale</p>
+<div class="tpl">
+<span class="subj">Subject: "Half-year celebration: your favorites, special prices"</span>
+"We're halfway through the year, and I wanted to celebrate with you. For this week only, your favorite items are 15% off. These are the pieces you've been eyeing &mdash; now's the time."
+</div>
+<ul>
+<li>Best sellers at 15% off for one week</li>
+<li>Bundle deals: buy 2, save 20%</li>
+<li>Clear out seasonal inventory to make room for fall</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">August &mdash; Back to School</p>
+<div class="tpl">
+<span class="subj">Subject: "Handmade for the school year"</span>
+"Back-to-school season doesn't have to be boring. I've been making the coziest kid-friendly pieces &mdash; plus a few teacher appreciation gifts that are a step above the usual apple mug. Take a look."
+</div>
+<ul>
+<li>Kid accessories: beanies, pencil cases, bookmarks</li>
+<li>Teacher gifts: small amigurumi, coasters, plant cozies</li>
+<li>Lunchbox cozies and backpack keychains</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">September &mdash; Fall Preview</p>
+<div class="tpl">
+<span class="subj">Subject: "Pumpkin spice and new stitches"</span>
+"Fall is my favorite season to create. The colors, the textures, the warmth &mdash; everything I love about crochet comes alive. Here's a first look at what I've been working on for autumn."
+</div>
+<ul>
+<li>Warm-tone items: rust, mustard, forest green</li>
+<li>Autumn home decor: pumpkins, leaf garlands, throw pillows</li>
+<li>Cozy accessories: infinity scarves, fingerless gloves</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">October &mdash; Halloween</p>
+<div class="tpl">
+<span class="subj">Subject: "Spooky season crafts are here"</span>
+"It's finally October. I've been making the cutest spooky pieces all month &mdash; tiny ghosts, pumpkin amigurumi, and trick-or-treat bags that kids actually love. Limited quantities, and they always sell out."
+</div>
+<ul>
+<li>Halloween amigurumi: ghosts, pumpkins, bats, black cats</li>
+<li>Trick-or-treat bags and costume accessories</li>
+<li>Spooky home decor: garlands, bowl cozies, door hangers</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">November &mdash; Black Friday / Thanksgiving</p>
+<div class="tpl">
+<span class="subj">Subject: "Our biggest sale of the year"</span>
+"This is the one sale I do all year. Everything in the shop is 25% off &mdash; no exceptions, no fine print. Plus, I've put together a holiday gift guide to make your shopping easier. This ends Sunday."
+</div>
+<ul>
+<li>25% off everything, site-wide, limited time</li>
+<li>Holiday gift guide with curated picks by recipient</li>
+<li>Limited edition items available only this weekend</li>
+</ul>
+</div>
+
+<div class="month">
+<p class="month-title">December &mdash; Christmas</p>
+<div class="tpl">
+<span class="subj">Subject: "Handmade holidays: gifts with heart"</span>
+"There's still time for handmade Christmas gifts. Ornaments, stockings, and gift sets are ready to ship. I've also put together a last-minute gift guide for anyone who still needs ideas. Every order ships within 48 hours this month."
+</div>
+<ul>
+<li>Ornaments, stockings, tree toppers</li>
+<li>Gift sets with wrapping included</li>
+<li>Last-minute guide: "still ships before Christmas" collection</li>
+</ul>
+</div>
+
+</div>
+</details>
+
+<!-- 4. REVIEW & REFERRAL PLAYBOOK -->
+<details>
+<summary><span class="num">4</span> Review &amp; Referral Playbook</summary>
+<div class="body">
+
+<h3>When to Ask for a Review</h3>
+<p><strong>3-5 days after delivery.</strong> The customer has received and seen the item, it's still fresh and exciting, and they haven't yet moved on to the next thing. This is the sweet spot.</p>
+
+<h3>How to Ask &mdash; Template</h3>
+<div class="tpl">
+"Hi [Name]! I hope you're loving your [item]. If you have a moment, a quick review would mean the world to me. Just reply to this email with a photo and a few words, and I'll feature it in my shop. As a thank you, here's 10% off your next order: [CODE]"
+</div>
+
+<h3>5 Ways to Get More Reviews (Without Being Pushy)</h3>
+<ol>
+<li><strong>Include a handwritten card with every order</strong> asking for feedback. A small note like "I'd love to hear what you think" goes a long way.</li>
+<li><strong>Share customer photos on your social media</strong> (with permission). When people see others being featured, they want to be featured too.</li>
+<li><strong>Create a "Wall of Love" section in your shop.</strong> Dedicate a space to customer photos and quotes. It encourages new reviews and builds trust with new buyers.</li>
+<li><strong>Send a gentle follow-up if no review after 14 days.</strong> Keep it short: "Just checking in &mdash; how's your [item] holding up?"</li>
+<li><strong>Offer a small incentive.</strong> A discount code or free pattern download in exchange for a review. Keep it simple and genuine.</li>
+</ol>
+
+<h3>Referral Program Template</h3>
+<div class="tpl">
+"Know someone who'd love handmade crochet? Share your personal code <b>[CODE]</b> and they get <b>15% off</b> their first order. When they buy, <b>you get 20% off</b> your next order."
+</div>
+<p><strong>How to track:</strong> Create a spreadsheet with columns for referrer name, their unique code, number of times used, and rewards given. Generate simple codes like FRIEND-[NAME] so you can trace them easily. Update after every referred purchase.</p>
+
+<h3>Handling Negative Feedback</h3>
+<p>Not every review will be glowing. Here is a 3-step framework for turning complaints into loyalty:</p>
+<ol>
+<li><strong>Acknowledge.</strong> "Thank you for letting me know. I'm sorry this wasn't what you expected."</li>
+<li><strong>Offer to fix.</strong> "I'd like to make this right. I can [replace the item / offer a refund / send a different piece]. What would work best for you?"</li>
+<li><strong>Follow up.</strong> After resolving, check in one more time: "I wanted to make sure everything is good now. Your satisfaction matters to me."</li>
+</ol>
+<div class="tpl">
+<b>Full Response Template:</b><br>
+"Hi [Name], thank you for reaching out about your [item]. I'm sorry it didn't meet your expectations &mdash; that's not the experience I want for my customers. I'd love to make this right. I can [option A: replace / option B: refund / option C: send alternative]. Please let me know what works best and I'll take care of it right away."
+</div>
+
+</div>
+</details>
+
+<!-- 5. BONUS: REPEAT BUYER SWIPE FILE -->
+<details>
+<summary><span class="bonus">BONUS</span> Repeat Buyer Swipe File</summary>
+<div class="body">
+<p>15 email subject lines for re-engagement, organized by trigger. Use these word-for-word or customize with your brand voice.</p>
+
+<div class="swipe">
+<span class="swipe-num">#1</span>
+<span class="swipe-subj">"I thought of you when I made this"</span>
+<p><strong>When to use:</strong> You've made a new item that complements a past customer's purchase. <strong>Include:</strong> A photo of the new item, a reference to their past order, and a direct link to purchase.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#2</span>
+<span class="swipe-subj">"Your favorites are back in stock"</span>
+<p><strong>When to use:</strong> A previously sold-out item is available again. <strong>Include:</strong> The item name, a photo, and a note about limited quantity to create urgency.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#3</span>
+<span class="swipe-subj">"A little surprise inside (just for you)"</span>
+<p><strong>When to use:</strong> You want to offer an exclusive discount or early access to a loyal customer. <strong>Include:</strong> A unique discount code and a time limit (e.g., 48 hours).</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#4</span>
+<span class="swipe-subj">"Remember this? I made a matching [item]"</span>
+<p><strong>When to use:</strong> You've created a companion piece to something they've already purchased. <strong>Include:</strong> Photos of both items side by side, and the bundle discount if applicable.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#5</span>
+<span class="swipe-subj">"It's been a while &mdash; here's what's new"</span>
+<p><strong>When to use:</strong> A customer hasn't purchased in 30-45 days but isn't yet dormant. <strong>Include:</strong> 3-4 new items with photos, a friendly check-in tone, no discount needed.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#6</span>
+<span class="swipe-subj">"Your exclusive early access starts now"</span>
+<p><strong>When to use:</strong> Before a public launch or seasonal collection drop. <strong>Include:</strong> A preview of the collection, a "shop before anyone else" link, and the public launch date.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#7</span>
+<span class="swipe-subj">"[Name], I saved something for you"</span>
+<p><strong>When to use:</strong> You've set aside a specific item based on their past taste. <strong>Include:</strong> Personalize with their name, reference their color or style preference, and create a 48-hour hold.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#8</span>
+<span class="swipe-subj">"New collection drop &mdash; see it before anyone else"</span>
+<p><strong>When to use:</strong> Launching a new seasonal or themed collection. <strong>Include:</strong> 2-3 hero product photos, the collection story, and a "shop now" link that goes live for them first.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#9</span>
+<span class="swipe-subj">"Your loyalty reward is waiting"</span>
+<p><strong>When to use:</strong> A customer has hit a loyalty milestone (3rd, 5th, or 10th purchase). <strong>Include:</strong> Their reward details, a thank you, and what the next milestone unlocks.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#10</span>
+<span class="swipe-subj">"Quick question about your last order"</span>
+<p><strong>When to use:</strong> 7-10 days after delivery as a soft check-in and review prompt. <strong>Include:</strong> A genuine question about their experience, a request for a photo, and a small incentive for responding.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#11</span>
+<span class="swipe-subj">"I just finished something you'll love"</span>
+<p><strong>When to use:</strong> You've completed a one-of-a-kind or small-batch item. <strong>Include:</strong> A behind-the-scenes photo, the story of making it, and a "first come, first served" note.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#12</span>
+<span class="swipe-subj">"Flash sale: 24 hours only"</span>
+<p><strong>When to use:</strong> You need a quick revenue boost or want to clear specific inventory. <strong>Include:</strong> The discount amount, a countdown (24 hours), and 3-5 featured items with photos.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#13</span>
+<span class="swipe-subj">"What should I make next? You decide"</span>
+<p><strong>When to use:</strong> To drive engagement and make customers feel invested in your shop. <strong>Include:</strong> 2-3 options with photos or sketches, a "reply with your vote" CTA, and a promise to make the winner.</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#14</span>
+<span class="swipe-subj">"Happy anniversary! One year since your first order"</span>
+<p><strong>When to use:</strong> The annual anniversary of their first purchase. <strong>Include:</strong> A thank you, a reminder of what they ordered, a special anniversary discount code (15-20% off).</p>
+</div>
+
+<div class="swipe">
+<span class="swipe-num">#15</span>
+<span class="swipe-subj">"I'm clearing space &mdash; these are the last ones"</span>
+<p><strong>When to use:</strong> End of season or when discontinuing certain items. <strong>Include:</strong> The items being retired, a final-chance discount, and a "once they're gone, they're gone" framing.</p>
+</div>
+
+</div>
+</details>
+
+<!-- 6. SECRET BONUS: $0 REACTIVATION EMAIL -->
+<details>
+<summary><span class="secret">SECRET</span> The $0 Reactivation Email</summary>
+<div class="body">
+<p>This is one email designed to bring back customers who haven't purchased in 60+ days. No discount, no coupon &mdash; just emotion and scarcity. It works because it makes them feel remembered.</p>
+
+<h3>The Template</h3>
+<div class="tpl">
+<span class="subj">Subject: "I almost gave your piece away"</span>
+<br>
+"Hi [Name],<br><br>
+I was reorganizing my workshop this week and I came across a [color/style] [item type] that reminded me of the [original item] you ordered back in [month].<br><br>
+I almost set it aside for someone else &mdash; but then I thought of you first.<br><br>
+It's a [brief description: e.g., 'chunky merino throw in that same warm caramel tone you picked last time']. I made [number, e.g., 'just three of these'], and one of them has your name on it. Not literally &mdash; but it could.<br><br>
+If you'd like me to hold it for you, just reply to this email. I'll keep it aside for 48 hours before I list it in the shop.<br><br>
+Talk soon,<br>
+[Your Name]"
+</div>
+
+<h3>Why This Works</h3>
+<ul>
+<li><strong>Curiosity:</strong> The subject line "I almost gave your piece away" creates an immediate emotional hook. They have to open it.</li>
+<li><strong>Specificity:</strong> Referencing their actual past purchase makes it personal, not generic.</li>
+<li><strong>Scarcity:</strong> "Just three of these" and a 48-hour hold create urgency without feeling like a sales tactic.</li>
+<li><strong>No discount needed:</strong> The emotion and exclusivity do the selling. You protect your margins entirely.</li>
+</ul>
+
+<h3>When to Send</h3>
+<p>Target customers who purchased once (or more) but have been inactive for 60-90 days. Send it mid-week (Tuesday-Thursday), mid-morning. One email only &mdash; if they don't respond, move on. Don't follow up on this one; its power is in the scarcity.</p>
+
+</div>
+</details>
+
+<!-- FOOTER -->
+<div class="footer">
+<h2>Your Next Step</h2>
+<p>Pick one email from the calendar this month, customize it with your products, and send it. That's it. One email, one action, one step closer to repeat buyers.</p>
+</div>
+
+<p class="copy">Repeat Buyer Engine&#8482; &mdash; CrochetLib</p>
+
+</div>
+</body>
+</html>

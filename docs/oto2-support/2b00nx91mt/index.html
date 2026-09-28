@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Never Stuck Again&#8482; &mdash; CrochetLib</title>
+<style>
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/6lcebm.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;src:url('https://files.catbox.moe/onbguu.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --bg:#FBF7F1;--paper:#FFFFFF;--ink:#2B2420;--ink-soft:#6B5E55;
+  --accent:#C2683F;--accent-dark:#9C4A28;--verde:#33A96B;--line:#EDE3D8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+.wrap{max-width:520px;margin:0 auto}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.brand{font-weight:800;font-size:1.05rem;letter-spacing:.5px;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+.header h1{font-size:1.55rem;font-weight:700;line-height:1.25;margin-bottom:12px}
+.header p{color:var(--ink-soft);font-size:.95rem}
+
+/* Sections */
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden}
+summary{font-weight:700;font-size:1.05rem;padding:16px 20px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:8px;height:8px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open]>summary::before{transform:rotate(45deg)}
+.section-body{padding:0 20px 20px}
+.section-tag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--paper);background:var(--accent);border-radius:4px;padding:2px 8px;margin-right:6px;vertical-align:middle}
+.bonus-tag{background:var(--verde)}
+
+/* Typography inside sections */
+.section-body h3{font-size:.95rem;font-weight:700;color:var(--accent-dark);margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.section-body h3:first-child{margin-top:4px}
+.section-body h4{font-size:.88rem;font-weight:700;margin:14px 0 6px}
+.section-body p{font-size:.88rem;margin-bottom:8px;color:var(--ink)}
+.section-body ul,.section-body ol{font-size:.88rem;padding-left:20px;margin-bottom:10px}
+.section-body li{margin-bottom:4px}
+.section-body li strong{color:var(--ink)}
+
+/* Problem table */
+.prob-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:14px}
+.prob-table th{text-align:left;padding:6px 8px;background:var(--bg);font-weight:700;border-bottom:2px solid var(--line);font-size:.78rem;text-transform:uppercase;letter-spacing:.3px;color:var(--ink-soft)}
+.prob-table td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.prob-table td:first-child{font-weight:600;white-space:nowrap;color:var(--ink)}
+.prob-table td:last-child{color:var(--ink-soft)}
+
+/* Abbrev table */
+.abbr-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.abbr-table th{text-align:left;padding:5px 8px;background:var(--bg);font-weight:700;border-bottom:2px solid var(--line);font-size:.78rem;text-transform:uppercase;letter-spacing:.3px;color:var(--ink-soft)}
+.abbr-table td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.abbr-table td:first-child{font-weight:700;font-family:monospace;color:var(--accent-dark);white-space:nowrap}
+
+/* Walkthrough cards */
+.walk-card{background:var(--bg);border-radius:8px;padding:14px 16px;margin-bottom:12px}
+.walk-card h4{font-size:.9rem;font-weight:700;margin:0 0 4px;color:var(--accent-dark)}
+.walk-card .walk-desc{font-size:.82rem;color:var(--ink-soft);margin-bottom:8px;font-style:italic}
+.walk-card ol{font-size:.84rem;padding-left:20px;margin:0}
+.walk-card li{margin-bottom:3px}
+
+/* Mock form */
+.mock-form{background:var(--bg);border-radius:8px;padding:16px;margin:12px 0}
+.form-field{margin-bottom:12px}
+.form-field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:4px;color:var(--ink)}
+.form-field input,.form-field textarea,.form-field select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font-family:'Figtree',sans-serif;font-size:.85rem;background:var(--paper);color:var(--ink)}
+.form-field textarea{height:80px;resize:vertical}
+.upload-zone{border:2px dashed var(--line);border-radius:8px;padding:20px;text-align:center;color:var(--ink-soft);font-size:.84rem}
+.mock-btn{display:block;width:100%;padding:12px;background:var(--accent);color:var(--paper);border:none;border-radius:8px;font-family:'Figtree',sans-serif;font-size:.92rem;font-weight:700;cursor:default;margin-top:8px;opacity:.7}
+.form-note{font-size:.78rem;color:var(--ink-soft);text-align:center;margin-top:8px;font-style:italic}
+
+/* Troubleshoot chart */
+.ts-chart{width:100%;border-collapse:collapse;font-size:.84rem;margin:10px 0}
+.ts-chart td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.ts-chart td:first-child{font-weight:600;width:45%}
+
+/* Priority */
+.priority-box{background:var(--verde);color:var(--paper);border-radius:8px;padding:16px;margin:8px 0}
+.priority-box p{color:var(--paper);font-size:.88rem}
+.priority-box strong{color:var(--paper)}
+
+/* Footer */
+.footer{text-align:center;padding:28px 0 20px}
+.footer h2{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.footer p{font-size:.88rem;color:var(--ink-soft);max-width:400px;margin:0 auto}
+.divider{height:1px;background:var(--line);margin:4px 0 28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="brand">CrochetLib</div>
+  <h1>Never Stuck Again&#8482;</h1>
+  <p>You're in! Here's your complete Never Stuck Again&#8482; toolkit. Everything you need to troubleshoot any crochet problem, master tricky techniques, and get expert help when you need it.</p>
+</header>
+
+<!-- 1. PATTERN SOS LIBRARY -->
+<details open>
+  <summary><span class="section-tag">1</span> Pattern SOS Library</summary>
+  <div class="section-body">
+    <p>Your quick-reference troubleshooting guide. Find your problem, apply the fix, and keep crocheting.</p>
+
+    <h3>Tension and Gauge Issues</h3>
+    <table class="prob-table">
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>Stitches too tight</td><td>Relax your grip and go up one hook size</td></tr>
+      <tr><td>Stitches too loose</td><td>Tighten your grip and go down one hook size</td></tr>
+      <tr><td>Uneven edges</td><td>Count stitches every row; mark the first stitch with a stitch marker</td></tr>
+      <tr><td>Fabric curling</td><td>Use a larger hook; block the finished piece with steam or wet blocking</td></tr>
+      <tr><td>Gauge doesn't match pattern</td><td>Make a 4-inch swatch and adjust hook size until gauge matches</td></tr>
+      <tr><td>Rows look different</td><td>Check if you're accidentally working in back loop only on alternate rows</td></tr>
+      <tr><td>Fabric too stiff</td><td>Switch to a looser yarn weight or go up one or two hook sizes</td></tr>
+      <tr><td>Fabric too floppy</td><td>Go down a hook size or switch to a thicker yarn</td></tr>
+    </table>
+
+    <h3>Stitch Mistakes</h3>
+    <table class="prob-table">
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>Accidentally added stitches</td><td>Count every row; place stitch markers at the first and last stitch</td></tr>
+      <tr><td>Dropped a stitch</td><td>Insert your hook from front to back into the dropped loop, yarn over, pull through</td></tr>
+      <tr><td>Yarn splits when crocheting</td><td>Use a hook with a smoother, more tapered tip; try a different yarn</td></tr>
+      <tr><td>Can't find where to insert hook</td><td>Use stitch markers at the start and end of every row</td></tr>
+      <tr><td>Chain too tight to work into</td><td>Use a hook one size larger just for the foundation chain</td></tr>
+      <tr><td>Turning chain: stitch or not?</td><td>Check pattern notes. Usual rule: sc = no, hdc/dc = yes</td></tr>
+      <tr><td>Skipped a stitch</td><td>Frog back to the mistake; use stitch markers to prevent repeats</td></tr>
+      <tr><td>Wrong stitch height</td><td>Review: sc = short, hdc = medium, dc = tall, tr = tallest</td></tr>
+    </table>
+
+    <h3>Joining and Finishing</h3>
+    <table class="prob-table">
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>Visible seam when joining rounds</td><td>Use an invisible join: sl st into the first st, fasten off, weave in</td></tr>
+      <tr><td>Color change shows a jog</td><td>Shift the join point by one stitch each round (jogless join method)</td></tr>
+      <tr><td>Ends keep poking out</td><td>Weave in over-under for at least 2 inches, then reverse direction</td></tr>
+      <tr><td>Piece puckers after sewing</td><td>Use mattress stitch with matching tension; don't pull too tight</td></tr>
+      <tr><td>Magic ring comes undone</td><td>Pull the tail extra tight; weave the end through the ring twice</td></tr>
+      <tr><td>Edges not straight</td><td>Add a border round of single crochet all the way around</td></tr>
+      <tr><td>Piece won't lay flat</td><td>Check your stitch count; you may need more increases (or fewer decreases)</td></tr>
+    </table>
+
+    <h3>Amigurumi-Specific</h3>
+    <table class="prob-table">
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>Stuffing shows through</td><td>Use a tighter gauge (smaller hook); stuff firmly but don't overstuff</td></tr>
+      <tr><td>Pieces won't stay attached</td><td>Sew with a blunt yarn needle using whip stitch; go around 3 times</td></tr>
+      <tr><td>Eyes not even</td><td>Pin both eyes before attaching; step back and check from a distance</td></tr>
+      <tr><td>Shape is wrong</td><td>Count inc/dec carefully; compare stitch count per row to the pattern</td></tr>
+      <tr><td>Limbs are floppy</td><td>Insert a pipe cleaner or wire armature before stuffing</td></tr>
+      <tr><td>Closing hole isn't invisible</td><td>Thread yarn through front loops of the last round, then pull tight</td></tr>
+      <tr><td>Color changes leave gaps</td><td>Carry the unused yarn inside the piece and crochet over it</td></tr>
+    </table>
+  </div>
+</details>
+
+<!-- 2. STITCH-ALONG WALKTHROUGHS -->
+<details>
+  <summary><span class="section-tag">2</span> Stitch-Along Walkthroughs</summary>
+  <div class="section-body">
+    <p>Step-by-step written guides for 12 techniques that trip up most crocheters. Follow along at your own pace.</p>
+
+    <div class="walk-card">
+      <h4>Magic Ring</h4>
+      <p class="walk-desc">The foundation for working in the round. Used for hats, amigurumi, granny squares, and anything that starts from a center point.</p>
+      <ol>
+        <li>Wrap yarn around your index and middle finger, leaving a 6-inch tail.</li>
+        <li>Insert your hook under the first strand and over the second strand on your fingers.</li>
+        <li>Yarn over and pull through to create a loop on your hook.</li>
+        <li>Chain 1 (this does not count as a stitch).</li>
+        <li>Work your first-round stitches into the ring, inserting your hook through the center of the ring each time.</li>
+        <li>When all stitches are placed, pull the yarn tail to close the ring tightly.</li>
+        <li>Slip stitch into the first stitch to join the round.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Bobble Stitch</h4>
+      <p class="walk-desc">Creates textured, raised bumps on the fabric. Used for blankets, hats, and decorative accents.</p>
+      <ol>
+        <li>Work to the stitch where you want the bobble.</li>
+        <li>Yarn over, insert hook into the stitch, yarn over and pull up a loop, yarn over and pull through 2 loops. You now have 2 loops on your hook.</li>
+        <li>Repeat Step 2 four more times in the same stitch. You should have 6 loops on your hook.</li>
+        <li>Yarn over and pull through all 6 loops at once.</li>
+        <li>Chain 1 to lock the bobble in place (check your pattern; some skip this chain).</li>
+        <li>Continue working the next stitch as normal. The bobble will pop toward the back; push it to the front with your finger.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Front Post / Back Post Double Crochet</h4>
+      <p class="walk-desc">Creates a ribbed, textured surface. Used for hat brims, cuffs, basket sides, and cable patterns.</p>
+      <ol>
+        <li>Work a base row of regular double crochet stitches.</li>
+        <li>For a Front Post DC (FPdc): yarn over, insert your hook from front to back to front around the post of the stitch in the row below (not into the top of the stitch).</li>
+        <li>Yarn over, pull up a loop around the post. Complete the dc as normal (yarn over, pull through 2 loops, twice).</li>
+        <li>For a Back Post DC (BPdc): yarn over, insert your hook from back to front to back around the post of the stitch below.</li>
+        <li>Complete the dc the same way as in Step 3.</li>
+        <li>Alternate FPdc and BPdc across the row for a ribbed effect.</li>
+        <li>On subsequent rows, work FPdc over FPdc and BPdc over BPdc to maintain the rib pattern.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Broomstick Lace</h4>
+      <p class="walk-desc">An elegant, open lacework pattern. Used for scarves, shawls, and decorative panels. Requires a large knitting needle or dowel.</p>
+      <ol>
+        <li>Work a foundation chain in multiples of 5, plus 1. Work one row of single crochet.</li>
+        <li>Extend the loop on your hook and place it onto the large needle (or dowel).</li>
+        <li>Insert your hook into the next stitch, pull up a loop, and place it on the needle. Repeat across the entire row.</li>
+        <li>Slide 5 loops off the needle at a time. Insert your crochet hook through all 5 loops.</li>
+        <li>Work 5 single crochet stitches into that group of 5 loops.</li>
+        <li>Repeat Steps 4-5 across the row until all loop groups are worked.</li>
+        <li>Turn and repeat from Step 2 for the next pattern row.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Bavarian Crochet</h4>
+      <p class="walk-desc">A textured square technique with a distinctive woven look. Used for blankets, pillows, and washcloths.</p>
+      <ol>
+        <li>Make a magic ring. Round 1: ch 3 (counts as dc), 2 dc in ring, [ch 2, 3 dc in ring] 3 times, ch 2, sl st to top of ch-3. (4 clusters, 4 corner spaces.)</li>
+        <li>Round 2: ch 3, FPdc around each dc of the previous round. At each corner, work (2 dc, ch 2, 2 dc) into the ch-2 space.</li>
+        <li>Round 3: ch 3, FPdc around each stitch of the previous round, working corner clusters into each corner space.</li>
+        <li>Continue adding rounds. Each round adds FPdc around the posts below and corner increases in the ch-2 spaces.</li>
+        <li>Change colors at the start of any round for a striped effect.</li>
+        <li>Block your finished square for even edges and consistent sizing.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Crocodile Stitch</h4>
+      <p class="walk-desc">Creates overlapping scale-like petals. Used for bags, dragon-scale gloves, mermaid blankets, and decorative items.</p>
+      <ol>
+        <li>Work a foundation row of V-stitches: (dc, ch 1, dc) evenly spaced across.</li>
+        <li>To make a scale: work 5 dc down the post of the first dc of a V-stitch (inserting around the post, not into the top).</li>
+        <li>Now work 5 dc up the post of the second dc of the same V-stitch.</li>
+        <li>The two fans fold together to form one scale. Skip to the next V-stitch and repeat.</li>
+        <li>On the next row, work V-stitches into the ch-1 spaces between scales (offset from the row below).</li>
+        <li>Alternate scale rows and V-stitch rows to build the fabric.</li>
+        <li>Work the scales loosely so the petals fold naturally. Block lightly with steam.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Corner-to-Corner (C2C)</h4>
+      <p class="walk-desc">A diagonal technique for graphghans and picture blankets. Each "pixel" is a small square of double crochet.</p>
+      <ol>
+        <li>Chain 6. Dc in the 4th ch from hook, dc in next 2 ch. You have made your first C2C tile (a block of 3 dc + a ch-3 at the start).</li>
+        <li>To increase: ch 6, dc in 4th ch from hook, dc in next 2 ch (new tile made). Sl st into the ch-3 space of the previous tile, ch 3, 3 dc in the same space.</li>
+        <li>Continue adding tiles along the diagonal by slip-stitching into the next ch-3 space, ch 3, 3 dc in that space.</li>
+        <li>Increase one tile per row until you reach the desired width.</li>
+        <li>To decrease: at the start of the row, sl st across the first tile to the ch-3 space. Ch 3, 3 dc in that space, then continue across.</li>
+        <li>Follow a pixel chart for color changes. Change color on the last pull-through of the tile before the new color.</li>
+        <li>Weave in ends as you go to avoid a mountain of tails at the end.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Tapestry Crochet</h4>
+      <p class="walk-desc">Colorwork technique where you carry unused yarn inside the stitches. Used for bags, baskets, and geometric patterns.</p>
+      <ol>
+        <li>Work a foundation chain. Begin with single crochet in your main color (MC).</li>
+        <li>Lay the contrast color (CC) yarn along the top of the row. Crochet your sc stitches over the CC yarn, enclosing it inside the stitches.</li>
+        <li>To switch colors: work the last sc in MC until 2 loops remain on the hook. Drop MC, pick up CC, yarn over and pull through both loops.</li>
+        <li>Now crochet with CC while carrying MC inside the stitches (lay MC along the top, crochet over it).</li>
+        <li>Keep even tension on both yarns. The carried yarn should not show through the front.</li>
+        <li>Follow a colorwork chart, reading right-side rows right to left and wrong-side rows left to right.</li>
+        <li>Use a smaller hook than usual; tapestry crochet tends to work up looser because of the carried yarn.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Tunisian Simple Stitch</h4>
+      <p class="walk-desc">A hybrid of knitting and crochet that creates a dense, woven-look fabric. Requires a Tunisian (Afghan) hook.</p>
+      <ol>
+        <li>Chain the desired width. Forward pass: insert hook in 2nd ch from hook, yarn over, pull up a loop. Keep the loop on the hook. Repeat across. You'll have as many loops on your hook as you have chains.</li>
+        <li>Return pass: yarn over, pull through 1 loop. Then yarn over and pull through 2 loops, repeatedly, until 1 loop remains.</li>
+        <li>Forward pass (Row 2): skip the first vertical bar. Insert your hook under the next vertical bar (from right to left), yarn over, pull up a loop. Repeat across. Pick up the last stitch by inserting under both loops of the edge stitch.</li>
+        <li>Return pass: same as Step 2. Yarn over, pull through 1, then through 2 repeatedly.</li>
+        <li>Repeat Steps 3-4 for each row.</li>
+        <li>To bind off: work a forward pass, but instead of keeping loops, slip stitch across (insert under vertical bar, yarn over, pull through both loops on hook).</li>
+        <li>Block the finished piece; Tunisian tends to curl until blocked.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Solomon's Knot</h4>
+      <p class="walk-desc">An open lace mesh made of elongated loops. Used for shawls, wraps, curtains, and lightweight scarves.</p>
+      <ol>
+        <li>Make a slip knot. Pull up the loop on your hook to about 1 inch (or the length specified in your pattern).</li>
+        <li>Yarn over and pull through the long loop. You now have a Solomon's knot (an elongated chain with a single crochet locking it).</li>
+        <li>Insert your hook under the back strand of the elongated loop (the single strand running behind it). Yarn over and pull through, yarn over and pull through both loops (this is the locking sc).</li>
+        <li>Repeat Steps 1-3 to create pairs of knots for the foundation row.</li>
+        <li>To work Row 2: make 2 knots, then sc into the locking sc of a knot in the row below (skipping one knot). Make 2 knots, sc into the next locking sc. Repeat across.</li>
+        <li>Keep your elongated loops consistent in length for even mesh.</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Puff Stitch</h4>
+      <p class="walk-desc">Creates rounded, raised stitches. Softer and rounder than bobbles. Used for baby blankets, hats, and textured scarves.</p>
+      <ol>
+        <li>Work to the stitch where you want the puff.</li>
+        <li>Yarn over, insert hook into the stitch, yarn over and pull up a loop to the height of a half double crochet (about 1/2 inch). You have 3 loops on your hook.</li>
+        <li>Repeat Step 2 two more times in the same stitch. You should have 7 loops on your hook.</li>
+        <li>Yarn over and pull through all 7 loops at once.</li>
+        <li>Chain 1 to close and secure the puff.</li>
+        <li>Continue to the next stitch. The puff will naturally push to the front of the fabric.</li>
+        <li>For larger puffs, add one more yarn-over-pull-up-a-loop repeat (9 loops before the final pull-through).</li>
+      </ol>
+    </div>
+
+    <div class="walk-card">
+      <h4>Spike Stitch</h4>
+      <p class="walk-desc">Elongated stitches worked into rows below, blending colors vertically. Used for striped blankets, washcloths, and colorwork without carrying yarn.</p>
+      <ol>
+        <li>Work at least 2 rows of single crochet in your first color (Color A).</li>
+        <li>Switch to Color B. Work 1 sc normally.</li>
+        <li>For the spike: insert your hook into the stitch one row below (or 2-3 rows below for a longer spike), yarn over, and pull up a loop, drawing it up to the height of the current row.</li>
+        <li>Yarn over and pull through both loops on hook (completing the sc at the correct height).</li>
+        <li>Alternate regular sc and spike stitches, or follow your pattern for placement.</li>
+        <li>The spike stitch pulls Color B down into the Color A rows, creating a blended, woven look.</li>
+        <li>Keep your pulled-up loops at a consistent height for even results. Do not pull too tight or the fabric will pucker.</li>
+      </ol>
+    </div>
+  </div>
+</details>
+
+<!-- 3. ASK-A-CROCHETER HELPDESK -->
+<details>
+  <summary><span class="section-tag">3</span> Ask-a-Crocheter Helpdesk</summary>
+  <div class="section-body">
+    <h3>How to Submit Your Question</h3>
+    <p>Stuck on a pattern? Not sure what went wrong? Our experienced crocheters are here to help. Follow these steps for the fastest, most accurate response:</p>
+    <ol>
+      <li><strong>Take a clear, well-lit photo</strong> of the exact spot where you're stuck. Natural daylight works best. Show both the front and back of the fabric if possible.</li>
+      <li><strong>Include the pattern name</strong> and the specific row or round number where you ran into trouble.</li>
+      <li><strong>Describe what you tried</strong> and what happened. For example: "I followed the instructions for Row 12, but I ended up with 25 stitches instead of 24."</li>
+      <li><strong>Submit through the form below.</strong></li>
+    </ol>
+
+    <div class="mock-form">
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" placeholder="Jane D." disabled>
+      </div>
+      <div class="form-field">
+        <label>Pattern Name</label>
+        <input type="text" placeholder="e.g. Sunflower Granny Square" disabled>
+      </div>
+      <div class="form-field">
+        <label>Row / Round Number</label>
+        <input type="text" placeholder="e.g. Round 4" disabled>
+      </div>
+      <div class="form-field">
+        <label>Describe What Happened</label>
+        <textarea placeholder="Tell us what you tried, what the pattern says, and what went wrong..." disabled></textarea>
+      </div>
+      <div class="form-field">
+        <label>Photo of Your Work</label>
+        <div class="upload-zone">Click or drag to upload a photo<br>(JPG or PNG, max 10 MB)</div>
+      </div>
+      <button class="mock-btn" disabled>Submit Your Question</button>
+      <p class="form-note">Responses are delivered within 48 hours.</p>
+    </div>
+  </div>
+</details>
+
+<!-- 4. TENSION & GAUGE MASTERCLASS -->
+<details>
+  <summary><span class="section-tag">4</span> Tension and Gauge Masterclass</summary>
+  <div class="section-body">
+
+    <h3>What Is Gauge and Why It Matters</h3>
+    <p>Gauge is the number of stitches and rows per inch (or per 4 inches / 10 cm) that you produce with a specific yarn, hook, and stitch pattern. It determines the finished size of your project. Even a small difference in gauge can add up to inches over a full blanket or garment. If your gauge is off, your hat won't fit, your sweater will be too big (or too small), and your blanket won't match the pattern dimensions.</p>
+
+    <h3>How to Make a Gauge Swatch</h3>
+    <ol>
+      <li>Using the yarn and hook size listed in the pattern, chain enough stitches for a piece at least 5 inches wide (usually 20-25 chains).</li>
+      <li>Work in the pattern stitch for 15 rows (or about 5 inches of height).</li>
+      <li>Fasten off. Do not stretch the swatch.</li>
+      <li>Lay the swatch flat on a table. Place a ruler horizontally and count the number of stitches in 4 inches. Then place the ruler vertically and count rows in 4 inches.</li>
+      <li>Compare your count to the pattern's gauge. If your numbers match, you're ready to start. If not, adjust your hook size and make another swatch.</li>
+    </ol>
+
+    <h3>The 4 Factors That Affect Tension</h3>
+    <ul>
+      <li><strong>Hook size:</strong> A larger hook produces larger, looser stitches. A smaller hook produces tighter, denser stitches. This is the easiest factor to change.</li>
+      <li><strong>Yarn weight:</strong> Heavier yarn produces larger stitches. If you substitute a different yarn, always check gauge even if the label says the same weight category.</li>
+      <li><strong>Grip style:</strong> How you hold the hook and tension the yarn affects every stitch. Knife grip, pencil grip, and different yarn-wrapping methods all produce slightly different tension.</li>
+      <li><strong>Mood and tiredness:</strong> Tension changes when you're stressed, tired, or distracted. If you notice your stitches getting tighter after a long session, take a break. Many crocheters find their evening stitches are looser than their morning stitches.</li>
+    </ul>
+
+    <h3>Blocking 101</h3>
+    <p><strong>Wet blocking:</strong> Soak your finished piece in lukewarm water for 15-20 minutes. Gently squeeze (don't wring) the water out. Lay flat on a blocking mat, pin to the desired shape and dimensions, and let it dry completely. Best for: natural fibers (cotton, wool, linen), lace, and anything that needs to be shaped.</p>
+    <p><strong>Steam blocking:</strong> Pin your piece to shape on a blocking mat. Hold a steam iron 1-2 inches above the fabric (never touch acrylic yarn with a hot iron). Let the steam relax the fibers, then allow it to dry. Best for: acrylic and synthetic yarns, quick touch-ups, and pieces that just need light shaping.</p>
+
+    <h3>Troubleshooting Chart</h3>
+    <table class="ts-chart">
+      <tr><td>My piece is too big</td><td>Try a smaller hook size. Recheck your stitch count per row.</td></tr>
+      <tr><td>My piece is too small</td><td>Try a bigger hook size. Make sure you're not skipping stitches.</td></tr>
+      <tr><td>Uneven tension</td><td>Practice with a consistent grip. Take breaks every 30-45 minutes.</td></tr>
+      <tr><td>Gauge matches but fabric feels wrong</td><td>Try a different hook material (wood, metal, or ergonomic). Some hooks glide differently.</td></tr>
+      <tr><td>Gauge changes mid-project</td><td>Check your hook (you may have switched sizes by accident). Take breaks more often.</td></tr>
+    </table>
+  </div>
+</details>
+
+<!-- 5. BONUS: PRIORITY QUEUE -->
+<details>
+  <summary><span class="section-tag bonus-tag">Bonus</span> Priority Queue</summary>
+  <div class="section-body">
+    <div class="priority-box">
+      <p><strong>You're a Priority Queue member.</strong></p>
+      <p>Your helpdesk questions jump to the front of the line. Standard response time: 48 hours. Your response time: <strong>24 hours or less.</strong></p>
+      <p>This upgrade is active for 6 months from today. No action needed on your part -- just submit your questions through the helpdesk form above and they'll be prioritized automatically.</p>
+    </div>
+  </div>
+</details>
+
+<!-- 6. SECRET BONUS: ABBREVIATIONS CHEAT SHEET -->
+<details>
+  <summary><span class="section-tag bonus-tag">Secret Bonus</span> Pattern Abbreviations Cheat Sheet</summary>
+  <div class="section-body">
+    <p>Print this out or keep it bookmarked. Every abbreviation you'll encounter in English-language crochet patterns, all in one place.</p>
+
+    <table class="abbr-table">
+      <tr><th>Abbreviation</th><th>Meaning</th></tr>
+      <tr><td>ch</td><td>Chain</td></tr>
+      <tr><td>sl st</td><td>Slip stitch</td></tr>
+      <tr><td>sc</td><td>Single crochet</td></tr>
+      <tr><td>hdc</td><td>Half double crochet</td></tr>
+      <tr><td>dc</td><td>Double crochet</td></tr>
+      <tr><td>tr</td><td>Treble (triple) crochet</td></tr>
+      <tr><td>dtr</td><td>Double treble crochet</td></tr>
+      <tr><td>yo</td><td>Yarn over</td></tr>
+      <tr><td>st</td><td>Stitch</td></tr>
+      <tr><td>sts</td><td>Stitches</td></tr>
+      <tr><td>sk</td><td>Skip</td></tr>
+      <tr><td>sp</td><td>Space</td></tr>
+      <tr><td>ch-sp</td><td>Chain space</td></tr>
+      <tr><td>lp</td><td>Loop</td></tr>
+      <tr><td>inc</td><td>Increase (2 stitches in one)</td></tr>
+      <tr><td>dec</td><td>Decrease (2 stitches into one)</td></tr>
+      <tr><td>tog</td><td>Together (as in sc2tog, dc3tog)</td></tr>
+      <tr><td>rep</td><td>Repeat</td></tr>
+      <tr><td>RS</td><td>Right side (front of work)</td></tr>
+      <tr><td>WS</td><td>Wrong side (back of work)</td></tr>
+      <tr><td>BLO</td><td>Back loop only</td></tr>
+      <tr><td>FLO</td><td>Front loop only</td></tr>
+      <tr><td>FP</td><td>Front post</td></tr>
+      <tr><td>BP</td><td>Back post</td></tr>
+      <tr><td>FPdc</td><td>Front post double crochet</td></tr>
+      <tr><td>BPdc</td><td>Back post double crochet</td></tr>
+      <tr><td>PM</td><td>Place marker</td></tr>
+      <tr><td>SM</td><td>Slip marker</td></tr>
+      <tr><td>FO</td><td>Fasten off</td></tr>
+      <tr><td>MC</td><td>Main color</td></tr>
+      <tr><td>CC</td><td>Contrast color</td></tr>
+      <tr><td>rnd</td><td>Round</td></tr>
+      <tr><td>beg</td><td>Beginning</td></tr>
+      <tr><td>alt</td><td>Alternate</td></tr>
+      <tr><td>approx</td><td>Approximately</td></tr>
+      <tr><td>cont</td><td>Continue</td></tr>
+      <tr><td>rem</td><td>Remaining</td></tr>
+      <tr><td>prev</td><td>Previous</td></tr>
+      <tr><td>patt</td><td>Pattern</td></tr>
+      <tr><td>tch</td><td>Turning chain</td></tr>
+      <tr><td>ea</td><td>Each</td></tr>
+      <tr><td>sc2tog</td><td>Single crochet 2 together (decrease)</td></tr>
+      <tr><td>dc2tog</td><td>Double crochet 2 together (decrease)</td></tr>
+      <tr><td>cl</td><td>Cluster</td></tr>
+      <tr><td>pc</td><td>Popcorn stitch</td></tr>
+      <tr><td>ps</td><td>Puff stitch</td></tr>
+      <tr><td>sh</td><td>Shell (group of stitches in one space)</td></tr>
+      <tr><td>V-st</td><td>V-stitch (dc, ch 1, dc in same st)</td></tr>
+    </table>
+  </div>
+</details>
+
+<!-- FOOTER -->
+<div class="divider"></div>
+<footer class="footer">
+  <h2>Your Next Step</h2>
+  <p>Go back to the CrochetLib app and pick the most challenging pattern you've been putting off. You now have the troubleshooting library, the technique walkthroughs, and expert backup whenever you need it. No more getting stuck.</p>
+</footer>
+
+</div>
+</body>
+</html>
