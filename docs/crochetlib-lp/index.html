@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<title>Crochet Library · Patterns Organized by Category</title>
+<meta content="Saw a beautiful crochet piece and couldn't find the pattern? Over 200 crochet patterns organized by category, on your phone. Instant and lifetime access." name="description"/>
+<meta content="Crochet Library" property="og:title"/>
+<meta content="Every crochet pattern organized by category, right in your hand." property="og:description"/>
+<meta content="imagens/mockup-hero.webp" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- Régua organizado aplicada em 17/08/2026, medida com 6-Sites/Base/medir.js.
+     Fora do padrão de propósito: a fonte (Figtree, escolhida em teste com 9
+     candidatas em 17/08), as cores (a régua manda trocar por produto) e a mídia
+     deitada no PC (a VSL é gravada em pé, deitar deixaria tarja preta). -->
+<meta content="organizado-v1.1 | fonte:Figtree · cores:croche · midia:9x16 · headline:caixa-alta" name="molde"/>
+<link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🧶&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<!-- Video player: replace with your Panda embed -->
+<!-- Tracking: add your pixel here -->
+<!-- 09/09/2026: a fonte agora e HOSPEDADA AQUI, nao no Google.
+     Antes eram DUAS idas em fila a servidores de terceiro (628ms pro CSS em
+     fonts.googleapis.com, depois 1.007ms pro arquivo em fonts.gstatic.com), e o
+     CSS travava a renderizacao. Agora e um arquivo so, do mesmo servidor que ja
+     esta conectado, com preload.
+     ⚠️ ISTO NAO E A MESMA COISA que a tentativa de 21/08, que fracassou:
+     la a folha do Google virou assincrona e deu piscar de fonte (FCP 1,7s -> 3,2s,
+     nota 98 -> 85, revertido). Hospedar elimina a espera SEM criar o piscar. -->
+<link as="font" crossorigin="" href="https://files.catbox.moe/6lcebm.woff2" rel="preload" type="font/woff2"/>
+<!-- 21/08: TESTEI carregar esta folha sem travar a renderizacao, que e o que o
+     Lighthouse manda fazer ("render-blocking, economiza 50ms"). MEDIDO 3 vezes:
+     ficou 1,5s PIOR (FCP 1,7s -> 3,2s, nota 98 -> 85). Revertido. Nao repetir. -->
+<style>
+/* Figtree hospedada aqui (09/09/2026). Fonte variavel: UM arquivo cobre 400 a 900. */
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;
+  src:url('https://files.catbox.moe/6lcebm.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 900;font-display:swap;
+  src:url('https://files.catbox.moe/onbguu.woff2') format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+
+/* =======================================================================
+   DESIGN 15/08/2026 — refeito em cima do layout gerado no Lovable.
+   Valores (cor, raio, sombra, escala de texto) medidos direto da página
+   dele, não estimados. O que mudou de arquitetura em relação à versão
+   antiga: o body NÃO é mais limitado a 430px. Agora a SEÇÃO ocupa a
+   largura toda (a faixa de cor atravessa a tela) e só o .env fica
+   limitado e centralizado. É isso que faz a página parar de ser uma
+   ilha branca no meio do monitor.
+   ======================================================================= */
+:root{
+  --terracota:#C2683F; --terracota-esc:#9C4A28;
+  --creme:#FBF6EF; --branco:#FFFDFB;
+  --texto:#3B2A22; --texto2:#6B5A4D;
+  --verde:#33A96B; --verde-esc:#1E8A50;
+  /* 09/09: cores SO PARA TEXTO, criadas pra passar no contraste 4.5:1 do WCAG.
+     O Lighthouse reprovava "BONUS 01" (3,87) e "GRATIS" (4,31). NAO mexer no
+     --verde-esc: ele e a base do gradiente do botao de comprar. */
+  --verde-txt:#1D854D; --terra-txt:#B25F39;
+  --rodape:#2B2119; --dourado:#E8A319; --faixa-txt:#FFE9A8;
+  --grad-verde:linear-gradient(180deg,#33A96B 0%,#1E8A50 100%);
+  --grad-terra:linear-gradient(135deg,#C2683F 0%,#9C4A28 100%);
+  /* raios da régua organizado */
+  --r:14px; --r-lg:20px;
+  --bd:1px solid rgba(194,104,63,.15);
+  --bd-creme:1px solid rgba(194,104,63,.2);
+  --sh:0 2px 10px -2px rgba(59,42,34,.12);
+  --sh-heroi:0 18px 40px -12px rgba(59,42,34,.28),0 4px 12px -4px rgba(59,42,34,.14);
+  --sh-btn:0 8px 18px -6px rgba(30,138,80,.55);
+  --col:430px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* Régua ORGANIZADO: peso base 400, não 600. Era daqui que vinha o desconforto.
+   A página inteira estava em negrito, então nada se destacava e tudo pesava.
+   Na régua o grosso é exceção: título 800, lista 700, o resto 400. */
+body{font-family:'Figtree',system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--texto);
+  background:var(--branco);font-size:16px;font-weight:400;line-height:1.5;overflow-x:hidden;
+  padding-bottom:84px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+
+/* ---------- esqueleto ---------- */
+/* respiro entre seções da régua: 56px no PC, 40px no celular */
+.sec{width:100%;padding:40px 0}
+.sec.creme{background:var(--creme)}
+.sec.terra{background:var(--grad-terra);color:#fff}
+.sec.compacta{padding:40px 0}
+/* Respiros do topo na ordem da régua organizado: 20 · 22 · 6 · 36 · 30 · 34.
+   (etiqueta→headline, headline→sub1, sub1→sub2, sub2→mídia, mídia→botão,
+   botão→selos). O 6px entre os dois subtítulos é de propósito: mesma ideia
+   fica colada. O topo da seção é 64px em cima e 28px embaixo no celular. */
+/* 25/09: topo de 28px pra 12px, o Gabriel quis a logo mais colada no teto. Embaixo segue 28px. */
+.sec.topo{padding:12px 0 28px}
+.sec.topo h1{margin-top:20px}
+.sec.topo .vid{margin-top:36px}
+.sec.topo .btn{margin-top:30px}
+.sec.topo .prova{margin-top:34px}
+/* margem lateral 24px da régua (estava 16px, e é parte do aperto) */
+.env{max-width:var(--col);margin:0 auto;padding:0 24px}
+.centro{text-align:center}
+
+/* ---------- texto (régua organizado) ---------- */
+/* 03/09: os valores da REGUA (6-Sites/Base/MEDIDAS.md): 28px no celular, 52px no PC,
+   peso 800, entrelinha 1,14. O codigo estava em 32/58 com entrelinha 1,12, fora da regua,
+   e o piso de 32px anulava o vw: TODO celular renderizava 32px fixo (em 393px o 6.2vw da
+   24px, entao o piso sempre ganhava). Era isso que fazia a headline comer a tela. */
+h1{font-size:clamp(28px,6.2vw,52px);font-weight:800;line-height:1.14;letter-spacing:-.01em;
+  text-transform:uppercase}
+/* título de seção 26px/38px, peso 800, entrelinha 1,5 (era 1,2 e ficava apertado) */
+h2{font-size:clamp(26px,3.2vw,38px);font-weight:800;line-height:1.5;letter-spacing:-.01em}
+.pk{color:var(--terracota)}
+/* 27/08: headline em duas alturas, no formato do print de referencia que o Gabriel mandou:
+   linha 1 escura em caixa mista, linha 2 colorida em CAIXA ALTA e menor.
+   O h1 e uppercase por padrao, entao esta headline desliga o uppercase e liga so na linha 2.
+   A cor da linha 2 e TERRACOTA, nao verde como no print: verde nesta pagina e a cor do botao
+   de comprar, e repetir ela no titulo tira forca do botao. */
+/* 03/09: medido no navegador em 360 / 393 (Redmi 13) / 412px.
+   7.12vw da 28px no 393 (a regua) e escala de verdade nos outros, em vez de travar num piso.
+   letter-spacing -.02em e text-wrap:balance sao o que fazem a frase caber em 2 linhas e
+   matam a palavra orfa ("biblioteca" sozinha numa linha). Medido: 3 linhas/171px -> 2/129px. */
+.sec.topo h1[data-papel="headline"]{text-transform:none;
+  font-size:clamp(24px,7.12vw,52px);letter-spacing:-.02em;text-wrap:balance}
+/* o numero e a prova principal da oferta, entao ele e o maior e o unico colorido da linha 1.
+   Terracota claro (#C2683F): contraste 3,65:1 no creme, passa o minimo de 3:1 de texto grande.
+   NAO usar verde aqui, e a cor do botao de comprar. Dourado nao passa contraste. */
+/* 25/09: headline de uma peça só, tudo em maiúsculo, sem número colorido nem linha 2. */
+/* 25/09 (3): o Gabriel achou estreita demais. O text-wrap:balance encurtava as linhas pra
+   igualar o tamanho delas, e sobrava margem dos lados. Sem ele, e avançando 8px em cada lado
+   (fica 16px da borda da tela), medido em 393px: 6 linhas/191px -> 5 linhas/160px. */
+/* 25/09 (4): "PORTUGUÊS" ficava sozinho na última linha. Diminuir a letra não resolvia (o "EM"
+   continuava na linha de cima), então "em&nbsp;português" virou bloco que não quebra, e a letra
+   desceu um pouco, de 7.12vw pra 6.8vw (28px -> 26,7px no 393). 5 linhas/152px. */
+/* 25/09 (5), desfeito: testado "+1.200 receitas em português" numa linha só com a quebra
+   automática. Obrigava a letra a cair pra 21px e deixava o "COM" sozinho. */
+/* 25/09 (6), a VALENDO: 3 linhas com a quebra escolhida à mão (<br> no HTML), escolhida
+   entre 5 divisões medidas por ser a de linhas mais parecidas:
+     O APLICATIVO QUE VAI MUDAR A / FORMA COMO VOCÊ FAZ CROCHÊ COM / +1.200 RECEITAS EM PORTUGUÊS
+   white-space:nowrap segura as quebras. A linha do meio é a mais longa (18,39em com o
+   letter-spacing -.03em), então a letra é (tela - 24px) ÷ 18,6: ~19,8px no 393, sobra 4px.
+   Avança 12px em cada lado (fica 12px da borda). Trava em 21,5px porque a coluna para em 430px.
+   ⚠️ Mexeu no texto? Remedir a linha mais longa, senão ela vaza da tela no celular. */
+.sec.topo h1.h1-unica{text-transform:uppercase;white-space:nowrap;text-wrap:nowrap;
+  margin-left:-12px;margin-right:-12px;letter-spacing:-.03em;line-height:1.3;
+  font-size:min(calc((100vw - 24px) / 18.6), 21.5px)}
+/* Destaque das palavras (opção 3 que o Gabriel escolheu entre 3): fundo dourado da
+   estrela de avaliação, letra escura. Contraste ~7:1. Nunca verde (é a cor do botão). */
+.h1-unica mark{background:var(--dourado);color:var(--texto);padding:0 .14em;border-radius:5px;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.h1-num{font-size:1.4em;color:var(--terracota);letter-spacing:-.03em;line-height:1}
+.h1-linha2{display:block;text-transform:uppercase;color:var(--terracota-esc);
+  font-size:.7em;line-height:1.22;letter-spacing:.005em;margin-top:9px;text-wrap:balance}
+/* sub1: 18px LEVE. Estava 15px grosso, que é o oposto da régua e some na hierarquia */
+.sub{font-size:17px;font-weight:400;color:var(--texto2);line-height:1.5;margin-top:22px}
+.sec.terra .sub{color:rgba(255,255,255,.88)}
+/* 25/09: sub1 do topo ocupa a largura da tela, igual à headline (12px da borda). Fica em 17px:
+   pra encher 3 linhas inteiras teria que ir a 21px e passaria a headline. */
+.sec.topo .sub[data-papel="sub1"]{margin-left:-12px;margin-right:-12px}
+/* sub2 da régua: 15px peso 800, colado no sub1 (6px). "Mesma ideia fica junto". */
+.assina{font-size:15px;font-weight:800;color:var(--texto);margin-top:6px}
+.mini{font-size:13px;font-weight:600;color:var(--texto2)}
+
+/* ---------- etiqueta ---------- */
+/* etiqueta da régua: 13px, peso 700, entrelinha 1,5 */
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--branco);
+  border:1.5px solid rgba(194,104,63,.3);color:var(--terracota);font-size:13px;font-weight:700;
+  line-height:1.5;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;
+  border-radius:999px;box-shadow:var(--sh)}
+.sec.terra .pill{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.28);color:var(--faixa-txt);box-shadow:none}
+
+/* ---------- botões ---------- */
+/* botão da régua: 17px peso 800, CAIXA ALTA, padding 20/40, canto 14 */
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;
+  background:var(--grad-verde);color:var(--branco);font-size:17px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.02em;line-height:1.2;
+  padding:20px 40px;border-radius:var(--r);box-shadow:var(--sh-btn);text-decoration:none;text-align:center;
+  transition:transform .15s cubic-bezier(.2,0,0,1);-webkit-tap-highlight-color:transparent;
+  position:relative;overflow:hidden}
+.btn:active{transform:scale(.97)}
+/* foco visível no teclado: quem navega por Tab precisa enxergar onde está */
+.btn:focus-visible,.fq:focus-visible,a:focus-visible{
+  outline:3px solid var(--terracota-esc);outline-offset:3px;border-radius:4px}
+.btn.claro{background:var(--branco);color:var(--terracota-esc);box-shadow:0 8px 18px -6px rgba(43,33,25,.4)}
+.btn.fantasma{background:var(--branco);color:var(--texto2);font-size:15px;font-weight:800;min-height:56px;
+  padding:16px 24px;border:1px solid rgba(107,90,77,.35);box-shadow:none}
+/* reflexo sutil, passa uma vez quando o botão entra na tela */
+.btn::after{content:"";position:absolute;top:0;left:0;width:55%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
+  /* 09/09: os dois transform PRECISAM ficar na mesma declaracao. Separados, o
+     segundo apaga o primeiro e a faixa de brilho fica parada em cima do botao. */
+  /* 09/09 (5a rodada): o will-change SAIU daqui. Ele estava criando uma camada
+     grafica permanente em CADA UM dos 6 botoes, o dia inteiro, para uma animacao
+     que roda 1,1s uma vez. Agora ele so existe enquanto a animacao acontece
+     (na classe .brilha, logo abaixo), e o navegador libera a memoria depois. */
+  transform:translateX(-272.7%) skewX(-20deg);pointer-events:none}
+.btn.brilha::after{will-change:transform;animation:brilho 1.1s cubic-bezier(.2,0,0,1)}
+/* 09/09: era animado por "left", que nao e composto e obriga recalculo de layout a
+   cada quadro. transform roda na placa de video. -272,7% da largura do proprio
+   elemento (55% do pai) equivale ao -150% do pai que estava antes. */
+@keyframes brilho{from{transform:translateX(-272.7%) skewX(-20deg)}to{transform:translateX(272.7%) skewX(-20deg)}}
+
+/* ---------- barra fixa ---------- */
+.fixa{position:fixed;inset:auto 0 0 0;z-index:60;background:rgba(255,253,251,.94);
+  backdrop-filter:blur(10px);border-top:1px solid rgba(194,104,63,.18);
+  padding:10px 0 calc(10px + env(safe-area-inset-bottom));
+  opacity:0;pointer-events:none;transition:opacity .3s}
+.fixa.on{opacity:1;pointer-events:auto}
+.fixa .btn{min-height:54px;font-size:16px}
+
+/* ---------- topo ---------- */
+/* Logo e nome numa linha só. Além de ficar mais parecido com um cabeçalho de marca,
+   economiza altura, que no topo é o recurso mais disputado da página. */
+.marca{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo{width:56px;height:56px;flex:none;object-fit:contain}
+/* 18/08: caiu de 19px pra 16px pra parar de competir com a headline. Em 19 ela ficava
+   quase do tamanho do título, e a régua manda a etiqueta ser bem menor.
+   Como o terracota claro só passa no contraste em texto grande, aqui o destaque usa o
+   terracota ESCURO, que passa em tamanho pequeno. */
+.oi{font-size:15px;font-weight:800;line-height:1.3;text-align:left}
+.oi .pk{color:var(--terracota-esc)}
+/* mídia da régua: canto de 20px e sombra funda */
+/* 18/08: o vídeo subiu de 272px pra 340px, ocupando a coluna quase toda.
+   Comparado com a página de referência, o nosso estava usando 64% da largura da tela
+   contra 82% dela, e por isso parecia miúdo no meio de tanta margem.
+   Custo: sendo 9:16, cada pixel de largura vira quase dois de altura. */
+.vid{width:100%;max-width:340px;margin:36px auto 0;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--rodape);box-shadow:0 30px 60px -20px rgba(59,42,34,.45)}
+.chama-vid{font-size:15px;font-weight:400;margin-top:6px}
+.prova{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:34px;flex-wrap:wrap}
+.avs{display:flex}
+.avs img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid var(--branco);margin-left:-9px}
+.avs img:first-child{margin-left:0}
+.estrelas{color:var(--dourado);font-size:15px;letter-spacing:-1px}
+.nota{font-size:15px;font-weight:900}
+
+/* ---------- cards ---------- */
+.card{background:var(--branco);border:var(--bd);border-radius:var(--r);box-shadow:var(--sh);padding:16px}
+.card.creme{background:var(--creme);border:var(--bd-creme)}
+.card.grande{border-radius:var(--r-lg);padding:24px}
+.pilha{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+
+/* ---------- carrossel ---------- */
+.trilho-caixa{width:100%;overflow:hidden;margin-top:24px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.trilho{display:flex;gap:12px;width:max-content;padding:4px 16px;animation:anda 18s linear infinite}
+@keyframes anda{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.slide{flex:0 0 auto;width:180px;border-radius:var(--r);overflow:hidden;
+  border:var(--bd-creme);background:var(--creme);box-shadow:var(--sh)}
+.slide img{width:100%;aspect-ratio:3/4;object-fit:cover}
+/* Depoimento é print de conversa: em 220px a letra fica ilegível e a pessoa passa
+   direto. Aqui ocupa 78% da tela do celular (teto de 320px), que é o maior tamanho
+   possível sem esconder que existe um card do lado, o que mata a vontade de arrastar. */
+/* 29/08: os prints estavam ESTICADOS. O .trilho e flex e o padrao dele e align-items:
+   stretch, entao todas as imagens eram puxadas ate a altura da mais alta. A depo-wa4 ia de
+   256px pra 424px. `align-items:flex-start` + `height:auto` resolvem.
+   Alem disso os 7 prints foram normalizados pra 340x420 no arquivo, entao agora todos
+   tem exatamente a mesma proporcao e o carrossel fica alinhado. */
+.trilho.depo{gap:16px;align-items:flex-start}
+/* 29/08: prints refeitos a partir dos ORIGINAIS de 1140x2028 que estavam em
+   4-Criativos/Depoimentos/. Agora cada um traz o cabecalho do WhatsApp com foto e nome,
+   que e prova muito mais forte que um nome escrito embaixo por mim.
+   29/08 (2a rodada): o Gabriel pediu o CELULAR INTEIRO, com relogio, barra de digitar
+   e botoes. Fica mais real. Todos padronizados em 640x1180. */
+.depo-card{flex:0 0 auto;width:86vw;max-width:352px;margin:0;background:#fff;
+  border-radius:16px;overflow:hidden;
+  border:1px solid rgba(194,104,63,.18);
+  box-shadow:0 10px 28px -8px rgba(59,42,34,.26)}
+.depo-card img{display:block;width:100%;height:auto;border:0;border-radius:0;box-shadow:none}
+@media (min-width:768px){ .depo-card{width:340px} }
+
+/* ---------- categorias ---------- */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.cat{background:var(--branco);border:var(--bd);border-radius:var(--r);box-shadow:var(--sh);padding:8px}
+.cat img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
+.cat b{display:block;font-size:13.5px;font-weight:800;text-align:center;padding:8px 2px 4px}
+
+/* ---------- lista de check ---------- */
+.chk{display:flex;align-items:center;gap:14px;font-size:15px;font-weight:700;line-height:1.4}
+.chk i{flex:none;width:32px;height:32px;border-radius:50%;background:var(--terracota);color:#fff;
+  display:grid;place-items:center;font-size:15px;font-weight:900;font-style:normal}
+
+/* ---------- bônus ---------- */
+/* linha de chamada acima do título da seção */
+.acima-titulo{font-size:16px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--texto);margin-bottom:6px;line-height:1.3}
+.bonus{display:flex;align-items:center;gap:14px}
+/* Sem moldura: a ilustração já tem contorno próprio, e caixa em volta de
+   desenho contornado vira borda dentro de borda. O ícone respira sozinho. */
+.bonus .ic{flex:none;width:52px;height:52px;display:grid;place-items:center}
+.bonus .ic img{width:52px;height:52px;object-fit:contain}
+.bonus .txt{flex:1;min-width:0}
+/* sem descrição: o nome é a única coisa que importa, então vai grande */
+.bonus .txt b{display:block;font-size:17px;font-weight:800;line-height:1.2}
+.bonus .val{flex:none;text-align:right}
+.bonus .val s{display:block;font-size:12px;font-weight:700;color:var(--texto2)}
+.bonus .val em{display:block;font-size:14px;font-weight:900;color:var(--verde-txt);font-style:normal}
+
+/* ===== 29/08: bonus com mockup de largura cheia. Antes era icone de 52px, e o
+   bonus parecia enfeite. Formato tirado do marcadorescatolicos. ===== */
+.bonus-grande{padding:0;overflow:hidden}
+.bg-mock{background:linear-gradient(155deg,#3B2A22 0%,#2B2119 100%);display:grid;
+  place-items:center;padding:30px 20px;position:relative}
+.bg-mock img{width:118px;height:118px;object-fit:contain;
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.45))}
+.bg-etq{font-size:12.5px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--terra-txt);margin:16px 16px 0}
+.bg-tit{font-size:20px;font-weight:800;line-height:1.25;margin:5px 16px 0;letter-spacing:-.01em}
+.bg-desc{font-size:15px;font-weight:400;color:var(--texto2);line-height:1.5;margin:8px 16px 0}
+.bg-val{margin:13px 16px 18px;display:flex;align-items:center;gap:9px}
+.bg-val s{font-size:14px;font-weight:700;color:var(--texto2)}
+.bg-val em{font-size:15px;font-weight:900;color:var(--verde-txt);font-style:normal}
+
+/* 29/08: os bonus que a Basica NAO leva vem riscados um por um, com o nome de cada.
+   Antes era uma linha so, "Sem os 3 bonus". Perda com nome pesa mais que ausencia. */
+.itens li.nao.risca{text-decoration:line-through;text-decoration-color:#C86A5A;
+  text-decoration-thickness:2px}
+.itens li.nao.risca i{display:inline-block;text-decoration:none}
+
+
+
+/* ---------- planos ---------- */
+.plano{background:var(--branco);border:2px solid var(--terracota);border-radius:var(--r-lg);
+  box-shadow:var(--sh-heroi);overflow:hidden;margin-top:24px}
+.faixa{background:var(--grad-terra);color:var(--faixa-txt);font-size:14px;font-weight:800;
+  letter-spacing:.04em;text-align:center;padding:12px}
+.corpo{padding:20px 16px}
+.pstars{font-size:17px;color:var(--dourado);letter-spacing:1px}
+.pnome{font-size:24px;font-weight:900;line-height:1.15;margin-top:6px}
+.psub{font-size:14px;font-weight:600;color:var(--texto2);margin-top:6px;line-height:1.45}
+.psub b{color:var(--terracota);font-weight:800}
+/* height:auto e OBRIGATORIO aqui: o img global e so `max-width:100%`, sem altura. Com os
+   atributos width/height no HTML (que existem pra nao dar tranco de layout), sem isto o
+   navegador trava a altura em 533px e ESTICA a imagem. Ja aconteceu em 20/08. */
+.pimg{width:100%;height:auto;border-radius:var(--r);margin-top:16px;border:var(--bd)}
+.itens{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:14px}
+/* lista da régua: 15px peso 700, entrelinha 1,5 e 14px entre os itens */
+.itens li{display:flex;align-items:flex-start;gap:10px;font-size:15px;font-weight:700;line-height:1.5}
+/* O ✓ e o 🎁 têm larguras naturais diferentes (emoji é mais largo), então o texto
+   de cada linha começava num ponto diferente. Largura fixa e centralizado deixa
+   as duas colunas retas, uma embaixo da outra. */
+.itens li i{flex:none;width:22px;text-align:center;font-style:normal;
+  color:var(--verde-txt);font-weight:900;line-height:1.35}
+.itens li.bonus-li i{color:inherit}
+.itens li.bonus-li b{color:var(--verde-txt);font-weight:900}
+.itens li.nao{color:#A99189;font-weight:600}
+.itens li.nao i{color:#C86A5A}
+.ancora{background:var(--creme);border:2px dashed var(--terracota);border-radius:var(--r);
+  padding:16px;font-size:13.5px;font-weight:700;line-height:1.5;text-align:center;margin-top:18px}
+.ancora b{color:var(--terracota)}
+.preco-de{font-size:15px;font-weight:700;color:var(--texto2);text-decoration:line-through;margin-top:18px;text-align:center}
+.preco-lbl{font-size:13px;font-weight:600;color:var(--texto2);text-align:center;margin-top:2px}
+.preco{text-align:center;font-weight:900;color:var(--terracota);line-height:1;margin:6px 0 18px;
+  font-size:58px;letter-spacing:-.02em}
+.preco sup{font-size:24px;vertical-align:super;margin-right:2px}
+.preco span{font-size:30px}
+.pagamento{font-size:12.5px;font-weight:700;color:var(--texto2);text-align:center;margin-top:12px}
+/* 3 colunas iguais em UMA fileira. No Lovable esses selos empilhavam em coluna e
+   comiam 3x o espaço, perdendo o efeito de "muro de garantias". */
+.selos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;padding-top:16px;
+  border-top:1px solid rgba(194,104,63,.14)}
+/* selo da régua: 13px peso 600. Estava 10,5px em 800, miúdo e grosso ao mesmo tempo. */
+.selo{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--creme);
+  border:var(--bd-creme);border-radius:14px;padding:10px 6px;font-size:13px;font-weight:600;
+  line-height:1.5;text-align:center}
+.selo b{font-size:17px;font-weight:400;line-height:1}
+/* 18/08: os 3 selos (compra segura / satisfação / privacidade) saíram daqui.
+   Eram genéricos, qualquer site tem, e ocupavam o espaço mais valioso da página,
+   logo abaixo do botão. No lugar entrou a garantia escrita, que é o único
+   argumento que o concorrente direto NÃO tem (ele não oferece garantia nenhuma). */
+/* 18/08 (2ª volta): entrou o selo de verdade no lugar do escudo de emoji, e o texto
+   encolheu de quatro linhas pra uma. O selo já diz "garantia 7 dias" sozinho, então
+   repetir isso por escrito era gastar o espaço mais caro da página com informação
+   duplicada. O que sobrou é só o que o selo NÃO diz: que eu devolvo sem perguntar. */
+.gar-mini{display:flex;align-items:center;gap:14px;margin-top:16px;padding-top:16px;
+  border-top:1px solid rgba(194,104,63,.14);text-align:left}
+.gar-mini img{flex:none;width:72px;height:72px}
+.gar-mini p{font-size:14px;font-weight:400;color:var(--texto2);line-height:1.45}
+.gar-mini b{display:block;font-size:18px;font-weight:900;color:var(--texto);
+  text-transform:uppercase;letter-spacing:.01em;line-height:1.15;margin-bottom:4px}
+
+/* ---------- 3 passos ---------- */
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px}
+.passo{background:var(--branco);border:var(--bd);border-radius:var(--r);box-shadow:var(--sh);
+  padding:14px 8px;text-align:center}
+.passo .em{font-size:26px}
+.passo b{display:block;font-size:13px;font-weight:800;margin-top:8px;line-height:1.2}
+.passo span{display:block;font-size:11.5px;font-weight:600;color:var(--texto2);line-height:1.35;margin-top:4px}
+
+/* ---------- garantia ---------- */
+.gar{text-align:center}
+.gar .escudo{width:66px;height:66px;border-radius:50%;background:var(--grad-terra);
+  display:grid;place-items:center;font-size:30px;margin:0 auto 16px;
+  box-shadow:0 8px 20px -8px rgba(156,74,40,.6)}
+.gar b{display:block;font-size:22px;font-weight:900;line-height:1.2}
+.gar p{font-size:15px;font-weight:400;color:var(--texto2);line-height:1.5;margin-top:10px}
+
+/* ---------- FAQ ---------- */
+.faq{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.fitem{background:var(--branco);border:var(--bd);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.fq{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  padding:16px;font-size:14.5px;font-weight:800;text-align:left;line-height:1.35;min-height:56px}
+.fq i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--creme);border:var(--bd-creme);
+  display:grid;place-items:center;font-size:11px;color:var(--terracota);font-style:normal;transition:transform .25s}
+.fitem.on .fq i{transform:rotate(180deg)}
+.fa{font-size:13.5px;font-weight:600;color:var(--texto2);line-height:1.6;padding:0 16px 16px;display:none}
+.fitem.on .fa{display:block}
+
+/* ---------- rodapé ---------- */
+footer{background:var(--rodape);color:#9A8578;padding:32px 0;text-align:center;
+  font-size:11.5px;font-weight:600;line-height:2}
+/* área de toque decente nos links do rodapé (o dedo dela não é preciso) */
+footer a{color:#C4AC9C;display:inline-block;padding:10px 6px}
+/* a logo no rodapé é lembrança de marca, não informação: fica discreta */
+.logo-rodape{width:40px;height:40px;margin:0 auto 12px;opacity:.85}
+
+
+/* ---------- animação de entrada ---------- */
+.rev{opacity:0}
+.rev.viu{animation:sobeFade .52s cubic-bezier(.22,1,.36,1) both}
+@keyframes sobeFade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---------- computador: mesma coluna, faixa atravessando a tela ---------- */
+@media (min-width:768px){
+  body{padding-bottom:0}
+  /* respiro entre seções no PC: 56px da régua */
+  .sec{padding:56px 0}
+  .sec.compacta{padding:56px 0}
+  .sec.topo{padding:64px 0 40px}
+  /* larguras da régua: topo 880, conteúdo 1080, preços 820, FAQ 600.
+     Antes tudo era uma coluna de 430px, que no monitor virava uma ilha. */
+  .env{max-width:1080px}
+  .sec.topo .env{max-width:880px}
+  #cl-offer .env{max-width:820px}
+  .faq{max-width:600px;margin-left:auto;margin-right:auto}
+  /* No PC a tela é mais baixa em relação ao conteúdo, então o vídeo 9:16 precisa
+     ser menor que no celular. A régua pede 16:9 aqui, mas a VSL é gravada em pé:
+     forçar deitado deixaria tarja preta dos dois lados. Fica em pé, menor. */
+  .vid{max-width:290px}
+  /* a barra fixa é coisa de celular: no PC o botão da seção já dá conta */
+  .fixa{display:none}
+  /* com o dobro de largura, o conteúdo se espalha em vez de virar uma tira */
+  .cats{grid-template-columns:repeat(4,1fr)}
+  .pilha{display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch}
+  .pilha .card{align-items:flex-start}
+  .bonus{flex-direction:column;text-align:center;gap:12px}
+  .bonus .val{text-align:center}
+  .sec.topo .btn,.sec.terra .btn{max-width:520px;margin-left:auto;margin-right:auto}
+}
+
+/* =====================================================================
+   LEGIBILIDADE (fica no fim de propósito, pra ganhar das regras acima)
+   O terracota claro sobre creme dá contraste 3,87. Em texto GRANDE e bold
+   isso passa (o mínimo é 3,0), mas em texto miúdo reprova (mínimo é 4,5).
+   Então: destaque dentro de título fica no tom claro, destaque em texto
+   pequeno usa o escuro, que dá 5,7. Mesma lógica no verde.
+   Público de 40 a 65 anos lendo no celular na claridade: não é firula.
+   ===================================================================== */
+.pill,.psub b,.ajuda-mail,.acima-titulo .pk{color:var(--terracota-esc)}
+.sec.terra .pill{color:var(--faixa-txt)}
+.bonus .val em,.total span,.itens li i,.itens li.bonus-li b{color:#17703F}
+footer{color:#AD9787}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .trilho{animation:none}
+  .rev,.rev.viu{opacity:1;animation:none}
+  .btn.brilha::after{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="fixa" id="barra">
+<div class="env"><a class="btn" href="#cl-offer">✨ I WANT MY PATTERNS</a></div>
+</div>
+<main>
+<!-- ============ TOPO ============ -->
+<section class="sec compacta topo">
+<div class="env centro">
+<!-- A mesma logo do Instagram, ao lado do nome. A cliente vem do anúncio de lá,
+         e reconhecer a marca na hora que cai aqui é o que tira o medo de golpe.
+         O emoji de novelo saiu: a logo já é um novelo, os dois juntos era repetição. -->
+<!-- 25/09: a logo voltou sozinha, mais perto do topo da tela. O "bem vinda" segue GUARDADO
+         a pedido do Gabriel, talvez volte. Pra voltar, é só tirar o comentário da linha dele. -->
+<div class="marca">
+<img alt="" class="logo" height="56" src="https://files.catbox.moe/bi0u2r.webp" width="56"/>
+<!-- <p class="oi">bem vinda à <span class="pk">Biblioteca de Crochê</span></p> -->
+</div>
+<!-- 18/08: headline trocada. A antiga ("Aqui você PENSA, PESQUISA e FAZ") era abstrata:
+         a pessoa lia e não sabia o que ia receber. A nova carrega o mecanismo, que é a única
+         coisa que a concorrência não tem, e o subtítulo virou o lugar do "em português". -->
+<!-- 18/08: headline no ângulo "tudo num lugar só" + a busca, tudo numa frase só.
+         Medido no navegador: em 32px a frase inteira dava 5 linhas e empurrava o botão
+         pra fora da primeira tela. Em 27px ela cabia em 3 linhas (93px).
+         27/08: aquele teto de 27px era da headline ANTIGA, que era mais longa. A nova é
+         curta e aguenta mais. Subida pra 32px e medida no navegador. -->
+<!-- 25/09: headline trocada a pedido do Gabriel. A anterior era
+         "+1.200 receitas de crochê / que transformam a vida de qualquer crocheteira".
+         Sub2 anterior: "Feito por quem crocheta, pra quem crocheta." -->
+<!-- 25/09 (2): headline numa peça só, mesma fonte, tamanho e cor, tudo em maiúsculo.
+         Sub1 anterior: "Tenha todas as peças que você sempre quis achar e desistiu. A biblioteca
+         já conta com mais de 900 crocheteiras satisfeitas. Se junte a nós." -->
+<h1 class="h1-unica" data-papel="headline">THE <mark>APP</mark> THAT WILL <mark>CHANGE</mark> HOW<br/>YOU CROCHET WITH<br/><mark>+200 PATTERNS</mark> IN ONE PLACE</h1>
+<p class="sub" data-papel="sub1">Get access to every pattern you've been looking for but couldn't find, with an app that organizes everything for you.</p>
+<p class="assina" data-papel="sub2">Trusted by over 900 happy crocheters.</p>
+<p class="chama-vid">Watch the video below 👇</p>
+<div class="vid" data-papel="midia">
+<div id="panda-player" style="position:relative;width:100%;padding:177.7778% 0 0;background-color:#2B2119">
+<iframe src="https://player-vz-b2980050-8c9.tv.pandavideo.com/embed/?v=d3336a73-0da6-4ac7-bbe0-2607906f40e4" style="border:none;position:absolute;top:0;left:0;height:100%;width:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+<a class="btn" data-papel="botao" href="#cl-offer">✨ I WANT MY PATTERNS</a>
+<div class="prova" data-papel="selos">
+<img alt="Trusted by over 900 happy crocheters" src="https://files.catbox.moe/e5wrh0.webp" style="max-width:320px;width:100%;height:auto"/>
+</div>
+</div>
+</section>
+<!-- ============ PROVA SOCIAL ============ -->
+<!-- TESTE 28/08: prova social virou a 2a secao, logo depois do topo, como no
+     marcadorescatolicos. Motivo: ela chega do anuncio desconfiada (medo de golpe e o
+     traco n1 dela) e hoje rola metade da pagina antes de ver uma voz de cliente.
+     Foi MOVIDA, nao duplicada, pra nao empurrar o preco pra baixo. -->
+<section class="sec creme">
+<div class="env centro rev">
+<h2 data-papel="titulo-secao">See what <span class="pk">they say</span></h2>
+</div>
+<div class="trilho-caixa">
+<div class="trilho depo">
+<figure class="depo-card">
+<img alt="Customer review on WhatsApp" height="1180" loading="lazy" src="https://files.catbox.moe/pbk5pl.webp" width="640"/>
+</figure>
+<figure class="depo-card">
+<img alt="Customer review on WhatsApp" height="1180" loading="lazy" src="https://files.catbox.moe/9ko3oj.webp" width="640"/>
+</figure>
+<figure class="depo-card">
+<img alt="Customer review on Instagram" height="1180" loading="lazy" src="https://files.catbox.moe/6anexg.webp" width="640"/>
+</figure>
+<figure class="depo-card">
+<img alt="Customer review on WhatsApp" height="1180" loading="lazy" src="https://files.catbox.moe/wji6j6.webp" width="640"/>
+</figure>
+<figure aria-hidden="true" class="depo-card">
+<img alt="" height="1180" loading="lazy" src="https://files.catbox.moe/pbk5pl.webp" width="640"/>
+</figure>
+<figure aria-hidden="true" class="depo-card">
+<img alt="" height="1180" loading="lazy" src="https://files.catbox.moe/9ko3oj.webp" width="640"/>
+</figure>
+<figure aria-hidden="true" class="depo-card">
+<img alt="" height="1180" loading="lazy" src="https://files.catbox.moe/6anexg.webp" width="640"/>
+</figure>
+<figure aria-hidden="true" class="depo-card">
+<img alt="" height="1180" loading="lazy" src="https://files.catbox.moe/wji6j6.webp" width="640"/>
+</figure>
+</div>
+</div>
+</section>
+<!-- ============ VEJA POR DENTRO ============ -->
+<section class="sec">
+<div class="env centro rev">
+<span class="pill">👀 See inside</span>
+<h2 style="margin-top:14px">You <span class="pk">search for a pattern</span>, and it appears</h2>
+<p class="sub">Type the name of the piece you want to make. The pattern opens instantly, with charts, step-by-step instructions, and every stitch explained.</p>
+</div>
+<div class="trilho-caixa">
+<div class="trilho">
+<div class="slide"><img alt="Amigurumi teddy bear pattern" loading="lazy" src="https://files.catbox.moe/fma1yo.png"/></div>
+<div class="slide"><img alt="Braided bag pattern" loading="lazy" src="https://files.catbox.moe/0m9p7v.png"/></div>
+<div class="slide"><img alt="Baby bootie pattern" loading="lazy" src="https://files.catbox.moe/xg5w2b.png"/></div>
+<div class="slide"><img alt="Backpack pattern" loading="lazy" src="https://files.catbox.moe/2i18xr.png"/></div>
+<div class="slide"><img alt="Amigurumi bunny pattern" loading="lazy" src="https://files.catbox.moe/z8knad.png"/></div>
+<div class="slide"><img alt="Scarf pattern" loading="lazy" src="https://files.catbox.moe/v67wcn.png"/></div>
+<div class="slide"><img alt="Coaster pattern" loading="lazy" src="https://files.catbox.moe/fgg924.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/fma1yo.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/0m9p7v.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/xg5w2b.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/2i18xr.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/z8knad.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/v67wcn.png"/></div>
+<div class="slide"><img alt="" aria-hidden="true" loading="lazy" src="https://files.catbox.moe/fgg924.png"/></div>
+</div>
+</div>
+</section>
+<!-- ============ CATEGORIAS ============ -->
+<section class="sec creme">
+<div class="env rev">
+<h2 class="centro" data-papel="titulo-secao">Browse the <span class="pk">categories</span></h2>
+<div class="cats">
+<div class="cat"><img alt="Crochet bags and backpacks" loading="lazy" src="https://files.catbox.moe/bico32.webp"/><b>Bags &amp; Backpacks</b></div>
+<div class="cat"><img alt="Crochet clothing" loading="lazy" src="https://files.catbox.moe/fxmhqn.webp"/><b>Clothing</b></div>
+<div class="cat"><img alt="Amigurumi" loading="lazy" src="https://files.catbox.moe/mebz78.webp"/><b>Amigurumi</b></div>
+<div class="cat"><img alt="Christmas crochet patterns" loading="lazy" src="https://files.catbox.moe/nzzbmk.webp"/><b>Christmas</b></div>
+<div class="cat"><img alt="Easter crochet patterns" loading="lazy" src="https://files.catbox.moe/f1vqf4.webp"/><b>Easter</b></div>
+<div class="cat"><img alt="Halloween crochet patterns" loading="lazy" src="https://files.catbox.moe/7crcqq.webp"/><b>Halloween</b></div>
+<div class="cat"><img alt="Baby crochet patterns" loading="lazy" src="https://files.catbox.moe/wi3zh9.webp"/><b>Baby Crochet</b></div>
+<div class="cat"><img alt="Crochet flowers and plants" loading="lazy" src="https://files.catbox.moe/n2fz84.webp"/><b>Flowers &amp; Plants</b></div>
+<div class="cat"><img alt="Crochet accessories" loading="lazy" src="https://files.catbox.moe/nq1hv8.webp"/><b>Accessories</b></div>
+<div class="cat"><img alt="Crochet home decor" loading="lazy" src="https://files.catbox.moe/ezwg58.webp"/><b>Home Decor</b></div>
+</div>
+</div>
+</section>
+<!-- ============ PRA QUEM É ============ -->
+<section class="sec">
+<div class="env rev">
+<h2 class="centro" data-papel="titulo-secao">The Library is <span class="pk">for you</span> if…</h2>
+<div class="pilha">
+<div class="card chk"><i>✓</i><span>See a beautiful piece and want to find it right away</span></div>
+<div class="card chk"><i>✓</i><span>Spend too much time searching for patterns</span></div>
+<div class="card chk"><i>✓</i><span>Want everything in one place</span></div>
+</div>
+</div>
+</section>
+<!-- ============ BÔNUS ============ -->
+<section class="sec creme">
+<div class="env rev">
+<p class="acima-titulo centro">YOU ALSO GET FOR <span class="pk">FREE</span></p>
+<h2 class="centro" data-papel="titulo-secao"><span class="pk">BONUS</span></h2>
+<div class="pilha">
+<div class="card bonus-grande">
+<div class="bg-mock"><img alt="" loading="lazy" src="https://files.catbox.moe/95m37k.webp"/></div>
+<p class="bg-etq">🎁 Bonus 01</p>
+<h3 class="bg-tit">Quick Stitch Guide</h3>
+<!-- CONFERIR: descricao escrita a partir do NOME do bonus. Gabriel precisa validar. -->
+<p class="bg-desc">The stitches that appear most in patterns, explained one by one.</p>
+<div class="bg-val"><s>$17</s><em>FREE</em></div>
+</div>
+<div class="card bonus-grande">
+<div class="bg-mock"><img alt="" loading="lazy" src="https://files.catbox.moe/rqr45a.webp"/></div>
+<p class="bg-etq">🎁 Bonus 02</p>
+<h3 class="bg-tit">Yarn &amp; Hook Chart</h3>
+<!-- CONFERIR -->
+<p class="bg-desc">Which hook to use with each yarn, so you never have to guess at the store.</p>
+<div class="bg-val"><s>$11</s><em>FREE</em></div>
+</div>
+<div class="card bonus-grande">
+<div class="bg-mock"><img alt="" loading="lazy" src="https://files.catbox.moe/841kgl.webp"/></div>
+<p class="bg-etq">🎁 Bonus 03</p>
+<h3 class="bg-tit">Seasonal Project Planner</h3>
+<!-- CONFERIR -->
+<p class="bg-desc">What to make each month of the year, so you never sit down without knowing what to start.</p>
+<div class="bg-val"><s>$11</s><em>FREE</em></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ PLANOS ============ -->
+<section class="sec">
+<div class="env rev" id="cl-offer">
+<h2 class="centro" data-papel="titulo-secao">Choose your <span class="pk">Library</span></h2>
+<div class="plano">
+<div class="faixa">🔥 BEST SELLER!</div>
+<div class="corpo">
+<div class="centro">
+<div class="pstars">★★★★★</div>
+<div class="pnome">COMPLETE LIBRARY</div>
+<div class="psub"><b>+200 patterns</b> · every category, all in one place</div>
+</div>
+<!-- 27/08: imagem do card trocada pelo mockup novo. O ?v= SOBE junto com a troca, senao
+             quem ja visitou continua vendo a antiga por 1 ano (regra do _headers da Netlify). -->
+<img alt="Complete Crochet Library open on phone, tablet and computer" class="pimg" height="533" loading="lazy" src="https://files.catbox.moe/pnd3zl.png" width="800"/>
+<ul class="itens">
+<li><i>✓</i>Bags &amp; Backpacks</li>
+<li><i>✓</i>Amigurumi</li>
+<li><i>✓</i>Christmas</li>
+<li><i>✓</i>Easter</li>
+<li><i>✓</i>Halloween</li>
+<li><i>✓</i>Baby Crochet</li>
+<li><i>✓</i>Flowers &amp; Plants</li>
+<li><i>✓</i>Accessories</li>
+<li><i>✓</i>Home Decor</li>
+<li><i>✓</i>Clothing</li>
+<li><i>✓</i>Instant and lifetime access</li>
+<li class="bonus-li"><i>🎁</i>Quick Stitch Guide <b>(free)</b></li>
+<li class="bonus-li"><i>🎁</i>Quick Yarn &amp; Hook Chart <b>(free)</b></li>
+<li class="bonus-li"><i>🎁</i>Seasonal Project Planner <b>(free)</b></li>
+</ul>
+<div class="preco-de">Was $67</div>
+<div class="preco-lbl">for just</div>
+<div class="preco">$27</div>
+<a class="btn" data-papel="botao" href="/checkout">✨ I WANT ACCESS NOW</a>
+<p class="pagamento">💳 Secure Payment · One-time, no subscription</p>
+<div class="gar-mini">
+<img alt="7-day guarantee seal" height="72" loading="lazy" src="https://files.catbox.moe/9hqoxr.png" width="72"/>
+<p data-papel="selo"><b>7-day guarantee</b>Don't like it? Full refund. No questions asked.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ COMO RECEBE ============ -->
+<section class="sec compacta">
+<div class="env rev">
+<h2 class="centro" data-papel="titulo-secao">How you <span class="pk">receive</span></h2>
+<div class="passos">
+<div class="passo"><div class="em">💳</div><b>1. Purchase</b><span>Secure card payment, done in seconds</span></div>
+<div class="passo"><div class="em">📧</div><b>2. Access arrives in your email</b><span>Instant — just tap the link</span></div>
+<div class="passo"><div class="em">🧶</div><b>3. Search and start creating</b><span>On your phone, no install needed</span></div>
+</div>
+</div>
+</section>
+<!-- ============ GARANTIA ============ -->
+<section class="sec compacta">
+<div class="env rev">
+<div class="card creme grande gar">
+<div class="escudo">🛡️</div>
+<b>7-Day Money-Back Guarantee</b>
+<p data-papel="texto">Not satisfied? Request a refund within 7 days and we'll return <strong>100% of your money</strong>, no questions asked.</p>
+</div>
+</div>
+</section>
+<!-- ============ FAQ ============ -->
+<section class="sec creme">
+<div class="env rev">
+<h2 class="centro" data-papel="titulo-secao">❓ Frequently Asked Questions</h2>
+<div class="faq">
+<!-- 18/08: FAQ refeita. A primeira pergunta agora é a desconfiança, que é a objeção
+           nº1 deste nicho ("prometeu mil e tinha vinte"). Antes a página não encostava no
+           assunto, e ela chegava aqui com essa suspeita sem resposta. -->
+<div class="fitem">
+<button class="fq" onclick="abreFaq(this)">How do I know there are really 200+ patterns? <i>▾</i></button>
+<div class="fa">You don't have to take my word for it. As soon as you get in, scroll through the entire library and check every single one. If you find fewer than what's listed here, or anything different from what I promised, reach out within 7 days and I'll refund everything. I know there are a lot of people out there promising thousands and delivering twenty — that's exactly why the guarantee exists.</div>
+</div>
+<div class="fitem">
+<button class="fq" onclick="abreFaq(this)">How do I find the pattern I want? <i>▾</i></button>
+<div class="fa">Just type the name of the piece, like bag or blanket, and the patterns show up instantly. It's like searching for a song on your phone. No digging through folders or scrolling to find it.</div>
+</div>
+<div class="fitem">
+<button class="fq" onclick="abreFaq(this)">Do I need to install anything? <i>▾</i></button>
+<div class="fa">No. It's a link. You tap and it opens, just like any website. Works on your phone, tablet and computer, and you can save it to your home screen to come back anytime.</div>
+</div>
+<div class="fitem">
+<!-- 15/08: texto antigo dizia que parte do acervo era em inglês e falava de glossário
+             PT/EN. Está desatualizado, a biblioteca já foi traduzida (95,6% em português). -->
+<button class="fq" onclick="abreFaq(this)">Are the patterns clearly explained? <i>▾</i></button>
+<div class="fa">Yes. Every pattern comes with charts and step-by-step instructions, so you can follow along right from your phone.</div>
+</div>
+<div class="fitem">
+<button class="fq" onclick="abreFaq(this)">Is it a one-time payment or subscription? <i>▾</i></button>
+<div class="fa">One-time payment. You pay once and the Library is yours forever — no subscriptions, no surprise charges.</div>
+</div>
+<div class="fitem">
+<button class="fq" onclick="abreFaq(this)">Do I need to be experienced at crochet? <i>▾</i></button>
+<div class="fa">Not at all. From the simplest to the most advanced, you go at your own pace. Plus you get the Stitch Guide as a bonus to look things up whenever you get stuck.</div>
+</div>
+<div class="fitem">
+<button class="fq" onclick="abreFaq(this)">What if I don't like it? <i>▾</i></button>
+<div class="fa">You have 7 days to ask for your money back. Reach out and I'll refund 100% — no reason needed, no forms. The risk is on me, not you.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ FECHAMENTO ============ -->
+<section class="sec terra">
+<div class="env centro rev">
+<span class="pill">🔥 Launch price</span>
+<h2 style="margin-top:16px;color:#fff">Get yours while it's $27</h2>
+<a class="btn claro" data-papel="botao" href="/checkout" style="margin-top:22px">✨ I WANT ACCESS NOW</a>
+<p class="sub" style="font-size:12.5px;font-weight:700;margin-top:14px">🔒 Secure payment · 7-day guarantee</p>
+</div>
+</section>
+</main>
+<footer>
+<div class="env">
+<img alt="" class="logo-rodape" height="40" loading="lazy" src="https://files.catbox.moe/bi0u2r.webp" width="40"/>
+<p>This site is not affiliated with Facebook or any Facebook entity.</p>
+<p>© 2026 Crochet Library. All rights reserved.</p>
+<p><a href="termos.html">Terms of use</a> · <a href="privacidade.html">Privacy policy</a></p>
+</div>
+</footer>
+<script>
+
+function abreFaq(b){b.parentElement.classList.toggle('on')}
+
+// entrada das seções ao rolar. Se o navegador for velho e não tiver
+// IntersectionObserver, mostra tudo na hora em vez de deixar invisível.
+if('IntersectionObserver' in window){
+  var revObs=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('viu');revObs.unobserve(e.target)}})},{threshold:.08});
+  document.querySelectorAll('.rev').forEach(function(el){revObs.observe(el)});
+}else{
+  document.querySelectorAll('.rev').forEach(function(el){el.classList.add('viu')});
+}
+
+// Barra fixa: aparece assim que o botão de compra do topo sai da tela.
+// Assim nunca há dois botões iguais visíveis ao mesmo tempo, e a partir do
+// primeiro rolar o CTA está sempre à mão. É isso que permite o topo respirar
+// sem a obrigação de encaixar tudo na primeira tela.
+// Feito no scroll e não com IntersectionObserver de propósito: o observer só
+// dispara quando o estado MUDA, então quem rola muito rápido (flick no celular)
+// podia passar do alvo sem nunca vê-lo e a barra não aparecia. Era assim no
+// site antigo. Aqui a posição é conferida em toda rolagem, sempre acerta.
+var alvo=document.querySelector('.sec.topo .btn'),barra=document.getElementById('barra');
+// 09/09: o PageSpeed apontou 114ms de "reflow forcado" nesta linha. A causa era
+// medir (getBoundingClientRect) e escrever (classList) no mesmo instante, a cada
+// rolagem, o que obriga o navegador a recalcular o layout na hora.
+// A correcao NAO muda o comportamento: continua conferindo em toda rolagem (o
+// motivo explicado acima segue valendo). So agrupa a medida dentro do quadro de
+// animacao, onde o layout ja esta calculado. Uma checagem por quadro, no maximo.
+// 09/09 (2a rodada): o requestAnimationFrame de ontem NAO bastou. O PSI continuou
+// acusando reflow forcado aqui (58ms), porque ler getBoundingClientRect obriga o
+// navegador a recalcular o layout mesmo dentro do quadro de animacao.
+// Agora a posicao do botao e medida UMA VEZ (no carregamento e ao girar a tela) e
+// guardada. A cada rolagem so se comparam dois numeros, sem tocar no layout.
+// Comportamento identico: continua conferindo em toda rolagem, entao rolagem
+// rapida no celular nao passa batido (era o motivo de nao usar IntersectionObserver).
+var limiteBarra=0;
+function mediLimiteBarra(){
+  if(!alvo)return;
+  limiteBarra = alvo.getBoundingClientRect().bottom + window.scrollY;
+}
+function confereBarra(){
+  if(!alvo||!barra)return;
+  barra.classList.toggle('on', window.scrollY > limiteBarra);
+}
+// 09/09 (4a rodada): a medicao inicial rodava JA, antes da primeira pintura, e
+// obrigava o navegador a calcular layout no pior momento (58ms). Agora so mede
+// depois que a pagina terminou de carregar. Sem risco: no topo da pagina a barra
+// tem que estar escondida mesmo, que e como ela ja comeca.
+if(alvo&&barra){
+  addEventListener('scroll',confereBarra,{passive:true});
+  addEventListener('resize',function(){mediLimiteBarra();confereBarra();});
+  addEventListener('load',function(){mediLimiteBarra();confereBarra();});
+}
+
+
+// reflexo no botão quando ele entra na tela
+var brilhoObs=new IntersectionObserver(function(es){es.forEach(function(e){
+  // o 'void offsetWidth' era um reflow forcado de proposito (truque velho pra
+  // reiniciar animacao). Dois quadros seguidos fazem o mesmo sem tocar no layout.
+  if(e.isIntersecting){var el=e.target;el.classList.remove('brilha');
+    requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add('brilha')})})}
+})},{threshold:.6});
+document.querySelectorAll('.btn').forEach(function(el){brilhoObs.observe(el)});
+
+// InitiateCheckout continua fora da página de propósito: quem dispara o IC é o Wiapy
+// (checkout real), evitando o IC inflado por clique de botão.
+</script>
+</body>
+</html>
