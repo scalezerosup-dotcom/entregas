@@ -119,7 +119,8 @@ function byId(id){ return D.recipes.filter(function(r){return r.slug===id;})[0];
 var HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>';
 function heart(slug){ return '<span class="heart'+(saved.indexOf(slug)>-1?' on':'')+'" data-heart="'+slug+'" role="button" aria-label="Save">'+HEART+'</span>'; }
 function card(r){
-  return '<div class="card"><a href="#/r/'+r.slug+'" style="display:block;text-decoration:none"><div class="ph"><img loading="lazy" src="'+r.img+'" alt="'+esc(r.title)+'"></div>'+
+  var c = CAT[r.cat] || {color:"#888",emoji:"🧴"};
+  return '<div class="card"><a href="#/r/'+r.slug+'" style="display:block;text-decoration:none"><div class="ph" style="background:'+c.color+';display:flex;align-items:center;justify-content:center;font-size:40px">'+c.emoji+'</div>'+
    '<div class="tx"><div class="tt">'+esc(r.title)+'</div><div class="mt">'+esc(r.time.split(",")[0])+'</div></div></a>'+heart(r.slug)+'</div>';
 }
 function head(active){
@@ -184,7 +185,7 @@ function recipe(slug){
   var ing = r.ingredients.map(function(i){ return '<tr><td>'+esc(i.item)+'</td><td>'+esc(i.amount)+'</td></tr>'; }).join("");
   var steps = r.method.map(function(s,i){ var k=r.slug+"|"+i; var d=done[k];
     return '<li data-k="'+k+'" style="'+(d?'opacity:.45;text-decoration:line-through':'')+'">'+esc(s)+'</li>'; }).join("");
-  $app.innerHTML = '<div class="hero"><img src="'+r.img+'" alt="'+esc(r.title)+'"><a class="x" href="#/c/'+r.cat+'" aria-label="Close" style="text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2420" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>'+heart(r.slug)+'</div>'+
+  $app.innerHTML = '<div class="hero" style="background:'+c.color+';display:flex;align-items:center;justify-content:center;font-size:88px">'+(c.emoji||"")+'<a class="x" href="#/c/'+r.cat+'" aria-label="Close" style="text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2420" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>'+heart(r.slug)+'</div>'+
    '<div class="body"><span class="pill" style="background:'+c.color+'">'+esc(c.name)+'</span><h1>'+esc(r.title)+'</h1>'+
    '<div class="facts"><div class="fact"><small>Active time</small><b>'+esc(r.time)+'</b></div><div class="fact"><small>Batch size</small><b>'+esc(r.batch_size)+'</b></div></div>'+
    '<div class="blk"><h2>Ingredients</h2><table class="ing">'+ing+'</table></div>'+
@@ -194,8 +195,7 @@ function recipe(slug){
    (r.safety_note? '<div class="safety"><b>Before you make this</b>'+esc(r.safety_note)+'</div>' : '')+
    '<a class="btn" href="'+r.pdf+'" download>Download the full '+esc(c.name)+' PDF</a>'+
    '<p class="note-honest">Measurements are given by weight for accuracy — a basic kitchen scale helps a lot. '+
-   'This is general crafting information, not medical advice; patch test new products and stop use if your skin reacts. '+
-   'The photo is a representative example for this category, not this specific recipe.</p></div>';
+   'This is general crafting information, not medical advice; patch test new products and stop use if your skin reacts.</p></div>';
   $app.querySelectorAll("[data-k]").forEach(function(el){ el.onclick=function(){ var k=el.dataset.k; if(done[k]) delete done[k]; else done[k]=1;
     el.style.opacity = done[k]?'.45':''; el.style.textDecoration = done[k]?'line-through':''; persist(); }; });
   window.scrollTo(0,0);
