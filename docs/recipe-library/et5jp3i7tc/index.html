@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#faf2eb">
+<title>The BeautyCrafts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf2eb;--paper:#ffffff;--ink:#3a2e29;--ink-soft:#6b5d56;--accent:#8b9b7d;--accent-dark:#6b7a5e;--line:#e5e7eb;
+--r:18px;--nav:64px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 12px)}
+h1,h2,h3,.serif{font-family:'Playfair Display','Playfair Display',Georgia,serif;line-height:1.15}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit}
+#app{max-width:560px;margin:0 auto;min-height:100vh}
+.pad{padding:0 18px}
+.top{display:flex;align-items:center;gap:10px;padding:16px 18px 6px}
+.brand{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.brand b{color:var(--accent-dark)}
+.hello{padding:14px 18px 4px}
+.hello .script{font-style:italic;font-family:'Playfair Display',serif;font-size:26px;color:var(--accent-dark);line-height:1}
+.hello h1{font-size:30px;font-weight:800;margin-top:4px}
+.search{margin:16px 18px 0;display:flex;align-items:center;gap:10px;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:0 14px;height:52px}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:16px;color:var(--ink);height:100%;min-width:0}
+.search svg{flex:none;color:var(--ink-soft)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 18px 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:99px;background:var(--paper);border:1.5px solid var(--line);font-weight:700;font-size:14px;color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.sec{display:flex;align-items:baseline;justify-content:space-between;padding:26px 18px 10px}
+.sec h2{font-size:22px}
+.sec small{color:var(--ink-soft);font-weight:700}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px}
+.tile{position:relative;text-align:left;border-radius:var(--r);padding:16px 14px;min-height:96px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.tile .ic{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:21px}
+.tile .nm{font-weight:800;font-size:15px;line-height:1.15}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:6px 18px 0}
+.card{background:var(--paper);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);text-align:left;position:relative;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:1/1;background:var(--line);overflow:hidden;position:relative}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card .tx{padding:10px 12px 12px}
+.card .tt{font-weight:800;font-size:14.5px;line-height:1.25}
+.card .mt{font-size:12px;color:var(--ink-soft);margin-top:4px;font-weight:600}
+.heart{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.heart svg{width:19px;height:19px;stroke:var(--accent-dark);fill:none;stroke-width:2.2}
+.heart.on svg{fill:var(--accent);stroke:var(--accent)}
+.head{color:#fff;padding:16px 18px 20px;border-radius:0 0 26px 26px}
+.head .back{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;opacity:.95;margin-bottom:8px}
+.head h1{font-size:26px;font-weight:800}
+.head p{opacity:.9;font-size:14px;margin-top:2px;font-weight:600}
+.empty{padding:40px 24px;text-align:center;color:var(--ink-soft)}
+.empty b{display:block;font-size:18px;color:var(--ink);margin-bottom:4px}
+.sub{padding:0 18px;color:var(--ink-soft);font-weight:600;font-size:14px;margin-top:-2px}
+/* recipe */
+.hero{position:relative;aspect-ratio:1/1;background:var(--line)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .x,.hero .heart{top:12px}
+.hero .x{position:absolute;left:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.hero .heart{right:12px;width:40px;height:40px}
+.body{padding:18px}
+.pill{display:inline-block;color:#fff;font-weight:800;font-size:12px;border-radius:99px;padding:4px 12px;letter-spacing:.02em}
+.body h1{font-size:28px;font-weight:800;margin:10px 0 12px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 10px;text-align:left}
+.fact small{display:block;color:var(--ink-soft);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
+.fact b{display:block;font-size:13.5px;margin-top:2px;line-height:1.3;font-weight:700}
+.blk{margin-top:22px}
+.blk h2{font-size:19px;margin-bottom:10px}
+.ing{width:100%;border-collapse:collapse}
+.ing td{padding:8px 0;border-top:1px dashed var(--line);font-size:14.5px;vertical-align:top}
+.ing tr:first-child td{border-top:0}
+.ing td:first-child{font-weight:700;padding-right:10px}
+.ing td:last-child{color:var(--ink-soft);text-align:right;white-space:nowrap;font-weight:700}
+.steps{counter-reset:step;list-style:none}
+.steps li{counter-increment:step;position:relative;padding:3px 0 14px 32px;font-size:15px}
+.steps li::before{content:counter(step);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+.tips li{margin-left:20px;margin-bottom:6px}
+.safety{background:#FCEFE9;border:1px solid #E8B9A6;border-radius:14px;padding:14px 16px;margin-top:16px;font-size:14px;line-height:1.5}
+.safety b{display:block;margin-bottom:4px;color:#8A3B22}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 4px 0 var(--accent-dark);margin-top:22px}
+.note-honest{font-size:13px;color:var(--ink-soft);margin-top:14px;line-height:1.5}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav div{max-width:560px;margin:0 auto;height:var(--nav);display:grid;grid-template-columns:repeat(3,1fr)}
+nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:800;color:var(--ink-soft)}
+nav button.on{color:var(--accent-dark)}
+nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav><div>
+  <button data-go="#/" id="n-home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</button>
+  <button data-go="#/search" id="n-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Search</button>
+  <button data-go="#/saved" id="n-saved"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>Saved</button>
+</div></nav>
+<script src="recipes.js"></script>
+<script>
+(function(){
+"use strict";
+var D = window.TBC || {categories:[], recipes:[]};
+var CAT = {}; D.categories.forEach(function(c){CAT[c.id]=c;});
+var $app = document.getElementById("app");
+var saved = [];
+try { saved = JSON.parse(localStorage.getItem("tbc_saved")||"[]"); } catch(e){}
+var done = {};
+try { done = JSON.parse(localStorage.getItem("tbc_done")||"{}"); } catch(e){}
+function persist(){ try{ localStorage.setItem("tbc_saved", JSON.stringify(saved)); localStorage.setItem("tbc_done", JSON.stringify(done)); }catch(e){} }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function norm(s){ return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function byId(id){ return D.recipes.filter(function(r){return r.slug===id;})[0]; }
+var HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>';
+function heart(slug){ return '<span class="heart'+(saved.indexOf(slug)>-1?' on':'')+'" data-heart="'+slug+'" role="button" aria-label="Save">'+HEART+'</span>'; }
+function card(r){
+  return '<div class="card"><a href="#/r/'+r.slug+'" style="display:block;text-decoration:none"><div class="ph"><img loading="lazy" src="'+r.img+'" alt="'+esc(r.title)+'"></div>'+
+   '<div class="tx"><div class="tt">'+esc(r.title)+'</div><div class="mt">'+esc(r.time.split(",")[0])+'</div></div></a>'+heart(r.slug)+'</div>';
+}
+function head(active){
+  ["home","search","saved"].forEach(function(k){ document.getElementById("n-"+k).classList.toggle("on", k===active); });
+}
+function count(cat){ return D.recipes.filter(function(r){return r.cat===cat;}).length; }
+function home(){
+  head("home");
+  $app.innerHTML = '<div class="top"><span class="brand">The Beauty<b>Crafts</b></span></div><div class="sub">Your '+D.recipes.length+'+ DIY body care recipes</div>'+
+   '<div class="hello"><div class="script">Hi there,</div><h1>What will you make today?</h1></div>'+
+   '<a class="search" href="#/search" style="text-decoration:none;color:var(--ink-soft)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search: body butter, soap, deodorant...</span></a>'+
+   '<div class="sec"><h2>Your library</h2></div>'+
+   '<div class="tiles">'+D.categories.map(function(c){
+     return '<a class="tile" href="#/c/'+c.id+'" style="background:'+c.color+';text-decoration:none"><span class="ic">'+c.emoji+'</span><span><span class="nm">'+esc(c.name)+'</span></span></a>'; }).join("")+'</div>';
+}
+function category(id){
+  var c = CAT[id]; if(!c){ return home(); }
+  head("home");
+  var list = D.recipes.filter(function(r){return r.cat===id;});
+  $app.innerHTML = '<div class="head" style="background:'+c.color+'"><a class="back" href="#/" style="text-decoration:none">‹ Library</a><h1>'+c.emoji+' '+esc(c.name)+'</h1><p>Tap a recipe to open it</p></div>'+
+    (list.length? '<div class="grid" style="padding-top:16px">'+list.map(card).join("")+'</div>' : '<div class="empty"><b>Nothing here yet</b></div>');
+}
+function score(r, toks){
+  var title = norm(r.title), kw = norm(r.keywords.join(" ")), cat = norm(CAT[r.cat]?CAT[r.cat].name:"");
+  var total = 0;
+  for(var i=0;i<toks.length;i++){
+    var t = toks[i], s = 0;
+    if(title.indexOf(t)===0) s = 9; else if(title.indexOf(" "+t)>-1) s = 7; else if(title.indexOf(t)>-1) s = 5;
+    else if(kw.indexOf(t)>-1) s = 3; else if(cat.indexOf(t)>-1) s = 2;
+    if(!s) return 0; total += s;
+  }
+  return total;
+}
+function search(q){
+  head("search");
+  $app.innerHTML = '<div class="top"><span class="brand">Search</span></div>'+
+   '<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="body butter, soap, deodorant..." autocomplete="off" value="'+esc(q||"")+'"></label><div id="res"></div>';
+  var inp = document.getElementById("q"), res = document.getElementById("res");
+  function run(){
+    var v = inp.value.trim();
+    if(!v){ res.innerHTML = '<div class="chips">'+["body butter","soap","lip oil","scrub","spray","deodorant"].map(function(w){return '<button class="chip" data-w="'+w+'">'+w+'</button>';}).join("")+'</div><div class="empty">Type what you want to make.<br>The recipe shows up as you type.</div>'; bind(); return; }
+    var toks = norm(v).split(/\s+/).filter(Boolean);
+    var out = D.recipes.map(function(r){return {r:r,s:score(r,toks)};}).filter(function(x){return x.s>0;}).sort(function(a,b){return b.s-a.s;}).map(function(x){return x.r;});
+    res.innerHTML = out.length ? '<div class="grid" style="padding-top:14px">'+out.map(card).join("")+'</div>' : '<div class="empty"><b>No recipes for "'+esc(v)+'"</b>Try a simpler word, like soap or scrub.</div>';
+    bindHearts();
+  }
+  function bind(){ res.querySelectorAll("[data-w]").forEach(function(b){ b.onclick=function(){ inp.value=b.dataset.w; run(); }; }); }
+  inp.addEventListener("input", run); run();
+  if(!q) setTimeout(function(){ try{inp.focus();}catch(e){} }, 50);
+}
+function savedView(){
+  head("saved");
+  var list = saved.map(byId).filter(Boolean);
+  $app.innerHTML = '<div class="top"><span class="brand">Saved</span></div>'+
+    (list.length? '<div class="grid" style="padding-top:12px">'+list.map(card).join("")+'</div>' :
+     '<div class="empty"><b>No saved recipes yet</b>Tap the heart on any recipe to keep it here.</div>');
+}
+function recipe(slug){
+  var r = byId(slug); if(!r){ return home(); }
+  head("home");
+  var c = CAT[r.cat] || {name:"",color:"#888"};
+  var ing = r.ingredients.map(function(i){ return '<tr><td>'+esc(i.item)+'</td><td>'+esc(i.amount)+'</td></tr>'; }).join("");
+  var steps = r.method.map(function(s,i){ var k=r.slug+"|"+i; var d=done[k];
+    return '<li data-k="'+k+'" style="'+(d?'opacity:.45;text-decoration:line-through':'')+'">'+esc(s)+'</li>'; }).join("");
+  $app.innerHTML = '<div class="hero"><img src="'+r.img+'" alt="'+esc(r.title)+'"><a class="x" href="#/c/'+r.cat+'" aria-label="Close" style="text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2420" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>'+heart(r.slug)+'</div>'+
+   '<div class="body"><span class="pill" style="background:'+c.color+'">'+esc(c.name)+'</span><h1>'+esc(r.title)+'</h1>'+
+   '<div class="facts"><div class="fact"><small>Active time</small><b>'+esc(r.time)+'</b></div><div class="fact"><small>Batch size</small><b>'+esc(r.batch_size)+'</b></div></div>'+
+   '<div class="blk"><h2>Ingredients</h2><table class="ing">'+ing+'</table></div>'+
+   '<div class="blk"><h2>Method</h2><ol class="steps">'+steps+'</ol></div>'+
+   '<div class="blk"><h2>Shelf life</h2><p>'+esc(r.shelf_life)+'</p></div>'+
+   '<div class="blk"><h2>Tips</h2><ul class="tips">'+r.tips.map(function(t){return '<li>'+esc(t)+'</li>';}).join("")+'</ul></div>'+
+   (r.safety_note? '<div class="safety"><b>Before you make this</b>'+esc(r.safety_note)+'</div>' : '')+
+   '<a class="btn" href="'+r.pdf+'" download>Download the full '+esc(c.name)+' PDF</a>'+
+   '<p class="note-honest">Measurements are given by weight for accuracy — a basic kitchen scale helps a lot. '+
+   'This is general crafting information, not medical advice; patch test new products and stop use if your skin reacts. '+
+   'The photo is a representative example for this category, not this specific recipe.</p></div>';
+  $app.querySelectorAll("[data-k]").forEach(function(el){ el.onclick=function(){ var k=el.dataset.k; if(done[k]) delete done[k]; else done[k]=1;
+    el.style.opacity = done[k]?'.45':''; el.style.textDecoration = done[k]?'line-through':''; persist(); }; });
+  window.scrollTo(0,0);
+}
+function bindHearts(){
+  document.querySelectorAll("[data-heart]").forEach(function(h){
+    h.onclick=function(e){ e.preventDefault(); e.stopPropagation();
+      var s=h.dataset.heart, i=saved.indexOf(s); if(i>-1) saved.splice(i,1); else saved.push(s); persist();
+      document.querySelectorAll('[data-heart="'+s+'"]').forEach(function(x){ x.classList.toggle("on", saved.indexOf(s)>-1); });
+      if(/^#\/saved/.test(location.hash)) savedView(), bindHearts();
+    };
+  });
+}
+function route(){
+  var h = location.hash || "#/", m;
+  if(m = h.match(/^#\/c\/([\w-]+)/)) category(m[1]);
+  else if(m = h.match(/^#\/r\/([\w-]+)/)) recipe(m[1]);
+  else if(h.indexOf("#/search")===0) search("");
+  else if(h.indexOf("#/saved")===0) savedView();
+  else home();
+  bindHearts();
+  if(!/^#\/search/.test(h)) window.scrollTo(0,0);
+}
+document.querySelectorAll("nav [data-go]").forEach(function(b){ b.onclick=function(){ location.hash=b.dataset.go; }; });
+window.addEventListener("hashchange", route);
+route();
+})();
+</script>
+</body>
+</html>
