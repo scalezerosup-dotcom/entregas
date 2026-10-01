@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pricing &amp; Profit Calculator · Resin Crafting Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--paper:#F5F0E0;--ink:#252A32;--ink-soft:#6B625C;--accent:#48B02B;--accent-dark:#09784F;--line:#E7E1DA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:'Roboto',-apple-system,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:'Poppins',Georgia,serif;line-height:1.15}
+.top{background:var(--accent-dark);color:var(--paper);text-align:center;padding:11px 16px;font-weight:700}
+.wrap{max-width:560px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:clamp(26px,6vw,34px);margin-bottom:6px}
+.intro{color:var(--ink-soft);margin-bottom:18px}
+form{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:700;font-size:15px}
+label small{font-weight:400;color:var(--ink-soft)}
+.campo{display:flex;align-items:center;border:2px solid var(--line);border-radius:12px;background:var(--bg);overflow:hidden}
+.campo:focus-within{border-color:var(--accent)}
+.campo span{padding:0 12px;color:var(--ink-soft);font-weight:700}
+input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:18px;padding:13px 12px;color:var(--ink);outline:none}
+button{font:inherit;cursor:pointer}
+.calc{min-height:52px;border:0;border-radius:12px;background:var(--accent);color:var(--paper);font-weight:800;font-size:18px;box-shadow:0 4px 0 var(--accent-dark)}
+.res{margin-top:18px;background:var(--paper);border:2px solid var(--accent);border-radius:16px;padding:18px;display:none}
+.res.on{display:block}
+.fila{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.fila:last-of-type{border-bottom:0}
+.fila b{font-family:'Poppins',Georgia,serif;font-size:22px;color:var(--accent-dark)}
+.fila.destacada b{font-size:30px;color:var(--accent)}
+.como{color:var(--ink-soft);font-size:14px;margin-top:8px}
+.acc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.acc button{min-height:46px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--accent-dark);font-weight:800}
+.err{color:#a13a2f;font-weight:700;display:none}
+@media print{.top,form,.acc{display:none}.res{display:block;border:1px solid #999}}
+</style>
+</head>
+<body>
+<div class="top">Resin Crafting Lab</div>
+<main class="wrap">
+  <h1 id="titulo"></h1>
+  <p class="intro" id="intro"></p>
+  <form id="f" novalidate></form>
+  <p class="err" id="err"></p>
+  <section class="res" id="res" aria-live="polite"></section>
+</main>
+<script>
+/* =====================================================================
+   CONFIG: lo único que se adapta por producto. Textos en el idioma de la
+   tienda. Por defecto: calculadora de precio de venta para nichos de
+   "ingreso extra" (costo de materiales + horas + margen).
+   ===================================================================== */
+const CONFIG = {
+  titulo: document.title.split(" · ")[0],
+  intro: "Enter your real numbers and get a minimum, recommended and premium price for every piece you sell, plus your profit per piece and per batch.",
+  moneda: "$",
+  boton: "Calculate my price",
+  campos: [
+    { id: "materiales", label: "Materials cost per piece", ayuda: "Resin, pigment, mold wear, packaging — everything that piece used", prefijo: "$", def: 6 },
+    { id: "horas", label: "Your time per piece", ayuda: "Mixing, pouring, demolding, sanding and finishing — in hours", prefijo: "h", def: 1.5 },
+    { id: "hora", label: "What your hour is worth", ayuda: "What you want to earn per hour of work", prefijo: "$", def: 20 },
+    { id: "margen", label: "Profit margin", ayuda: "On top of materials and your time", prefijo: "%", def: 40 },
+    { id: "comision", label: "Marketplace or payment fees", ayuda: "Etsy, Shopify, PayPal... combined, as a percent of the sale price", prefijo: "%", def: 8 },
+    { id: "piezas", label: "Pieces per batch", ayuda: "To see your profit for a full batch, not just one piece", prefijo: "pcs", def: 6 }
+  ],
+  // Devuelve [{label, valor, destacada}] + una línea de cómo se calculó
+  calcular(v) {
+    const costo = v.materiales + v.horas * v.hora;
+    const base = costo * (1 + v.margen / 100);
+    const conFee = p => p / (1 - v.comision / 100);
+    const minimo = conFee(costo);
+    const recomendado = conFee(base);
+    const premium = conFee(base * 1.35);
+    const gananciaPorPieza = recomendado - costo - recomendado * (v.comision / 100);
+    const gananciaPorLote = gananciaPorPieza * v.piezas;
+    return {
+      filas: [
+        { label: "Minimum price (covers cost + fees)", valor: minimo },
+        { label: "Recommended price", valor: recomendado, destacada: true },
+        { label: "Premium price", valor: premium },
+        { label: "Profit per piece at the recommended price", valor: gananciaPorPieza },
+        { label: `Profit for a batch of ${v.piezas}`, valor: gananciaPorLote }
+      ],
+      como: `Cost per piece = materials + hours × your hourly rate = ${fmt(costo)}. Recommended = (cost + ${v.margen}% margin), then grossed up so that after the ${v.comision}% marketplace fee you still keep that margin. Premium = recommended base + 35%, same fee adjustment. Profit = recommended price − cost − fee.`
+    };
+  },
+  textos: { copiar: "Copy result", copiado: "Copied!", imprimir: "Print", error: "Fill in every field with a number of 0 or more." }
+};
+/* ===================================================================== */
+const CLAVE = "calc-" + location.pathname;
+function fmt(n) { return CONFIG.moneda + " " + (Math.round(n * 100) / 100).toLocaleString(document.documentElement.lang || "es", { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+function leer() { try { return JSON.parse(localStorage.getItem(CLAVE) || "{}"); } catch (e) { return {}; } }
+function guardar(v) { try { localStorage.setItem(CLAVE, JSON.stringify(v)); } catch (e) {} }
+const f = document.getElementById("f"), res = document.getElementById("res"), err = document.getElementById("err");
+document.getElementById("titulo").textContent = CONFIG.titulo;
+document.getElementById("intro").textContent = CONFIG.intro;
+const previos = leer();
+CONFIG.campos.forEach(c => {
+  const l = document.createElement("label");
+  l.innerHTML = `<span>${c.label} <small>${c.ayuda || ""}</small></span>`;
+  const w = document.createElement("div"); w.className = "campo";
+  const i = document.createElement("input");
+  i.type = "number"; i.inputMode = "decimal"; i.min = "0"; i.step = "any"; i.id = c.id;
+  i.value = previos[c.id] ?? c.def ?? "";
+  const s = document.createElement("span"); s.textContent = c.prefijo || "";
+  w.append(i, s); l.append(w); f.append(l);
+});
+const b = document.createElement("button"); b.className = "calc"; b.type = "submit"; b.textContent = CONFIG.boton; f.append(b);
+let ultimo = "";
+f.addEventListener("submit", ev => {
+  ev.preventDefault();
+  const v = {};
+  for (const c of CONFIG.campos) {
+    const n = parseFloat(String(document.getElementById(c.id).value).replace(",", "."));
+    if (!isFinite(n) || n < 0) { err.textContent = CONFIG.textos.error; err.style.display = "block"; res.classList.remove("on"); return; }
+    v[c.id] = n;
+  }
+  err.style.display = "none";
+  guardar(v);
+  const r = CONFIG.calcular(v);
+  ultimo = r.filas.map(x => `${x.label}: ${fmt(x.valor)}`).join("\n");
+  res.innerHTML = r.filas.map(x => `<div class="fila${x.destacada ? " destacada" : ""}">
+<span>${x.label}</span><b>${fmt(x.valor)}</b></div>`).join("")
+    + `<p class="como">${r.como}</p>`
+    + `<div class="acc"><button type="button" id="cp">${CONFIG.textos.copiar}</button><button type="button" onclick="window.print()">${CONFIG.textos.imprimir}</button></div>`;
+  res.classList.add("on");
+  document.getElementById("cp").onclick = async e => {
+    try { await navigator.clipboard.writeText(ultimo); } catch (x) {
+      const t = document.createElement("textarea"); t.value = ultimo; document.body.append(t); t.select(); document.execCommand("copy"); t.remove();
+    }
+    e.target.textContent = CONFIG.textos.copiado; setTimeout(() => e.target.textContent = CONFIG.textos.copiar, 1500);
+  };
+  res.scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+</script>
+</body>
+</html>
