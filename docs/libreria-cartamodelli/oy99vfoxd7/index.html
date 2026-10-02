@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#fbf3eb">
+<title>Libreria Cartamodelli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf3eb;--paper:#fffaf5;--ink:#382b2a;--ink-soft:#6d5956;--accent:#d88b9a;--accent-dark:#a95f70;--line:#eadccf;--r:18px;--nav:64px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 12px)}
+h1,h2,h3,.ttl{font-family:'Poppins','Inter',sans-serif;line-height:1.2}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit}
+#app{max-width:620px;margin:0 auto;min-height:100vh}
+.top{padding:18px 18px 6px}
+.brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.brand b{color:var(--accent-dark)}
+.hero{margin:6px 18px 0;border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:16/9;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hello{padding:14px 18px 4px}
+.hello h1{font-size:27px;font-weight:800;margin-top:2px}
+.hello p{color:var(--ink-soft);font-weight:500;font-size:14.5px;margin-top:4px}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 18px 0}
+.cat{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:1/1.05;display:block;text-decoration:none;color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(56,43,42,0) 35%,rgba(56,43,42,.78) 100%)}
+.cat .in{position:absolute;left:12px;right:12px;bottom:11px;z-index:1}
+.cat .nm{font-family:'Poppins',sans-serif;font-weight:800;font-size:17px;line-height:1.1}
+.cat .ct{font-size:12px;font-weight:600;opacity:.92;margin-top:2px}
+.cat.wide{grid-column:1/-1;aspect-ratio:2.2/1}
+.sec{padding:26px 18px 8px;font-family:'Poppins',sans-serif;font-weight:800;font-size:19px}
+.steps{padding:0 18px;display:grid;gap:10px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;gap:12px;align-items:flex-start;font-size:14.5px}
+.step b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:13px}
+.linkbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin:12px 18px 0;border-radius:14px;background:var(--paper);border:2px solid var(--line);font-weight:700;text-decoration:none;font-size:15px}
+.head{color:#fff;padding:16px 18px 18px;border-radius:0 0 26px 26px;background:var(--accent-dark)}
+.head .back{display:inline-block;font-weight:700;font-size:14px;opacity:.95;margin-bottom:6px;text-decoration:none}
+.head h1{font-size:25px;font-weight:800}
+.head p{opacity:.92;font-size:13.5px;margin-top:2px;font-weight:500}
+.search{margin:14px 18px 0;display:flex;align-items:center;gap:10px;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:0 14px;height:50px}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:16px;color:var(--ink);height:100%;min-width:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 18px 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:99px;background:var(--paper);border:1.5px solid var(--line);font-weight:700;font-size:13.5px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 18px 0}
+.card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-decoration:none;display:flex;flex-direction:column}
+.card .th{aspect-ratio:1/1;background:#fff;padding:10px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+.card .th svg{width:100%;height:100%}
+.card .tt{padding:10px 12px 12px;font-weight:700;font-size:13.5px;line-height:1.3}
+.heart{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.heart svg{width:18px;height:18px;stroke:var(--accent-dark);fill:none;stroke-width:2.2}
+.heart.on svg{fill:var(--accent);stroke:var(--accent)}
+.more{display:flex;margin:16px 18px 0;min-height:48px;border-radius:14px;background:var(--ink);color:#fff;font-weight:700;align-items:center;justify-content:center;width:calc(100% - 36px)}
+.empty{padding:40px 24px;text-align:center;color:var(--ink-soft)}
+.empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:4px}
+.dtop{position:relative;min-height:46px;padding-top:10px}
+.dtop .x{position:absolute;left:14px;top:10px;width:40px;height:40px;border-radius:50%;background:var(--paper);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15);text-decoration:none}
+.dtop .heart{top:10px;right:14px;width:40px;height:40px}
+.body{padding:6px 18px 18px}
+.pill{display:inline-block;color:#fff;font-weight:700;font-size:12px;border-radius:99px;padding:4px 12px;background:var(--accent-dark)}
+.body h1{font-size:25px;font-weight:800;margin:10px 0 12px}
+.prev{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.prev svg{width:100%;height:auto;display:block}
+.lbl{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:18px 0 6px}
+.sizes{display:flex;flex-wrap:wrap;gap:8px}
+.sz{padding:9px 13px;border-radius:12px;background:var(--paper);border:1.5px solid var(--line);font-weight:700;font-size:13.5px}
+.sz.on{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.fact small{display:block;color:var(--ink-soft);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
+.fact b{display:block;font-size:13.5px;margin-top:2px;line-height:1.3;font-weight:600}
+.fact.full{grid-column:1/-1}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;width:100%;border-radius:16px;background:var(--accent-dark);color:#fff;font-weight:800;font-size:17px;box-shadow:0 4px 0 rgba(56,43,42,.25);margin-top:18px}
+.btn[disabled]{opacity:.7}
+.note{font-size:13px;color:var(--ink-soft);margin-top:12px;line-height:1.5}
+table.tb{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 4px;background:var(--paper);border-radius:12px;overflow:hidden}
+table.tb th,table.tb td{padding:8px 10px;text-align:center;border-bottom:1px solid var(--line)}
+table.tb th{background:var(--line);font-weight:700;font-size:12px}
+.guide{padding:6px 18px 0;font-size:14.5px}
+.guide p{margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav div{max-width:620px;margin:0 auto;height:var(--nav);display:grid;grid-template-columns:repeat(3,1fr)}
+nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:700;color:var(--ink-soft)}
+nav button.on{color:var(--accent-dark)}
+nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav><div>
+  <button data-go="#/" id="n-home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</button>
+  <button data-go="#/cerca" id="n-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Cerca</button>
+  <button data-go="#/salvati" id="n-saved"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>Salvati</button>
+</div></nav>
+<script src="lib/jspdf.umd.min.js"></script>
+<script src="lib/engine.js"></script>
+<script src="lib/catalog.js"></script>
+<script>
+(function(){
+"use strict";
+var PM = window.PM, DES = window.PMCatalog(PM), $app = document.getElementById("app");
+var CATS = [
+  {id:"femminile", name:"Abbigliamento Femminile", short:"Femminile", img:"img/cat-femminile.webp"},
+  {id:"maschile", name:"Abbigliamento Maschile", short:"Maschile", img:"img/cat-maschile.webp"},
+  {id:"bambini", name:"Abbigliamento per Bambini", short:"Bambini", img:"img/cat-bambini.webp"},
+  {id:"neonati", name:"Abbigliamento per Neonati", short:"Neonati", img:"img/cat-neonati.webp"},
+  {id:"cerimonia", name:"Abbigliamento per Feste e Cerimonie", short:"Feste e Cerimonie", img:"img/cat-cerimonia.webp"}
+];
+var CAT = {}; CATS.forEach(function(c){ CAT[c.id]=c; });
+var BYSLUG = {}; DES.forEach(function(d){ BYSLUG[d.slug]=d; });
+function nPat(d){ return PM.SIZES[d.set].length; }
+var TOTAL = DES.reduce(function(s,d){ return s+nPat(d); },0);
+var catPat = {};
+DES.forEach(function(d){ catPat[d.cat]=(catPat[d.cat]||0)+nPat(d); });
+var saved = []; try{ saved = JSON.parse(localStorage.getItem("cm_saved")||"[]"); }catch(e){}
+function persist(){ try{ localStorage.setItem("cm_saved", JSON.stringify(saved)); }catch(e){} }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function norm(s){ return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function fmtN(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"."); }
+var HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>';
+function heart(slug){ return '<span class="heart'+(saved.indexOf(slug)>-1?' on':'')+'" data-heart="'+slug+'" role="button" aria-label="Salva">'+HEART+'</span>'; }
+function head(a){ ["home","search","saved"].forEach(function(k){ document.getElementById("n-"+k).classList.toggle("on", k===a); }); }
+
+var thumbCache = {};
+function thumb(d){
+  if(thumbCache[d.slug]) return thumbCache[d.slug];
+  var sizes = PM.SIZES[d.set], sz = sizes[Math.min(1,sizes.length-1)];
+  var pcs = d.gen(sz).pieces, real = pcs.filter(function(p){ return !p.noSew; });
+  var svg = PM.toSvg(real.length ? real : pcs, {thumb:true, fill:"#f6e3e6", stroke:"#382b2a"}).svg;
+  thumbCache[d.slug] = svg; return svg;
+}
+function card(d){
+  return '<div class="card"><a href="#/m/'+d.slug+'" style="display:flex;flex-direction:column;text-decoration:none;color:inherit"><div class="th">'+thumb(d)+'</div><div class="tt">'+esc(d.name)+'</div></a>'+heart(d.slug)+'</div>';
+}
+function bindHearts(){
+  document.querySelectorAll("[data-heart]").forEach(function(h){
+    h.onclick=function(e){ e.preventDefault(); e.stopPropagation(); var s=h.dataset.heart, i=saved.indexOf(s);
+      if(i>-1) saved.splice(i,1); else saved.push(s); persist(); h.classList.toggle("on", i===-1); };
+  });
+}
+
+function home(){
+  head("home");
+  var tiles = CATS.map(function(c,i){
+    return '<a class="cat'+(i===4?' wide':'')+'" href="#/c/'+c.id+'"><img src="'+c.img+'" alt=""><div class="in"><div class="nm">'+esc(c.short)+'</div><div class="ct">'+fmtN(catPat[c.id])+' cartamodelli</div></div></a>';
+  }).join("");
+  $app.innerHTML = '<div class="top"><span class="brand">🧵 Cartamodelli<b> di Cucito</b></span></div>'+
+    '<div class="hero"><img src="img/hero.webp" alt=""></div>'+
+    '<div class="hello"><h1>'+fmtN(TOTAL)+' cartamodelli pronti</h1><p>Scegli la categoria, la tua taglia e scarica il PDF da stampare.</p></div>'+
+    '<div class="cats">'+tiles+'</div>'+
+    '<div class="sec">Come funziona</div><div class="steps">'+
+    '<div class="step"><b>1</b><span>Apri una categoria e scegli il cartamodello. Nell\'anteprima vedi il disegno dei pezzi.</span></div>'+
+    '<div class="step"><b>2</b><span>Scegli la tua taglia e tocca <strong>Scarica il PDF</strong>.</span></div>'+
+    '<div class="step"><b>3</b><span>Stampa a casa o in copisteria al 100% e inizia a cucire.</span></div></div>'+
+    '<a class="linkbtn" href="#/guida">Guida alla stampa e tabella taglie</a>';
+}
+var PAGE = 30;
+function category(id, filter, shown){
+  var c = CAT[id]; if(!c) return home();
+  head("home");
+  var list = DES.filter(function(d){ return d.cat===id; });
+  var types = []; list.forEach(function(d){ if(types.indexOf(d.type)<0) types.push(d.type); });
+  filter = filter || "Tutti"; shown = shown || PAGE;
+  var fl = list.filter(function(d){ return filter==="Tutti" || d.type===filter; });
+  var chips = '<div class="chips">'+["Tutti"].concat(types).map(function(t){ return '<button class="chip'+(t===filter?' on':'')+'" data-t="'+esc(t)+'">'+esc(t)+'</button>'; }).join("")+'</div>';
+  $app.innerHTML = '<div class="head"><a class="back" href="#/">‹ Libreria</a><h1>'+esc(c.name)+'</h1><p>'+list.length+' modelli · '+fmtN(catPat[id])+' cartamodelli (uno per taglia)</p></div>'+chips+
+    '<div class="grid">'+fl.slice(0,shown).map(card).join("")+'</div>'+
+    (fl.length>shown?'<button class="more" id="more">Mostra altri ('+(fl.length-shown)+')</button>':'');
+  $app.querySelectorAll("[data-t]").forEach(function(b){ b.onclick=function(){ category(id, b.dataset.t, PAGE); window.scrollTo(0,0); }; });
+  var m = document.getElementById("more"); if(m) m.onclick=function(){ var y=window.scrollY; category(id, filter, shown+PAGE); window.scrollTo(0,y); };
+  bindHearts();
+}
+function score(d, toks){
+  var n = norm(d.name), t = norm(d.type), c = norm(CAT[d.cat].short), total = 0;
+  for(var i=0;i<toks.length;i++){ var k=toks[i], s=0;
+    if(n.indexOf(k)===0) s=9; else if(n.indexOf(" "+k)>-1) s=7; else if(n.indexOf(k)>-1) s=5; else if(t.indexOf(k)>-1) s=3; else if(c.indexOf(k)>-1) s=2;
+    if(!s) return 0; total+=s; }
+  return total;
+}
+function search(q){
+  head("search");
+  $app.innerHTML = '<div class="top"><span class="brand">Cerca</span></div><label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="gonna, pantalone, abito, camicia..." autocomplete="off" value="'+esc(q||"")+'"></label><div id="res"></div>';
+  var inp = document.getElementById("q"), res = document.getElementById("res");
+  function run(){
+    var v = inp.value.trim();
+    if(!v){ res.innerHTML = '<div class="chips">'+["gonna","pantalone","abito","camicia","maglietta","bolero"].map(function(w){ return '<button class="chip" data-w="'+w+'">'+w+'</button>'; }).join("")+'</div><div class="empty">Scrivi quello che vuoi cucire.</div>';
+      res.querySelectorAll("[data-w]").forEach(function(b){ b.onclick=function(){ inp.value=b.dataset.w; run(); }; }); return; }
+    var toks = norm(v).split(/\s+/).filter(Boolean);
+    var out = DES.map(function(d){ return {d:d,s:score(d,toks)}; }).filter(function(x){ return x.s>0; }).sort(function(a,b){ return b.s-a.s; }).map(function(x){ return x.d; });
+    var shown = out.slice(0,40);
+    res.innerHTML = out.length ? '<div class="grid">'+shown.map(card).join("")+'</div>'+(out.length>40?'<p class="note" style="padding:0 18px">Mostrati 40 di '+out.length+'. Affina la ricerca.</p>':'') : '<div class="empty"><b>Nessun risultato per "'+esc(v)+'"</b>Prova con una parola più semplice.</div>';
+    bindHearts();
+  }
+  inp.addEventListener("input", run); run();
+}
+function savedView(){
+  head("saved");
+  var list = saved.map(function(s){ return BYSLUG[s]; }).filter(Boolean);
+  $app.innerHTML = '<div class="top"><span class="brand">Salvati</span></div>'+(list.length?'<div class="grid">'+list.map(card).join("")+'</div>':'<div class="empty"><b>Ancora niente qui</b>Tocca il cuore su un cartamodello per ritrovarlo facilmente.</div>');
+  bindHearts();
+}
+function sizeKey(set){ try{ return localStorage.getItem("cm_size_"+set); }catch(e){ return null; } }
+function pattern(slug, key){
+  var d = BYSLUG[slug]; if(!d) return home();
+  head("home");
+  var sizes = PM.SIZES[d.set];
+  var sz = null;
+  key = key || sizeKey(d.set);
+  sizes.forEach(function(s){ if(s.key===key) sz = s; });
+  if(!sz) sz = sizes[Math.min(1,sizes.length-1)];
+  var res = d.gen(sz), pieces = res.pieces;
+  var svg = PM.toSvg(pieces, {maxW:150}).svg;
+  var pages = PM.pageCount(pieces), met = PM.fabricMeters(pieces);
+  var pcs = pieces.map(function(p){ return p.name+(p.qty>1?' ×'+p.qty:''); }).join(", ");
+  var c = CAT[d.cat];
+  $app.innerHTML = '<div class="dtop"><a class="x" href="#/c/'+d.cat+'" aria-label="Chiudi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#382b2a" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>'+heart(d.slug)+'</div>'+
+   '<div class="body"><span class="pill">'+esc(c.short)+'</span><h1>'+esc(d.name)+'</h1>'+
+   '<div class="prev">'+svg+'</div>'+
+   '<div class="lbl">Scegli la taglia</div><div class="sizes">'+sizes.map(function(s){ return '<button class="sz'+(s===sz?' on':'')+'" data-k="'+s.key+'">'+esc(s.lbl)+'</button>'; }).join("")+'</div>'+
+   '<button class="btn" id="dl">Scarica il PDF · taglia '+esc(sz.lbl.split(" · ")[0])+'</button>'+
+   '<p class="note" id="dlnote">PDF in formato A4, in scala reale: '+pages+' fogli da stampare al 100% e incollare. Alla prima pagina trovi il quadrato di controllo e la mappa di montaggio.</p>'+
+   '<div class="facts"><div class="fact"><small>Fogli A4</small><b>'+pages+'</b></div><div class="fact"><small>Difficoltà</small><b>'+esc(d.diff)+'</b></div>'+
+   '<div class="fact"><small>Metratura indicativa</small><b>'+met+' m (h 140 cm)</b></div><div class="fact"><small>Tessuto</small><b>'+esc(d.fabric)+'</b></div>'+
+   '<div class="fact full"><small>Pezzi inclusi</small><b>'+esc(pcs)+'</b></div></div>'+
+   '<p class="note">Margine di cucitura di 1 cm e orlo di 2,5 cm già inclusi. Prima di tagliare il tessuto definitivo, prova sempre il modello su un tessuto di prova.</p></div>';
+  $app.querySelectorAll(".sz").forEach(function(b){ b.onclick=function(){ try{ localStorage.setItem("cm_size_"+d.set, b.dataset.k); }catch(e){} pattern(slug, b.dataset.k); }; });
+  document.getElementById("dl").onclick=function(){
+    var btn=this, note=document.getElementById("dlnote"), old=btn.textContent;
+    btn.disabled=true; btn.textContent="Preparo il PDF...";
+    setTimeout(function(){
+      try{
+        var r = PM.buildPdf(window.jspdf.jsPDF, d, sz);
+        r.doc.save(d.slug+"-taglia-"+sz.key+".pdf");
+        note.textContent="Fatto! Il PDF è stato scaricato ("+r.pages+" pagine). Stampalo al 100%.";
+      }catch(e){ note.textContent="Non sono riuscito a creare il PDF. Riprova."; }
+      btn.disabled=false; btn.textContent=old;
+    }, 60);
+  };
+  bindHearts(); window.scrollTo(0,0);
+}
+function guide(){
+  head("home");
+  var rows = function(set, lab){
+    return '<h3 style="margin:18px 0 6px;font-size:16px">'+lab+'</h3><div style="overflow-x:auto"><table class="tb"><tr><th>Taglia</th><th>Petto</th><th>Vita</th><th>Fianchi</th></tr>'+
+      PM.SIZES[set].map(function(s){ return '<tr><td>'+esc(s.lbl)+'</td><td>'+s.chest+'</td><td>'+s.waist+'</td><td>'+s.hip+'</td></tr>'; }).join("")+'</table></div>';
+  };
+  $app.innerHTML = '<div class="head"><a class="back" href="#/">‹ Libreria</a><h1>Guida alla stampa</h1><p>Come usare i tuoi cartamodelli in PDF</p></div>'+
+    '<div class="guide"><div class="sec" style="padding:18px 0 6px">Stampare</div>'+
+    '<p>1. Scarica il PDF del cartamodello nella tua taglia.</p><p>2. Stampalo in formato <strong>A4 al 100%</strong>, senza "adatta alla pagina" o "riduci".</p>'+
+    '<p>3. Misura il quadrato di controllo di 10 cm nella prima pagina: se non misura 10 cm, la scala è sbagliata.</p>'+
+    '<p>4. Ritaglia i bordi bianchi, segui la mappa di montaggio (A1, A2, B1...) e incolla i fogli facendo combaciare le linee.</p>'+
+    '<div class="sec" style="padding:18px 0 6px">Tagliare e cucire</div>'+
+    '<p>La linea continua è il taglio (margine di cucitura di 1 cm e orlo di 2,5 cm già inclusi). La linea tratteggiata è la linea di cucitura. La freccia è il filo dritto del tessuto. Se un pezzo dice "sul doppio", appoggia il bordo con "PIEGA" sulla piega del tessuto.</p>'+
+    '<p>I rettangoli con le misure (cinture, sbieco, balze) si tagliano direttamente sul tessuto.</p>'+
+    '<div class="sec" style="padding:18px 0 6px">Tabella taglie (cm)</div>'+rows("F","Donna")+rows("M","Uomo")+rows("K","Bambini")+rows("B","Neonati")+'</div>';
+}
+
+function route(){
+  var h = location.hash || "#/", p = h.replace(/^#\//,"").split("/");
+  if(p[0]==="c") category(p[1]);
+  else if(p[0]==="m") pattern(p[1]);
+  else if(p[0]==="cerca") search();
+  else if(p[0]==="salvati") savedView();
+  else if(p[0]==="guida") guide();
+  else home();
+  if(p[0]!=="m") window.scrollTo(0,0);
+}
+document.querySelectorAll("nav [data-go]").forEach(function(b){ b.onclick=function(){ location.hash=b.dataset.go; }; });
+window.addEventListener("hashchange", route); route();
+})();
+</script>
+</body>
+</html>
