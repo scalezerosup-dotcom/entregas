@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#001a80">
+<title>Portalul Teacher's Treasure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#001a80;--blue2:#0033cc;--green:#16a34a;--gold:#f59e0b;--bg:#f8fafc;--ink:#0f172a;--soft:#64748b;--line:#e2e8f0;--r:16px;--nav:64px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 12px)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit}
+#app{max-width:720px;margin:0 auto;min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:22px 18px 22px;border-radius:0 0 26px 26px}
+.hero .lg{font-weight:900;font-size:15px;letter-spacing:.02em;opacity:.95}.hero .lg b{color:#86efac}
+.hero h1{font-size:27px;font-weight:900;line-height:1.14;margin-top:10px}
+.hero p{opacity:.9;font-weight:600;font-size:14px;margin-top:6px}
+.stats{display:flex;gap:8px;margin-top:14px}
+.stats div{flex:1;background:rgba(255,255,255,.14);border-radius:12px;padding:8px 6px;text-align:center;font-weight:800;font-size:12px}
+.stats b{display:block;font-size:20px;color:#fde68a}
+.steps{padding:14px 18px 0;display:grid;gap:8px}
+.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 13px;display:flex;gap:11px;align-items:flex-start;font-size:14px;font-weight:600}
+.step b{flex:none;width:25px;height:25px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900}
+.search{margin:14px 18px 0;display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:0 14px;height:48px}
+.search:focus-within{border-color:var(--blue2)}
+.search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:16px;height:100%;min-width:0}
+.lab{padding:12px 18px 0;font-weight:900;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:6px 18px 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 13px;border-radius:99px;background:#fff;border:1.5px solid var(--line);font-weight:800;font-size:13px;white-space:nowrap}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.cnt{padding:12px 18px 0;font-weight:800;font-size:13px;color:var(--soft)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 18px 0}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;text-decoration:none}
+.card img{width:100%;aspect-ratio:210/297;object-fit:cover;display:block;background:#fff;border-bottom:1px solid var(--line)}
+.card .tt{padding:8px 10px 10px;font-weight:800;font-size:12.5px;line-height:1.25;flex:1}
+.card .mt{font-weight:700;font-size:11px;color:var(--soft);margin-top:3px}
+.lv{position:absolute;top:8px;left:8px;color:#fff;font-weight:900;font-size:11px;padding:2px 9px;border-radius:99px}
+.heart{position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.heart svg{width:17px;height:17px;stroke:#dc2626;fill:none;stroke-width:2.2}.heart.on svg{fill:#dc2626}
+.more{display:block;margin:16px 18px 0;width:calc(100% - 36px);padding:14px;border-radius:14px;background:var(--blue);color:#fff;font-weight:900;font-size:15px}
+.det{padding:0 0 18px}
+.det .hd{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:16px 18px 18px;border-radius:0 0 24px 24px}
+.back{display:inline-block;font-weight:800;font-size:14px;opacity:.95;margin-bottom:6px;text-decoration:none}
+.det h1{font-size:23px;font-weight:900;line-height:1.15}
+.det .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.det .meta span{background:rgba(255,255,255,.18);padding:3px 10px;border-radius:99px;font-weight:800;font-size:12px}
+.pv{margin:16px 18px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.pv img{width:100%;display:block;border-radius:8px;border:1px solid var(--line)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;margin:14px 18px 0;border-radius:15px;background:linear-gradient(135deg,var(--green),#15803d);color:#fff;font-weight:900;font-size:16px;text-decoration:none;box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.note{margin:12px 18px 0;font-size:13px;color:var(--soft);font-weight:600}
+.empty{padding:44px 24px;text-align:center;color:var(--soft)}
+.empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:4px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav div{max-width:720px;margin:0 auto;height:var(--nav);display:grid;grid-template-columns:repeat(3,1fr)}
+nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:800;color:var(--soft)}
+nav button.on{color:var(--blue)}
+nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav><div>
+  <button data-go="#/" id="n-home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Acasă</button>
+  <button data-go="#/cauta" id="n-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Caută</button>
+  <button data-go="#/salvate" id="n-saved"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>Salvate</button>
+</div></nav>
+<script src="data.js"></script>
+<script>
+(function(){
+"use strict";
+var A=(window.TT||{acts:[]}).acts, $app=document.getElementById("app");
+var LC={A1:"#16a34a",A2:"#0d9488",B1:"#0284c7",B2:"#4f46e5",C1:"#be185d"};
+var AUD={kids:"Copii",teens:"Adolescenți",adults:"Adulți"};
+var cats=[];A.forEach(function(a){if(cats.indexOf(a.c)<0)cats.push(a.c);});cats.sort();
+var saved=[];try{saved=JSON.parse(localStorage.getItem("tt_saved")||"[]");}catch(e){}
+function persist(){try{localStorage.setItem("tt_saved",JSON.stringify(saved));}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
+function byId(i){return A.filter(function(a){return a.i===i;})[0];}
+var HEART='<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>';
+function heart(i){return '<span class="heart'+(saved.indexOf(i)>-1?' on':'')+'" data-heart="'+i+'" role="button" aria-label="Salvează">'+HEART+'</span>';}
+function head(k){["home","search","saved"].forEach(function(x){document.getElementById("n-"+x).classList.toggle("on",x===k);});}
+function card(a){return '<div class="card"><a href="#/a/'+a.i+'" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1"><img src="'+a.th+'" alt="" loading="lazy"><span class="lv" style="background:'+(LC[a.l]||"#001a80")+'">'+a.l+'</span><div class="tt">'+esc(a.t)+'<div class="mt">'+esc(a.c)+'</div></div></a>'+heart(a.i)+'</div>';}
+function bindH(){document.querySelectorAll("[data-heart]").forEach(function(h){h.onclick=function(e){e.preventDefault();e.stopPropagation();var id=h.dataset.heart,i=saved.indexOf(id);if(i>-1)saved.splice(i,1);else saved.push(id);persist();h.classList.toggle("on",i===-1);};});}
+var F={l:"",c:"",a:"",q:""},PAGE=48,shown=PAGE;
+function match(a){
+  if(F.l&&a.l!==F.l)return false;if(F.c&&a.c!==F.c)return false;if(F.a&&a.a!==F.a)return false;
+  if(F.q){var n=norm(a.t+" "+a.c+" "+a.tp+" "+a.l),t=norm(F.q).split(/\s+/).filter(Boolean);for(var i=0;i<t.length;i++)if(n.indexOf(t[i])<0)return false;}
+  return true;
+}
+function chips(key,items,all){return '<div class="chips">'+[["",all]].concat(items).map(function(c){return '<button class="chip'+(F[key]===c[0]?' on':'')+'" data-k="'+key+'" data-v="'+esc(c[0])+'">'+esc(c[1])+'</button>';}).join("")+'</div>';}
+function list(){
+  var r=A.filter(match);
+  var g=document.getElementById("grid");
+  g.innerHTML=r.length?r.slice(0,shown).map(card).join(""):'<div class="empty" style="grid-column:1/-1"><b>Nicio activitate găsită</b>Încearcă alt nivel sau alt cuvânt.</div>';
+  document.getElementById("cnt").textContent=r.length+" activități";
+  var m=document.getElementById("more");m.style.display=r.length>shown?"block":"none";
+  bindH();
+}
+function home(){
+  head("home");
+  $app.innerHTML='<div class="hero"><div class="lg">Teacher\'s <b>Treasure</b></div><h1>650+ de activități de engleză gata de tipărit</h1><p>Alege nivelul și tipul de activitate, apoi descarcă PDF-ul. Fiecare fișă are și pagina de răspunsuri.</p><div class="stats"><div><b>'+A.length+'</b>activități</div><div><b>5</b>niveluri A1–C1</div><div><b>'+cats.length+'</b>tipuri</div></div></div>'+
+  '<div class="steps"><div class="step"><b>1</b><span>Alege nivelul (A1–C1) și tipul de activitate.</span></div><div class="step"><b>2</b><span>Atinge fișa ca să o vezi și apasă „Descarcă PDF”.</span></div><div class="step"><b>3</b><span>Imprimă la 100% pe hârtie A4. Pagina 2 are răspunsurile.</span></div></div>'+
+  '<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Caută: past simple, animals, quiz..." autocomplete="off" value="'+esc(F.q)+'"></label>'+
+  '<div class="lab">Nivel</div><div id="f1"></div><div class="lab">Vârstă</div><div id="f3"></div><div class="lab">Tip de activitate</div><div id="f2"></div>'+
+  '<div class="cnt" id="cnt"></div><div class="grid" id="grid"></div><button class="more" id="more">Arată mai multe</button>';
+  function paint(){
+    document.getElementById("f1").innerHTML=chips("l",["A1","A2","B1","B2","C1"].map(function(x){return [x,x];}),"Toate");
+    document.getElementById("f3").innerHTML=chips("a",[["kids","Copii"],["teens","Adolescenți"],["adults","Adulți"]],"Toate");
+    document.getElementById("f2").innerHTML=chips("c",cats.map(function(x){return [x,x];}),"Toate");
+    $app.querySelectorAll("[data-k]").forEach(function(b){b.onclick=function(){F[b.dataset.k]=b.dataset.v;shown=PAGE;paint();list();};});
+  }
+  paint();list();
+  document.getElementById("q").addEventListener("input",function(e){F.q=e.target.value.trim();shown=PAGE;list();});
+  document.getElementById("more").onclick=function(){shown+=PAGE;list();};
+}
+function detail(id){
+  var a=byId(id);if(!a)return home();head("home");
+  $app.innerHTML='<div class="det"><div class="hd"><a class="back" href="#/">‹ Activități</a><h1>'+esc(a.t)+'</h1><div class="meta"><span>'+a.l+'</span><span>'+esc(a.c)+'</span><span>'+esc(AUD[a.a]||"Toate vârstele")+'</span><span>'+esc(a.tp)+'</span></div></div>'+
+  '<div class="pv"><img src="'+a.th+'" alt="'+esc(a.t)+'"></div>'+
+  '<a class="btn" href="'+a.f+'" download>⬇ Descarcă PDF (fișă + răspunsuri)</a>'+
+  '<div style="margin:10px 18px 0"><button class="chip" id="sv" style="width:100%;padding:12px">'+(saved.indexOf(a.i)>-1?'♥ Salvată':'♡ Salvează')+'</button></div>'+
+  '<p class="note">Imprimă la 100% pe hârtie A4 (fără „potrivire la pagină”). Pagina 2 este foaia de răspunsuri, pentru profesor.</p></div>';
+  document.getElementById("sv").onclick=function(){var i=saved.indexOf(a.i);if(i>-1)saved.splice(i,1);else saved.push(a.i);persist();this.textContent=saved.indexOf(a.i)>-1?'♥ Salvată':'♡ Salvează';};
+  window.scrollTo(0,0);
+}
+function savedView(){
+  head("saved");var l=saved.map(byId).filter(Boolean);
+  $app.innerHTML='<div class="hero" style="padding-bottom:16px"><div class="lg">Teacher\'s <b>Treasure</b></div><h1 style="font-size:22px">Salvate</h1></div>'+(l.length?'<div class="grid">'+l.map(card).join("")+'</div>':'<div class="empty"><b>Încă nimic aici</b>Atinge inima de pe o fișă ca să o găsești ușor.</div>');
+  bindH();
+}
+function route(){
+  var p=(location.hash||"#/").replace(/^#\//,"").split("/");
+  if(p[0]==="a")detail(p[1]);else if(p[0]==="cauta"){F.q=F.q;home();setTimeout(function(){var q=document.getElementById("q");if(q){q.focus();}},60);}else if(p[0]==="salvate")savedView();else home();
+  if(p[0]!=="a")window.scrollTo(0,0);
+}
+document.querySelectorAll("nav [data-go]").forEach(function(b){b.onclick=function(){location.hash=b.dataset.go;};});
+window.addEventListener("hashchange",route);route();
+})();
+</script>
+</body>
+</html>
