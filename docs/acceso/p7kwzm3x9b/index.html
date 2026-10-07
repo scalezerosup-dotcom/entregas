@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1e3a8a">
+<title>Biblioteka Aktywności Biblijnych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1e3a8a;--yellow:#facc15;--sky:#f0f9ff;--sky2:#e0f2fe;--ink:#1f2937;--soft:#6b7280;--green:#16a34a;--red:#dc2626;--r:18px;--nav:64px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--sky);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 12px)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit}
+#app{max-width:680px;margin:0 auto;min-height:100vh}
+.top{padding:18px 18px 6px;font-weight:900;font-size:20px;color:var(--blue);letter-spacing:-.01em}
+.top b{color:#b45309}
+.hero{margin:6px 18px 0;border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;box-shadow:0 3px 0 rgba(0,0,0,.08);background:#fff}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hello{padding:14px 18px 4px}
+.hello h1{font-size:27px;font-weight:900;color:var(--blue);line-height:1.15}
+.hello p{color:var(--soft);font-weight:500;font-size:14.5px;margin-top:4px}
+.steps{padding:12px 18px 0;display:grid;gap:8px}
+.step{background:#fff;border:1px solid var(--sky2);border-radius:14px;padding:11px 13px;display:flex;gap:11px;align-items:flex-start;font-size:14px}
+.step b{flex:none;width:25px;height:25px;border-radius:50%;background:var(--yellow);color:var(--blue);display:grid;place-items:center;font-size:13px;font-weight:900}
+.search{margin:14px 18px 0;display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--sky2);border-radius:16px;padding:0 14px;height:50px}
+.search:focus-within{border-color:var(--blue)}
+.search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:16px;height:100%;min-width:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 18px 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:99px;background:#fff;border:1.5px solid var(--sky2);font-weight:700;font-size:13.5px}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 18px 0}
+.card{position:relative;background:#fff;border:1px solid var(--sky2);border-radius:var(--r);overflow:hidden;text-decoration:none;display:flex;flex-direction:column}
+.card .th{aspect-ratio:1/1.1;background:#dbeafe;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .th img{width:100%;height:100%;object-fit:cover;display:block}
+.card .tt{padding:10px 12px 12px;font-weight:800;font-size:13.5px;line-height:1.25;color:var(--blue)}
+.card .rf{font-weight:600;font-size:11.5px;color:var(--soft);margin-top:2px}
+.heart{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.heart svg{width:18px;height:18px;stroke:var(--red);fill:none;stroke-width:2.2}
+.heart.on svg{fill:var(--red)}
+.head{color:#fff;padding:16px 18px 18px;border-radius:0 0 26px 26px;background:var(--blue)}
+.head .back{display:inline-block;font-weight:700;font-size:14px;opacity:.95;margin-bottom:6px;text-decoration:none}
+.head h1{font-size:25px;font-weight:900;line-height:1.15}
+.head p{opacity:.9;font-size:13.5px;margin-top:3px;font-weight:500}
+.body{padding:0 18px 18px}
+.cov{margin-top:14px;background:#fff;border:1px solid var(--sky2);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:42% 1fr}
+.cov img{width:100%;height:100%;object-fit:cover;display:block}
+.cov .tx{padding:14px 14px 14px 4px;font-size:14px}
+.verse{margin-top:10px;background:#fffbea;border-left:5px solid var(--yellow);border-radius:0 12px 12px 0;padding:10px 12px;font-weight:600;font-size:14px}
+.verse small{display:block;color:var(--soft);font-weight:700;margin-top:3px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;width:100%;border-radius:16px;background:var(--blue);color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 4px 0 rgba(0,0,0,.2);margin-top:14px}
+.btn.y{background:var(--yellow);color:var(--blue);box-shadow:0 4px 0 rgba(180,120,0,.5)}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:18px 0 4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:9px 14px;border-radius:12px;background:#fff;border:1.5px solid var(--sky2);font-weight:800;font-size:13.5px}
+.tab.on{color:#fff;border-color:transparent}
+.t1.on{background:var(--green)}.t2.on{background:var(--blue)}.t3.on{background:var(--red)}.t0.on{background:#6b7280}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.act{background:#fff;border:1px solid var(--sky2);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.act img{width:100%;display:block;border-bottom:1px solid var(--sky2);aspect-ratio:210/297;object-fit:cover;background:#fff}
+.act .at{padding:8px 10px 4px;font-weight:700;font-size:12.5px;line-height:1.25;flex:1}
+.act a{margin:4px 8px 9px;text-align:center;background:var(--blue);color:#fff;border-radius:10px;padding:8px 6px;font-weight:800;font-size:12.5px;text-decoration:none}
+.sec{font-weight:900;font-size:16px;color:var(--blue);margin:20px 0 4px}
+.note{font-size:13px;color:var(--soft);margin-top:12px;line-height:1.5}
+.read{margin-top:14px;background:#fff;border:1px solid var(--sky2);border-radius:var(--r);padding:14px;font-size:14.5px;line-height:1.6}
+.empty{padding:40px 24px;text-align:center;color:var(--soft)}
+.empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:4px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--sky2);padding-bottom:env(safe-area-inset-bottom)}
+nav div{max-width:680px;margin:0 auto;height:var(--nav);display:grid;grid-template-columns:repeat(3,1fr)}
+nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:700;color:var(--soft)}
+nav button.on{color:var(--blue)}
+nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav><div>
+  <button data-go="#/" id="n-home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Strona główna</button>
+  <button data-go="#/szukaj" id="n-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Szukaj</button>
+  <button data-go="#/zapisane" id="n-saved"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>Zapisane</button>
+</div></nav>
+<script src="data.js"></script>
+<script>
+(function(){
+"use strict";
+var D = window.MC || {stories:[]}, S = D.stories, $app = document.getElementById("app");
+var TOTAL = S.reduce(function(n,s){ return n + s.acts.filter(function(a){return a.a>0;}).length; },0);
+var saved = []; try{ saved = JSON.parse(localStorage.getItem("mw_saved")||"[]"); }catch(e){}
+function persist(){ try{ localStorage.setItem("mw_saved", JSON.stringify(saved)); }catch(e){} }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function norm(s){ return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function byId(id){ return S.filter(function(s){return s.id==id;})[0]; }
+var HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>';
+function heart(id){ return '<span class="heart'+(saved.indexOf(id)>-1?' on':'')+'" data-heart="'+id+'" role="button" aria-label="Zapisz">'+HEART+'</span>'; }
+function head(a){ ["home","search","saved"].forEach(function(k){ document.getElementById("n-"+k).classList.toggle("on", k===a); }); }
+function card(s){
+  return '<div class="card"><a href="#/p/'+s.id+'" style="text-decoration:none;color:inherit;display:flex;flex-direction:column"><div class="th"><img src="'+s.cover+'" alt="" loading="lazy"></div><div class="tt">'+esc(s.title)+'<div class="rf">'+esc(s.ref)+'</div></div></a>'+heart(s.id)+'</div>';
+}
+function bindHearts(){
+  document.querySelectorAll("[data-heart]").forEach(function(h){
+    h.onclick=function(e){ e.preventDefault(); e.stopPropagation(); var id=+h.dataset.heart, i=saved.indexOf(id);
+      if(i>-1) saved.splice(i,1); else saved.push(id); persist(); h.classList.toggle("on", i===-1); };
+  });
+}
+var PAGE = 36, filt = "wszystkie";
+function home(){
+  head("home");
+  var list = S.filter(function(s){ return filt==="wszystkie" || (filt==="st" ? s.id<=21 : s.id>=22); });
+  $app.innerHTML = '<div class="top">\u{1F4D6} Mali <b>Wierni</b></div><div class="hero"><img src="img/hero.webp" alt=""></div>'+
+    '<div class="hello"><h1>'+TOTAL+' aktywności biblijnych gotowych do druku</h1><p>'+S.length+' historii, od Stworzenia po Apokalipsę, dla dzieci w wieku 4–12 lat.</p></div>'+
+    '<div class="steps"><div class="step"><b>1</b><span>Wybierz historię.</span></div><div class="step"><b>2</b><span>Wybierz wiek: 4–6, 7–9 lub 10–12 lat.</span></div><div class="step"><b>3</b><span>Pobierz PDF i wydrukuj w skali 100% na papierze A4.</span></div></div>'+
+    '<div class="chips">'+[["wszystkie","Wszystkie historie"],["st","Stary Testament"],["nt","Nowy Testament"]].map(function(c){ return '<button class="chip'+(c[0]===filt?' on':'')+'" data-f="'+c[0]+'">'+c[1]+'</button>'; }).join("")+'</div>'+
+    '<div class="grid">'+list.map(card).join("")+'</div>';
+  $app.querySelectorAll("[data-f]").forEach(function(b){ b.onclick=function(){ filt=b.dataset.f; home(); }; });
+  bindHearts();
+}
+var tab = {};
+function story(id, age){
+  var s = byId(id); if(!s) return home();
+  head("home");
+  age = age===undefined ? (tab[id]!==undefined ? tab[id] : 1) : age; tab[id] = age;
+  var labs = {1:"Wiek 4–6",2:"Wiek 7–9",3:"Wiek 10–12",0:"Odpowiedzi"};
+  var tabs = [1,2,3,0].map(function(a){ return '<button class="tab t'+a+(a===age?' on':'')+'" data-a="'+a+'">'+labs[a]+'</button>'; }).join("");
+  var acts = s.acts.filter(function(a){ return a.a===age; }).map(function(a){
+    return '<div class="act"><img src="'+a.th+'" alt="'+esc(a.t)+'" loading="lazy"><div class="at">'+esc(a.t)+'</div><a href="'+a.f+'" download>Pobierz PDF</a></div>'; }).join("");
+  var txt = age===1 ? s.short : s.summary;
+  $app.innerHTML = '<div class="head"><a class="back" href="#/">‹ Historie</a><h1>'+esc(s.title)+'</h1><p>'+esc(s.ref)+'</p></div>'+
+   '<div class="body"><div class="cov"><img src="'+s.cover+'" alt=""><div class="tx"><div style="font-weight:800;color:var(--blue);margin-bottom:4px">Historia w skrócie</div>'+esc(s.short)+'</div></div>'+
+   '<div class="verse">„'+esc(s.verse.text)+'”<small>'+esc(s.verse.ref)+'</small></div>'+
+   '<a class="btn y" href="'+s.full+'" download>Pobierz wszystkie aktywności ('+s.pages+' stron, PDF)</a>'+
+   '<div class="tabs">'+tabs+'</div>'+
+   (age>0 && age!==1 ? '<div class="read"><b style="color:var(--blue)">Przeczytaj historię</b><br>'+esc(txt)+'</div>' : '')+
+   '<div class="acts">'+acts+'</div>'+
+   '<p class="note">Drukuj w skali 100% na papierze A4 (bez opcji „dopasuj do strony”). Strona „Odpowiedzi” jest dla rodziców i nauczycieli.</p></div>';
+  $app.querySelectorAll("[data-a]").forEach(function(b){ b.onclick=function(){ story(id, +b.dataset.a); }; });
+  window.scrollTo(0,0);
+}
+function score(s,toks){ var n=norm(s.title+" "+s.ref), t=0; for(var i=0;i<toks.length;i++){ if(n.indexOf(toks[i])===0) t+=9; else if(n.indexOf(" "+toks[i])>-1) t+=7; else if(n.indexOf(toks[i])>-1) t+=5; else return 0; } return t; }
+function search(){
+  head("search");
+  $app.innerHTML = '<div class="top">Szukaj</div><label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Noe, Dawid, Jezus, Daniel..." autocomplete="off"></label><div id="res"></div>';
+  var inp=document.getElementById("q"), res=document.getElementById("res");
+  function run(){ var v=inp.value.trim(); if(!v){ res.innerHTML='<div class="empty">Wpisz nazwę historii lub postaci.</div>'; return; }
+    var toks=norm(v).split(/\s+/).filter(Boolean);
+    var out=S.map(function(s){return {s:s,k:score(s,toks)};}).filter(function(x){return x.k>0;}).sort(function(a,b){return b.k-a.k;}).map(function(x){return x.s;});
+    res.innerHTML = out.length ? '<div class="grid">'+out.map(card).join("")+'</div>' : '<div class="empty"><b>Brak wyników dla „'+esc(v)+'”</b>Spróbuj prostszego słowa.</div>'; bindHearts(); }
+  inp.addEventListener("input",run); run();
+  setTimeout(function(){ try{inp.focus();}catch(e){} },50);
+}
+function savedView(){
+  head("saved");
+  var list=saved.map(byId).filter(Boolean);
+  $app.innerHTML='<div class="top">Zapisane</div>'+(list.length?'<div class="grid">'+list.map(card).join("")+'</div>':'<div class="empty"><b>Jeszcze nic tu nie ma</b>Dotknij serduszko na historii, żeby ją tu znaleźć.</div>');
+  bindHearts();
+}
+function route(){
+  var p=(location.hash||"#/").replace(/^#\//,"").split("/");
+  if(p[0]==="p") story(+p[1]); else if(p[0]==="szukaj") search(); else if(p[0]==="zapisane") savedView(); else home();
+  if(p[0]!=="p") window.scrollTo(0,0);
+}
+document.querySelectorAll("nav [data-go]").forEach(function(b){ b.onclick=function(){ location.hash=b.dataset.go; }; });
+window.addEventListener("hashchange", route); route();
+})();
+</script>
+</body>
+</html>
